@@ -30,11 +30,7 @@ export default class Character {
     getArmor() {
         return this.armor
     }
-
-    getIsPlayer() {
-        return this.isPlayer
-    }
-
+    
     selfHeal(value: number) {
         this.hp = this.hp + value
     }

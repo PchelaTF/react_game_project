@@ -7,4 +7,8 @@ export class Npc extends Character {
         super(initHp, initArmor, initAttack)
         this.isNpc = true
     }
+
+    getIsNpc() {
+        return this.isNpc
+    }
 }
