@@ -4,6 +4,7 @@ import FightMechanic from "./mechanics/FightMechanic"
 import React from 'react';
 import { Npc } from './mechanics/Npc';
 import FightScene from './components/FIghtScene/FightScene';
+import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 
 const mainCharacter = new Character(25, 5, { min: 10, max: 25 })
 const enemyCharacter = new Npc(15, 3, { min: 20, max: 30 })
@@ -22,8 +23,9 @@ function App() {
   return (
     <div className="App">
       {/* {hp}
-        <button onClick={() => decHp() }>attack</button> */}
-      <FightScene />
+      <button onClick={() => decHp()}>attack</button> */}
+      {/* <FightScene hp={hp} decHp={decHp}/> */}
+      <CreateCharacter/>
     </div>
   );
 }
