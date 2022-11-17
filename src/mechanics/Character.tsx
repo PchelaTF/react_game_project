@@ -2,17 +2,19 @@ export interface IAttack {
     min: number,
     max: number
 }
-
 export default class Character {
     private hp: number
+    private maxHp: number
     private armor: number
     private attack: IAttack
-    private isPlayer?: boolean
+    private isNpc: boolean
 
-    constructor(initHp: number, initArmor: number, initAttack: IAttack) {
+    constructor(initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false) {
         this.hp = initHp
+        this.maxHp= initHp
         this.armor = initArmor
         this.attack = initAttack
+        this.isNpc = initIsNpc
     }
 
     setHp(newHp: number) {
@@ -30,13 +32,33 @@ export default class Character {
     getArmor() {
         return this.armor
     }
-    
+
     selfHeal(value: number) {
-        this.hp = this.hp + value
+        if(this.hp + value > this.maxHp){
+            this.hp = this.maxHp
+            console.log("max healed" )
+        }
+        else {
+            this.hp = this.hp + value
+            console.log("healed on: "+ value + "hp")
+        }
+    }
+
+    getIsNpc() {
+        return this.isNpc
     }
 
     dealDamage(dmgToCharacter: Character) {
         const dmg = this.getAttack() - dmgToCharacter.getArmor()
         dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+    }
+
+    doNpcLogic(playerCharacter: Character) {
+        if(this.hp <= 0)
+            return
+        if(this.getHp() > this.maxHp / 2)
+            this.dealDamage(playerCharacter)
+        else
+            this.selfHeal(100)
     }
 }
