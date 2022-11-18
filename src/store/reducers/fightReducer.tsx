@@ -1,21 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 export interface IinitialState {
-    isEnemyTurn: boolean
-}
-const initialState: IinitialState = {
-    isEnemyTurn: false
+    currentTurn: number
 }
 
-export const SET_ENEMY_TURN = "SET_ENEMY_TURN"
-export const SET_ENEMY_TURN_FALSE = "SET_ENEMY_TURN_FALSE"
+const initialState: IinitialState  = {
+    currentTurn: 0
+}
+
+export const NEXT_TURN = "NEXT_TURN"
 
 export const fightSlice = createSlice({
     name: "fight",
     initialState,
     reducers: {
-        setEnemyTurn(state, action: PayloadAction<boolean>) {
-            state.isEnemyTurn = action.payload
+        setTurn(state, action: PayloadAction<number>) {
+            state.currentTurn = action.payload
         }
     }
 })
