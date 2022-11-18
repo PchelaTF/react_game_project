@@ -8,13 +8,17 @@ export default class Character {
     private armor: number
     private attack: IAttack
     private isNpc: boolean
+    private actionPoints: number
+    private name?: string 
 
-    constructor(initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false) {
+    constructor(initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string) {
         this.hp = initHp
         this.maxHp= initHp
         this.armor = initArmor
         this.attack = initAttack
         this.isNpc = initIsNpc
+        this.actionPoints = initActionPoints
+        this.name = initName
     }
 
     setHp(newHp: number) {

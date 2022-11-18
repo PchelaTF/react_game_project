@@ -4,15 +4,20 @@ import './CreateCharacter.scss'
 import { raceArr, raceFullArr, classArr, testClassArr, descrArr } from './testCRArr';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
+import { characterClasses } from '../../mechanics/CreatingMechanic';
 
 const CreateCharacter = () => {
     const [fullImg, setFullImg] = useState(raceFullArr[0])
     const [description, setDescription] = useState(descrArr[0])
+    const [reduxClass, setReduxClass] = useState(characterClasses[0])
 
     function switchRace(key: any) {
         setFullImg(raceFullArr[key])
         setDescription(descrArr[key])
+        setReduxClass(characterClasses[key])
     }
+
+    console.log(reduxClass)
 
     return (
         <div className='create-character'>

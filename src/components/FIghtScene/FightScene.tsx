@@ -3,12 +3,12 @@ import "./FightScene.scss"
 import { imgArr } from './testImgArr'
 import Enemy from './Enemy';
 
-interface IfightSceneProps {
+interface IFightSceneProps {
     hp: number,
     decHp: () => void
 }
 
-const FightScene = ({ hp, decHp }: IfightSceneProps) => {
+const FightScene = ({ hp, decHp }: IFightSceneProps) => {
     let playerImg = ''
     const enemyImgArr = []
     let sceneImg = ''
