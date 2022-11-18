@@ -4,12 +4,19 @@ import './CreateCharacter.scss'
 import { raceArr, raceFullArr, classArr, testClassArr, descrArr } from './testCRArr';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
-import { characterClasses } from '../../mechanics/CreatingMechanic';
+import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMechanic';
+import { useAppDispatch } from '../../store/store';
+import { userSlice } from '../../store/reducers/userReducer';
 
 const CreateCharacter = () => {
+    const dispath = useAppDispatch()
+    const { setPlayerCharacter } = userSlice.actions
     const [fullImg, setFullImg] = useState(raceFullArr[0])
     const [description, setDescription] = useState(descrArr[0])
+
     const [reduxClass, setReduxClass] = useState(characterClasses[0])
+
+    const [name, setName] = useState('')
 
     function switchRace(key: any) {
         setFullImg(raceFullArr[key])
@@ -17,7 +24,16 @@ const CreateCharacter = () => {
         setReduxClass(characterClasses[key])
     }
 
-    console.log(reduxClass)
+    const onHandleNameChange = (e: any) => {
+        setName(e.target.value)
+    }
+
+    const setReduxNewCharacter = (name: string, reduxClass: string) => {
+        const newCharacter = createNewCharacter(name, reduxClass)
+        const playerCharacter = setPlayerCharacter(newCharacter)
+        dispath(playerCharacter)
+        // dispath(setPlayerCharacter(createNewCharacter(name, reduxClass)))
+    }
 
     return (
         <div className='create-character'>
@@ -28,7 +44,12 @@ const CreateCharacter = () => {
 
                         <div className="create-character__select-name">
                             <label htmlFor="name">Enter character name</label>
-                            <input className='create-character__name-input' type="text" name='name' autoComplete='off' />
+                            <input
+                                className='create-character__name-input'
+                                type="text"
+                                name='name'
+                                autoComplete='off'
+                                onChange={(e) => onHandleNameChange(e)} />
                         </div>
 
                         <div className="create-character__select-container">
@@ -80,7 +101,7 @@ const CreateCharacter = () => {
                     </div>
                 </div>
 
-                <button className='create-character__btn'>Create character</button>
+                <button className='create-character__btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create character</button>
 
             </div>
         </div>
