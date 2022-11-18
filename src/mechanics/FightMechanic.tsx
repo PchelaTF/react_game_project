@@ -1,4 +1,6 @@
-import Character from "./Character"
+import { fightSlice } from "../store/reducers/FightReducer"
+import { useAppDispatch } from "../store/store"
+import Character from "./characters/Character"
 
 export default class FightMechanic {
     private turnOrder: Character[]
@@ -17,26 +19,32 @@ export default class FightMechanic {
         this.currentTurn = newTurn
     }
 
+    getTurn() {
+        return this.currentTurn
+    }
+
     setIsNpcTurn() {
         const character = this.turnOrder[this.currentTurn]
         this.isNpcTurn = character.getIsNpc()
-
     }
 
     getIsNpcTurn() {
         return this.isNpcTurn
     }
 
+    getOrder() {
+        return this.turnOrder
+    }
+
     nextTurn() {
         if(this.currentTurn < this.turnOrder.length - 1)
-            this.currentTurn++
+            this.setTurn(this.currentTurn + 1)
         else
             this.setTurn(0)
         
         this.setIsNpcTurn()
         if(this.getIsNpcTurn()) {
             this.turnOrder[this.currentTurn].doNpcLogic(this.turnOrder[0])
-            this.nextTurn()
         }
     }
 
