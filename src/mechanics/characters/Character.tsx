@@ -9,7 +9,7 @@ export default class Character {
     private attack: IAttack
     private isNpc: boolean
     private actionPoints: number
-    private name?: string 
+    private name?: string
 
     constructor(initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string) {
         this.hp = initHp
@@ -63,6 +63,6 @@ export default class Character {
         if(this.getHp() > this.maxHp / 2)
             this.dealDamage(playerCharacter)
         else
-            this.selfHeal(100)
+            this.selfHeal(5)
     }
 }

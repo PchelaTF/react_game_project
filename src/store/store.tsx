@@ -1,18 +1,19 @@
-import { combineReducers, configureStore  } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import FightReducer from "./reducers/fightReducer";
-import uiReducer from "./reducers/uiReducer";
 import userReducer from "./reducers/userReducer";
 
 const mainReducer = combineReducers({
-    uiReducer,
     userReducer,
     FightReducer
 })
 
 export const setupStore = () => {
     return configureStore({
-        reducer: mainReducer
+        reducer: mainReducer,
+        // middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        //     serializableCheck: false,
+        // }),
     })
 }
 

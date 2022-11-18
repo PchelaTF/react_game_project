@@ -43,9 +43,15 @@ export default class FightMechanic {
             this.setTurn(0)
         
         this.setIsNpcTurn()
+        this.setReduxTurn()
         if(this.getIsNpcTurn()) {
             this.turnOrder[this.currentTurn].doNpcLogic(this.turnOrder[0])
         }
     }
 
+    setReduxTurn() {
+        return function (dispatch: any, turn: number) {
+            dispatch(turn)
+        }
+    }
 }
