@@ -17,8 +17,6 @@ const CreateCharacter = () => {
         setReduxClass(characterClasses[key])
     }
 
-    console.log(reduxClass)
-
     return (
         <div className='create-character'>
             <div className="create-character__wrapper">

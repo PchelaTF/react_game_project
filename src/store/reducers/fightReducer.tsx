@@ -1,11 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import Character from "../../mechanics/characters/Character"
 
 export interface IinitialState {
-    currentTurn: number
+    characters: Character[],
+    currentTurn: number,
+    isPlayerTurn: boolean
 }
 
 const initialState: IinitialState  = {
-    currentTurn: 0
+    characters: [],
+    currentTurn: 0,
+    isPlayerTurn: true
 }
 
 export const NEXT_TURN = "NEXT_TURN"
@@ -16,6 +21,9 @@ export const fightSlice = createSlice({
     reducers: {
         setTurn(state, action: PayloadAction<number>) {
             state.currentTurn = action.payload
+        },
+        setIsPlayerTurn(state, action: PayloadAction<boolean>) {
+            state.isPlayerTurn = action.payload
         }
     }
 })
