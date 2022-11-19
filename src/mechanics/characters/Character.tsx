@@ -2,6 +2,16 @@ export interface IAttack {
     min: number,
     max: number
 }
+export interface ICharacterStats {
+    initHp: number,
+    initArmor: number,
+    initAttack: IAttack,
+    initIsNpc: boolean,
+    initActionPoints: number,
+    initName?: string,
+    initImgSmall: string,
+    initImgBig: string
+}
 export default class Character {
     private hp: number
     private maxHp: number
@@ -10,15 +20,19 @@ export default class Character {
     private isNpc: boolean
     private actionPoints: number
     private name?: string
-
-    constructor(initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string) {
-        this.hp = initHp
-        this.maxHp= initHp
-        this.armor = initArmor
-        this.attack = initAttack
-        this.isNpc = initIsNpc
-        this.actionPoints = initActionPoints
-        this.name = initName
+    private imgSmall: string
+    private imgBig: string
+    // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
+    constructor(characterStats: ICharacterStats) {
+        this.hp = characterStats.initHp
+        this.maxHp = characterStats.initHp
+        this.armor = characterStats.initArmor
+        this.attack = characterStats.initAttack
+        this.isNpc = characterStats.initIsNpc
+        this.actionPoints = characterStats.initActionPoints
+        this.name = characterStats.initName
+        this.imgSmall = characterStats.initImgSmall
+        this.imgBig = characterStats.initImgBig
     }
 
     setHp(newHp: number) {
@@ -37,14 +51,19 @@ export default class Character {
         return this.armor
     }
 
+    getImgSmall() { return this.imgSmall }
+
+    getImgBig() { return this.imgBig }
+
+
     selfHeal(value: number) {
-        if(this.hp + value > this.maxHp){
+        if (this.hp + value > this.maxHp) {
             this.hp = this.maxHp
-            console.log("max healed" )
+            console.log("max healed")
         }
         else {
             this.hp = this.hp + value
-            console.log("healed on: "+ value + "hp")
+            console.log("healed on: " + value + "hp")
         }
     }
 
@@ -58,11 +77,11 @@ export default class Character {
     }
 
     doNpcLogic(playerCharacter: Character) {
-        if(this.hp <= 0)
+        if (this.hp <= 0)
             return
-        if(this.getHp() > this.maxHp / 2)
+        if (this.getHp() > this.maxHp / 2)
             this.dealDamage(playerCharacter)
         else
-            this.selfHeal(5)
+            this.selfHeal(50)
     }
 }

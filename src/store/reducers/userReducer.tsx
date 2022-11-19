@@ -5,7 +5,7 @@ export interface IinitialState {
     character: Character | undefined
 }
 
-const initialState: IinitialState  = {
+const initialState: IinitialState = {
     character: undefined
 }
 
