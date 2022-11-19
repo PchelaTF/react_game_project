@@ -126,7 +126,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 <div className="fight-scene__panel-left">
                     <div className="skills__panel">
                         {/* <img src='' alt="img" /> */}
-                        <button onClick={handleAttack}>ATK</button>
+                        <button onClick={handleAttack} disabled={isEnemyTurn}>ATK</button>
                     </div>
                 </div>
                 <div className="fight-scene__panel-right"></div>

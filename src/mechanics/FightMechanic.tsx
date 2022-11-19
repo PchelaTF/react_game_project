@@ -1,4 +1,4 @@
-import { fightSlice } from "../store/reducers/fightReducer"
+import { fightSlice } from "../store/reducers/FightReducer"
 import { useAppDispatch } from "../store/store"
 import Character from "./characters/Character"
 
