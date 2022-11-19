@@ -12,6 +12,7 @@
         // margin: 0 auto;
 
         // padding-bottom: 35%;
+        flex: 0 1 50%;
         position: relative;
 
         &-backimg {
@@ -63,8 +64,19 @@
                         object-fit: contain;
                     }
 
+                    & span {
+                        position: absolute;
+                        bottom: -3.5%;
+                        right: 0;
+                        // width: 100%;
+                        max-width: 100%;
+                        height: 5px;
+                        background-color: rgba(255, 0, 0, 0.795);
+                        color: #fff;
+                    }
+
                     &::after {
-                        content: "";
+                        // content: "";
                         position: absolute;
                         bottom: -2.5%;
                         right: 0;
@@ -78,6 +90,7 @@
     }
 
     &__panel {
+        flex: 1 1 100%;
         max-width: 1140px;
         width: 100%;
         margin: 0 auto;

@@ -27,7 +27,7 @@ const CreateCharacter = () => {
     const onHandleNameChange = (e: any) => {
         setName(e.target.value)
     }
-
+    
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
         const newCharacter = createNewCharacter(name, reduxClass)
         const playerCharacter = setPlayerCharacter(newCharacter)
