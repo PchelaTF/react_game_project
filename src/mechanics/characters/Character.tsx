@@ -22,6 +22,7 @@ export default class Character {
     private name?: string
     private imgSmall: string
     private imgBig: string
+    private selfHealCount: number
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
     constructor(characterStats: ICharacterStats) {
         this.hp = characterStats.initHp
@@ -33,6 +34,7 @@ export default class Character {
         this.name = characterStats.initName
         this.imgSmall = characterStats.initImgSmall
         this.imgBig = characterStats.initImgBig
+        this.selfHealCount = 0
     }
 
     setHp(newHp: number) {
@@ -65,6 +67,7 @@ export default class Character {
             this.hp = this.hp + value
             console.log("healed on: " + value + "hp")
         }
+        this.selfHealCount = 1
     }
 
     getIsNpc() {
@@ -79,9 +82,9 @@ export default class Character {
     doNpcLogic(playerCharacter: Character) {
         if (this.hp <= 0)
             return
-        if (this.getHp() > this.maxHp / 2)
+        if(this.getHp() < this.maxHp / 2 && this.selfHealCount < 1)
+            this.selfHeal(7)
+        else 
             this.dealDamage(playerCharacter)
-        else
-            this.selfHeal(50)
     }
 }

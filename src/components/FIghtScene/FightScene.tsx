@@ -2,27 +2,28 @@ import React, { useRef, useState } from 'react';
 import "./FightScene.scss"
 import { imgArr } from './testImgArr'
 import Enemy from './Enemy';
-import FightMechanic from '../../mechanics/FightMechanic';
 import Character from '../../mechanics/characters/Character';
-import { useAppSelector } from '../../store/store';
-import { usePrevious } from '../../customHooks/usePrevious';
-import { HpBar } from './hpBar';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 
 interface IFightSceneProps {
-    fightScene: FightMechanic,
-    enemyArr: Character[],
-    mainCharacter: Character[]
+    allyArr: Character[]
+    enemyArr: Character[]
 }
 
-const FightScene = ({ fightScene, mainCharacter, enemyArr }: IFightSceneProps) => {
+const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     let playerImg = ''
     const enemyImgArr = []
     let sceneImg = ''
 
-    const [playerHp, setPlayerHp] = React.useState(fightScene.getOrder()[0].getHp())
-    const [enemyHp, setEnemyHp] = React.useState(fightScene.getOrder()[1].getHp())
-    const isPlayerTurn = useAppSelector(state => state.FightReducer.isPlayerTurn)
+    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
+    const [enemyHp, setEnemyHp] = React.useState(enemyArr[0].getHp())
+    const fightOrder = allyArr.concat(enemyArr)
+    const isEnemyTurn = useAppSelector(state => state.FightReducer.isEnemyTurn)
+    const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
+    const dispatch = useAppDispatch()
+    const { setTurn, setIsEnemyTurn } = fightSlice.actions
 
     for (let i = 0; i < imgArr.length; i++) {
         if (i === 0) {
@@ -37,19 +38,36 @@ const FightScene = ({ fightScene, mainCharacter, enemyArr }: IFightSceneProps) =
     }
 
     const passTurn = () => {
-        fightScene.nextTurn()
+        let newTurn = currentTurn
+        if(currentTurn == fightOrder.length)
+            dispatch(setTurn(1))
+        else dispatch(setTurn(newTurn + 1))
+        
+        if(currentTurn > allyArr.length)
+            dispatch(setIsEnemyTurn(false))
+        else dispatch(setIsEnemyTurn(true))
     }
 
     React.useEffect(() => {
-        if (isPlayerTurn)
-            enemyArr[0].doNpcLogic(fightScene.getOrder()[0])
-    }, [isPlayerTurn])
+        if(isEnemyTurn) {
+            setTimeout(() => {
+                enemyArr[0].doNpcLogic(allyArr[0])
+                setPlayerHp(allyArr[0].getHp())
+                passTurn()
+            }, 1000)
+        }
+    }, [isEnemyTurn])
 
     const handleAttack = () => {
-        fightScene.getOrder()[0].dealDamage(fightScene.getOrder()[1])
+        allyArr[0].dealDamage(enemyArr[0])
+        setEnemyHp(enemyArr[0].getHp())
         passTurn()
-        setEnemyHp(fightScene.getOrder()[1].getHp())
-        setPlayerHp(fightScene.getOrder()[0].getHp())
+    }
+
+    const heal = () => {
+        allyArr[0].selfHeal(6)
+        setPlayerHp(allyArr[0].getHp())
+        passTurn()
     }
 
     // ? какая-то фигня, пусть побудет
@@ -75,8 +93,6 @@ const FightScene = ({ fightScene, mainCharacter, enemyArr }: IFightSceneProps) =
     // console.log(HpBar(playerHp));    
     // ? какая-то фигня, пусть побудет
 
-    console.log(mainCharacter);
-
     return (
         <div className="fight-scene__wrapper">
             <div className="fight-scene__main">
@@ -95,7 +111,7 @@ const FightScene = ({ fightScene, mainCharacter, enemyArr }: IFightSceneProps) =
                             <img src={mainCharacter[0].getImgBig()} alt="img" />
                             <span style={{ width: playerHp }}>{playerHp}</span>
                         </div> */}
-                        {mainCharacter.map((item, i) => {
+                        {allyArr.map((item, i) => {
                             return <UserCharacters img={item.getImgBig()} playerHp={playerHp} key={i} />
                         })}
                     </div>
@@ -110,7 +126,7 @@ const FightScene = ({ fightScene, mainCharacter, enemyArr }: IFightSceneProps) =
                 <div className="fight-scene__panel-left">
                     <div className="skills__panel">
                         {/* <img src='' alt="img" /> */}
-                        <button onClick={handleAttack}>ATK</button>
+                        <button onClick={handleAttack} disabled={isEnemyTurn}>ATK</button>
                     </div>
                 </div>
                 <div className="fight-scene__panel-right"></div>

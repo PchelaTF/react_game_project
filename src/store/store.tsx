@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import FightReducer from "./reducers/fightReducer";
+import FightReducer from "./reducers/FightReducer";
 import userReducer from "./reducers/userReducer";
 
 const mainReducer = combineReducers({

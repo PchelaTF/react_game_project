@@ -1,9 +1,10 @@
+import React from 'react';
 import './App.css';
 import Character, { ICharacterStats } from "./mechanics/characters/Character"
-import FightMechanic from "./mechanics/FightMechanic"
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 import FightScene from './components/FIghtScene/FightScene';
-
+import { Warrior } from './mechanics/characters/Warrior';
+import FightMechanic from './mechanics/FightMechanic';
 // const mainCharacter = new Character(250, 5, { min: 8, max: 10 }, false, 2, "name")
 import face1 from "./assets/img/characters_icons/face1.png"
 import fullFace1 from './assets/img/characters_img/full_face1.png'
@@ -49,7 +50,7 @@ function App() {
     <div className="App">
       {/* <FightScene hp={hp} decHp={decHp}/> */}
       {/* <CreateCharacter /> */}
-      <FightScene fightScene={fightScene} mainCharacter={[mainCharacter]} enemyArr={[enemyCharacter, enemyCharacter2]} />
+      <FightScene allyArr={[mainCharacter]} enemyArr={[enemyCharacter, enemyCharacter2]} />
     </div>
   )
 }
