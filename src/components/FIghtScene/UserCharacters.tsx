@@ -1,23 +1,34 @@
 import React from 'react';
+import { usePrevious } from '../../customHooks/usePrevious';
+import UserCharactersAlive from './UserCharactersAlive';
+import UserCharactersDead from './UserCharactersDead';
 
-interface IUserCharacters {
+interface IUserCharactersProps {
     img: string,
     playerHp: number
     maxHp: number
 }
 
-const UserCharacters = ({ img, playerHp, maxHp }: IUserCharacters) => {
+const UserCharacters = ({ img, playerHp, maxHp }: IUserCharactersProps) => {
     const widthHpBar = Math.round((playerHp / maxHp) * 100)
-    const takeDamage = maxHp - playerHp
+    const prevHp = usePrevious(playerHp)
+    const takenDamage = prevHp - playerHp
+    const isAlive = playerHp > 0
 
     return (
-        <div className="player__img">
-            <img src={img} alt="img" />
-            <div className="player__img-hp">
-                <span style={{ width: `${widthHpBar}%` }}></span>
-                <p>{playerHp} / {maxHp}</p>
-            </div>
-            <div className="damage">{takeDamage}</div>
+        <div className="player__content" >
+            {isAlive ? <UserCharactersAlive
+                img={img}
+                playerHp={playerHp}
+                maxHp={maxHp}
+                widthHpBar={widthHpBar} />
+                :
+                <UserCharactersDead
+                    img={img}
+                    maxHp={maxHp}
+                />
+            }
+            {(takenDamage > 0) ? <span className="player__content-taken-damage">-{takenDamage}</span> : ""}
         </div>
     );
 };

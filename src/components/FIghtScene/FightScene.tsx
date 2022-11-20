@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import "./FightScene.scss"
-import Enemy from './Enemy';
+import Enemys from './Enemys';
 import Character from '../../mechanics/characters/Character';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
+import FightScenIsDead from './FightScenIsDead';
+import FightScenIsWin from './FightScenIsWin';
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -23,17 +25,17 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 
     const passTurn = () => {
         let newTurn = currentTurn
-        if(currentTurn == fightOrder.length)
+        if (currentTurn == fightOrder.length)
             dispatch(setTurn(1))
         else dispatch(setTurn(newTurn + 1))
-        
-        if(currentTurn > allyArr.length)
+
+        if (currentTurn > allyArr.length)
             dispatch(setIsEnemyTurn(false))
         else dispatch(setIsEnemyTurn(true))
     }
 
     React.useEffect(() => {
-        if(isEnemyTurn) {
+        if (isEnemyTurn) {
             setTimeout(() => {
                 enemyArr[0].doNpcLogic(allyArr[0])
                 setPlayerHp(allyArr[0].getHp())
@@ -69,7 +71,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                     <div className="enemys">
                         {enemyArr.map((item, i) => {
-                            return <Enemy enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
+                            return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
                         })}
                     </div>
                 </div>
@@ -83,6 +85,9 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                 </div>
                 <div className="fight-scene__panel-right"></div>
             </div>
+
+            {playerHp <= 0 ? <FightScenIsDead /> : ''}
+            {enemyHp <= 0 ? <FightScenIsWin /> : ''}
         </div>
     );
 };

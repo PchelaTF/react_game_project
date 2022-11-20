@@ -1,14 +1,17 @@
 .create-character {
     box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    align-items: center;
 
     &__wrapper {
         // max-width: 1440px;
-        max-width: 900px;
+        width: 900px;
         height: 700px;
         // height: 100%;
         // background-color: rgb(214, 210, 210);\
         padding: 35px;
-        margin: 80px auto 0;
+        margin: 0 auto;
         box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
         border-radius: 20px;
     }
@@ -92,7 +95,8 @@
         &-bigimg {
             position: absolute;
             top: 0;
-            left: 200%;
+            left: 184%;
+            width: 150px;
         }
     }
 

@@ -13,7 +13,7 @@ import { useAppSelector } from './store/store';
 import fightSceneImg from "./assets/img/War2.png"
 
 const characterStats: ICharacterStats = {
-  initHp: 250,
+  initHp: 2,
   initArmor: 5,
   initAttack: { min: 20, max: 30 },
   initIsNpc: false,
@@ -35,15 +35,15 @@ function App() {
   const mainCharacter = useAppSelector(state => state.userReducer.character)
 
   const getScene = () => {
-    switch(scene) {
+    switch (scene) {
       case "create":
-        return <CreateCharacter/>
+        return <CreateCharacter />
       case "main":
-        return <MainScene/>
+        return <MainScene />
       case "fight":
-        return <FightScene  fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]}/>
+        return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]} />
       default:
-        return <MainScene/>
+        return <MainScene />
     }
   }
 
