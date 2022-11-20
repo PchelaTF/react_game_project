@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-export type TScene = "fight" | "dialog" | "create"
+export type TScene = "fight" | "dialog" | "create" | "main"
 
 export interface IinitialState {
     scene: TScene
@@ -16,7 +16,7 @@ export const sceneSlice = createSlice({
     name: "scene",
     initialState,
     reducers: {
-        setText(state, action: PayloadAction<TScene>) {
+        setScene(state, action: PayloadAction<TScene>) {
             state.scene = action.payload
         }
     }

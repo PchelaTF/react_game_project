@@ -8,7 +8,7 @@ export interface ICharacterStats {
     initAttack: IAttack,
     initIsNpc: boolean,
     initActionPoints: number,
-    initName?: string,
+    initName: string,
     initImgSmall: string,
     initImgBig: string
 }
@@ -19,7 +19,7 @@ export default class Character {
     private attack: IAttack
     private isNpc: boolean
     private actionPoints: number
-    private name?: string
+    private name: string
     private imgSmall: string
     private imgBig: string
     private selfHealCount: number
@@ -57,6 +57,10 @@ export default class Character {
 
     getImgBig() { return this.imgBig }
 
+    getName() {
+        return this.name
+    }
+    
     getMaxHp() {return this.maxHp}
 
     selfHeal(value: number) {

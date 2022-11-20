@@ -2,6 +2,7 @@ import Character, { ICharacterStats } from "./characters/Character";
 import { Mage } from "./characters/Mage";
 import { Rogue } from "./characters/Rogue";
 import { Warrior } from "./characters/Warrior";
+import { raceArr, raceFullArr, classArr, testClassArr, descrArr } from '../components/CreateCharacter/testCRArr.js';
 
 const WARRIOR_CLASS = "warrior"
 const MAGE_CLASS = "mage"
@@ -18,7 +19,7 @@ export function createNewCharacter(name: string, characterClass: string) {
         initActionPoints: 2,
         initName: name,
         initImgSmall: 'string',
-        initImgBig: 'string'
+        initImgBig: raceFullArr[2]
     }
 
     const mageStats: ICharacterStats = {
@@ -29,7 +30,7 @@ export function createNewCharacter(name: string, characterClass: string) {
         initActionPoints: 2,
         initName: name,
         initImgSmall: 'string',
-        initImgBig: 'string'
+        initImgBig: raceFullArr[1]
     }
 
     const rogueStats: ICharacterStats = {
@@ -40,7 +41,7 @@ export function createNewCharacter(name: string, characterClass: string) {
         initActionPoints: 2,
         initName: name,
         initImgSmall: 'string',
-        initImgBig: 'string'
+        initImgBig: raceFullArr[0]
     }
 
     const defaultStats: ICharacterStats = {

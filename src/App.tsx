@@ -8,6 +8,8 @@ import FightMechanic from './mechanics/FightMechanic';
 // const mainCharacter = new Character(250, 5, { min: 8, max: 10 }, false, 2, "name")
 import face1 from "./assets/img/characters_icons/face1.png"
 import fullFace1 from './assets/img/characters_img/full_face1.png'
+import MainScene from './components/MainScene/MainScene';
+import { useAppSelector } from './store/store';
 import fightSceneImg from "./assets/img/War2.png"
 
 const characterStats: ICharacterStats = {
@@ -21,7 +23,7 @@ const characterStats: ICharacterStats = {
   initImgBig: fullFace1
 }
 
-const mainCharacter = new Character(characterStats)
+
 // const enemyCharacter = new Character(150, 3, { min: 2, max: 13 }, true, 2, "")
 // const enemyCharacter2 = new Character(150, 3, { min: 2, max: 13 }, true, 2, "")
 const enemyCharacter = new Character(characterStats)
@@ -29,14 +31,25 @@ const enemyCharacter = new Character(characterStats)
 
 
 function App() {
-  const characters: Character[] = [mainCharacter, enemyCharacter]
-  const fightScene = new FightMechanic(characters)
+  const scene = useAppSelector(state => state.SceneReducer.scene)
+  const mainCharacter = useAppSelector(state => state.userReducer.character)
+
+  const getScene = () => {
+    switch(scene) {
+      case "create":
+        return <CreateCharacter/>
+      case "main":
+        return <MainScene/>
+      case "fight":
+        return <FightScene  fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]}/>
+      default:
+        return <MainScene/>
+    }
+  }
 
   return (
     <div className="App">
-      {/* <FightScene hp={hp} decHp={decHp}/> */}
-      {/* <CreateCharacter /> */}
-      <FightScene allyArr={[mainCharacter]} enemyArr={[enemyCharacter]} fightSceneImg={fightSceneImg}/>
+      {getScene()}
     </div>
   )
 }

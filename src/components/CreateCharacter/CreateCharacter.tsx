@@ -7,10 +7,12 @@ import CreateCharacterClass from './CreateCharacterClass';
 import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMechanic';
 import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
+import { sceneSlice } from '../../store/reducers/SceneReducer';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
     const { setPlayerCharacter } = userSlice.actions
+    const { setScene } = sceneSlice.actions
     const [fullImg, setFullImg] = useState(raceFullArr[0])
     const [description, setDescription] = useState(descrArr[0])
 
@@ -32,6 +34,7 @@ const CreateCharacter = () => {
         const newCharacter = createNewCharacter(name, reduxClass)
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
+        dispath(setScene("main"))
         // dispath(setPlayerCharacter(createNewCharacter(name, reduxClass)))
     }
 
