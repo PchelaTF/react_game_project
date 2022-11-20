@@ -18,20 +18,9 @@ export const classArr = [assasin, mage, warrior, eny]
 export const raceArr = [face1, face2, face3, face4]
 export const raceFullArr = [fullFace1, fullFace2, fullFace3, fullFace4]
 
-export const testClassArr = [
-    {face1: face1, fullFace1: fullFace1},
-    {face2: face2, fullFace2: fullFace2},
-    {face3: face3, fullFace3: fullFace3},
-    {face4: face4, fullFace4: fullFace4}
-]
-
 export const descrArr = [
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, architecto.',
     'Lorem ipsum dolor sit amet.',
     'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam blanditiis deserunt quae sequi et dolorum!',
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, nam dicta! Tenetur rem aliquid, doloribus magnam temporibus corrupti provident doloremque!'
 ]
-
-
-
-
