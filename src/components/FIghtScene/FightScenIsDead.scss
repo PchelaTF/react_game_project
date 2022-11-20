@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap");
+
+.character-is-dead {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    background-color: rgba(15, 15, 15, 0.363);
+
+    & p {
+        margin: 0;
+        font-family: "Rubik Distressed", cursive;
+        font-size: 100px;
+        text-transform: uppercase;
+        color: red;
+    }
+}
