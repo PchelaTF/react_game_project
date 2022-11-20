@@ -5,7 +5,7 @@ interface IUserCharacters {
     playerHp: number
 }
 
-const UserCharacters = ({ img, playerHp}: IUserCharacters) => {
+const UserCharacters = ({ img, playerHp }: IUserCharacters) => {
     return (
         <div className="player__img">
             <img src={img} alt="img" />

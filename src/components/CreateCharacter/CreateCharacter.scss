@@ -130,14 +130,23 @@
     }
 
     &__btn {
+        // padding: 15px 50px;
+        // margin: 50px 0 0;
+        // border-radius: 20px;
+        // border: 1px solid;
+        // font-size: 16px;
+        // line-height: 120%;
+        // cursor: pointer;
+        // transition: all 0.3s linear;
         padding: 15px 50px;
         margin: 50px 0 0;
-        border-radius: 20px;
-        border: 1px solid;
+        border-radius: 10px;
         font-size: 16px;
         line-height: 120%;
         cursor: pointer;
         transition: all 0.3s linear;
+        background-color: #d6441b;
+        color: white;
 
         &:hover {
             background-color: aquamarine;
