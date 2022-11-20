@@ -57,6 +57,7 @@ export default class Character {
 
     getImgBig() { return this.imgBig }
 
+    getMaxHp() {return this.maxHp}
 
     selfHeal(value: number) {
         if (this.hp + value > this.maxHp) {

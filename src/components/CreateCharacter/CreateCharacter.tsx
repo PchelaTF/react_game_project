@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CreateCharacter.scss'
 
-import { raceArr, raceFullArr, classArr, testClassArr, descrArr } from './testCRArr';
+import { raceArr, raceFullArr, classArr, descrArr } from './testCRArr';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
 import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMechanic';
