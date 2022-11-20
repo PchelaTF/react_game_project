@@ -35,15 +35,15 @@ function App() {
   const mainCharacter = useAppSelector(state => state.userReducer.character)
 
   const getScene = () => {
-    switch(scene) {
+    switch (scene) {
       case "create":
-        return <CreateCharacter/>
+        return <CreateCharacter />
       case "main":
-        return <MainScene/>
+        return <MainScene />
       case "fight":
-        return <FightScene  fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]}/>
+        return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]} />
       default:
-        return <MainScene/>
+        return <MainScene />
     }
   }
 
