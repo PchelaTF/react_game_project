@@ -10,11 +10,12 @@ import face1 from "./assets/img/characters_icons/face1.png"
 import fullFace1 from './assets/img/characters_img/full_face1.png'
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
+import fightSceneImg from "./assets/img/War2.png"
 
 const characterStats: ICharacterStats = {
   initHp: 250,
   initArmor: 5,
-  initAttack: { min: 8, max: 10 },
+  initAttack: { min: 20, max: 30 },
   initIsNpc: false,
   initActionPoints: 2,
   initName: "name",
@@ -26,7 +27,7 @@ const characterStats: ICharacterStats = {
 // const enemyCharacter = new Character(150, 3, { min: 2, max: 13 }, true, 2, "")
 // const enemyCharacter2 = new Character(150, 3, { min: 2, max: 13 }, true, 2, "")
 const enemyCharacter = new Character(characterStats)
-const enemyCharacter2 = new Character(characterStats)
+// const enemyCharacter2 = new Character(characterStats)
 
 
 function App() {
@@ -40,7 +41,7 @@ function App() {
       case "main":
         return <MainScene/>
       case "fight":
-        return <FightScene allyArr={[mainCharacter]} enemyArr={[enemyCharacter]}/>
+        return <FightScene  fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter]}/>
       default:
         return <MainScene/>
     }

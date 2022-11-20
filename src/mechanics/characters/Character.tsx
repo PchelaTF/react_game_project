@@ -60,7 +60,8 @@ export default class Character {
     getName() {
         return this.name
     }
-
+    
+    getMaxHp() {return this.maxHp}
 
     selfHeal(value: number) {
         if (this.hp + value > this.maxHp) {

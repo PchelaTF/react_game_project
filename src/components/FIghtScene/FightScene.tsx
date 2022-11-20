@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import "./FightScene.scss"
-import { imgArr } from './testImgArr'
 import Enemy from './Enemy';
 import Character from '../../mechanics/characters/Character';
 import { useAppDispatch, useAppSelector } from '../../store/store';
@@ -10,13 +9,10 @@ import UserCharacters from './UserCharacters';
 interface IFightSceneProps {
     allyArr: Character[]
     enemyArr: Character[]
+    fightSceneImg: string
 }
 
-const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
-    let playerImg = ''
-    const enemyImgArr = []
-    let sceneImg = ''
-
+const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
     const [enemyHp, setEnemyHp] = React.useState(enemyArr[0].getHp())
     const fightOrder = allyArr.concat(enemyArr)
@@ -24,18 +20,6 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
     const dispatch = useAppDispatch()
     const { setTurn, setIsEnemyTurn } = fightSlice.actions
-
-    for (let i = 0; i < imgArr.length; i++) {
-        if (i === 0) {
-            playerImg = imgArr[i]
-        }
-        if (i === imgArr.length - 1) {
-            sceneImg = imgArr[imgArr.length - 1]
-        }
-        if (i !== 0 && i !== imgArr.length - 1) {
-            enemyImgArr.push(imgArr[i])
-        }
-    }
 
     const passTurn = () => {
         let newTurn = currentTurn
@@ -70,54 +54,22 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         passTurn()
     }
 
-    // ? какая-то фигня, пусть побудет
-    // const initWidth = playerHp ? '100%' : ''
-    // const [widthHp, setWidthHp] = useState(initWidth)
-
-    // const prevHp = usePrevious(playerHp)
-    // console.log('prevHp:', prevHp);
-    // if (prevHp) {
-    //     const damage = prevHp - playerHp
-    //     console.log('damage:', damage);
-
-    //     const curHp = playerHp
-
-    //     console.log('curHp:', curHp);
-
-    //     const calc = Math.round((playerHp / prevHp) * 100)
-
-    //     // console.log('calc value:', calc);
-
-    // }
-
-    // console.log(HpBar(playerHp));    
-    // ? какая-то фигня, пусть побудет
-
     return (
         <div className="fight-scene__wrapper">
             <div className="fight-scene__main">
                 <div className="fight-scene__main-backimg">
-                    <img src={sceneImg} alt="img" />
+                    <img src={fightSceneImg} alt="img" />
                 </div>
 
                 <div className="fight-scene__main-characters">
                     <div className="player">
-                        {/* 
-                        <div className="player__img">
-                            <img src={playerImg} alt="img" />
-                            <span style={{ width: playerHp }}>{playerHp}</span>
-                        </div>
-                        <div className="player__img">
-                            <img src={mainCharacter[0].getImgBig()} alt="img" />
-                            <span style={{ width: playerHp }}>{playerHp}</span>
-                        </div> */}
                         {allyArr.map((item, i) => {
-                            return <UserCharacters img={item.getImgBig()} playerHp={playerHp} key={i} />
+                            return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
                         })}
                     </div>
                     <div className="enemys">
                         {enemyArr.map((item, i) => {
-                            return <Enemy enemyImg={imgArr[1]} enemyHp={item.getHp()} key={i} />
+                            return <Enemy enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
                         })}
                     </div>
                 </div>
