@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import "./FightScene.scss"
-import Enemy from './Enemy';
+import Enemys from './Enemys';
 import Character from '../../mechanics/characters/Character';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fightSlice } from '../../store/reducers/FightReducer';
@@ -71,7 +71,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                     <div className="enemys">
                         {enemyArr.map((item, i) => {
-                            return <Enemy enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
+                            return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
                         })}
                     </div>
                 </div>
