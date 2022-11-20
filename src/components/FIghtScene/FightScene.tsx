@@ -18,6 +18,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const fightOrder = allyArr.concat(enemyArr)
     const isEnemyTurn = useAppSelector(state => state.FightReducer.isEnemyTurn)
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
+    const enemyIndex = useAppSelector(state => state.FightReducer.enemyIndex)
     const dispatch = useAppDispatch()
     const { setTurn, setIsEnemyTurn } = fightSlice.actions
 
@@ -43,7 +44,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     }, [isEnemyTurn])
 
     const handleAttack = () => {
-        allyArr[0].dealDamage(enemyArr[0])
+        allyArr[0].dealDamage(enemyArr[enemyIndex])
         setEnemyHp(enemyArr[0].getHp())
         passTurn()
     }
@@ -69,7 +70,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                     <div className="enemys">
                         {enemyArr.map((item, i) => {
-                            return <Enemy enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
+                            return <Enemy enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
                         })}
                     </div>
                 </div>

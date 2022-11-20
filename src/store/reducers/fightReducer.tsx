@@ -4,13 +4,15 @@ import Character from "../../mechanics/characters/Character"
 export interface IinitialState {
     characters: Character[],
     currentTurn: number,
-    isEnemyTurn: boolean
+    isEnemyTurn: boolean,
+    enemyIndex: number
 }
 
 const initialState: IinitialState  = {
     characters: [],
     currentTurn: 1,
-    isEnemyTurn: false
+    isEnemyTurn: false,
+    enemyIndex: 0
 }
 
 export const NEXT_TURN = "NEXT_TURN"
@@ -25,6 +27,9 @@ export const fightSlice = createSlice({
         },
         setIsEnemyTurn(state, action: PayloadAction<boolean>) {
             state.isEnemyTurn = action.payload
+        },
+        setEnemyIndex(state, action: PayloadAction<number>) {
+            state.enemyIndex = action.payload
         }
     }
 })
