@@ -29,7 +29,7 @@ const CreateCharacter = () => {
     const onHandleNameChange = (e: any) => {
         setName(e.target.value)
     }
-    
+
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
         const newCharacter = createNewCharacter(name, reduxClass)
         const playerCharacter = setPlayerCharacter(newCharacter)
@@ -45,37 +45,33 @@ const CreateCharacter = () => {
 
                     <div className="create-character__select">
 
-                        <div className="create-character__select-name">
-                            <label htmlFor="name">Enter character name</label>
-                            <input
-                                className='create-character__name-input'
-                                type="text"
-                                name='name'
-                                autoComplete='off'
-                                onChange={(e) => onHandleNameChange(e)} />
-                        </div>
-
-                        <div className="create-character__select-container">
+                        <div className="create-character__select-item">
+                            <p className='create-character__select-title'>race</p>
 
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
                                     return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} />
                                 })}
-
-                                <div className="create-character__race-bigimg">
-                                    <img src={fullImg} alt="img" />
-                                </div>
                             </div>
+                        </div>
+
+                        <div className="create-character__select-item">
+                            <p className='create-character__select-title'>class</p>
 
                             <div className="create-character__class">
                                 {classArr.map((item, i) => {
                                     return <CreateCharacterClass key={i} CharacterClass={item} />
                                 })}
                             </div>
-
                         </div>
 
+
                     </div>
+
+                    <div className="create-character__bigimg">
+                        <img src={fullImg} alt="img" />
+                    </div>
+
 
                     <div className="create-character__info">
                         <p className="create-character__info-title">Information</p>
@@ -90,9 +86,9 @@ const CreateCharacter = () => {
                             <div className="create-character__info-stats stats">
                                 <p className="stats__title">Stats</p>
                                 <ul className="stats__lists">
-                                    <li className="stats__elem">STR - 15</li>
-                                    <li className="stats__elem">DEX - 15</li>
-                                    <li className="stats__elem">CON - 15</li>
+                                    <li className="stats__elem">HP - maxHp</li>
+                                    <li className="stats__elem">attak - (min - max)</li>
+                                    <li className="stats__elem">armor - armor</li>
                                     <li className="stats__elem">INT - 15</li>
                                     <li className="stats__elem">MEN - 15</li>
                                     <li className="stats__elem">WIT - 15</li>
@@ -104,9 +100,20 @@ const CreateCharacter = () => {
                     </div>
                 </div>
 
-                <button className='create-character__btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create character</button>
+
+                <div className="create-character__name">
+                    <input
+                        type="text"
+                        name='name'
+                        autoComplete='off'
+                        placeholder='CHARACTER NAME'
+                        onChange={(e) => onHandleNameChange(e)} />
+                </div>
+
+                <button className='create-character__btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button>
 
             </div>
+
         </div>
     );
 };
