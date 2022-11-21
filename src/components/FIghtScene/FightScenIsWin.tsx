@@ -7,7 +7,7 @@ const FightScenIsWin = () => {
     const dispatch = useAppDispatch()
 
     function exitFightScene() {
-        dispatch(setScene("create"))
+        dispatch(setScene("main"))
     }
     return (
         <div className='character-is-win' onClick={() => exitFightScene()}>
