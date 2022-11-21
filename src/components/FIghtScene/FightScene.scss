@@ -3,7 +3,8 @@
         display: flex;
         flex-direction: column;
         min-height: 100%;
-        background-color: #000;
+        // background-color: #000;
+        backdrop-filter: blur(10px);
     }
 
     &__main {
@@ -116,7 +117,7 @@
         width: 100%;
         margin: 0 auto;
         height: 300px;
-        background-color: #000;
+        // background-color: #000;
         display: flex;
 
         &-left,
