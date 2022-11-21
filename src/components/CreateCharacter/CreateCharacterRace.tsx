@@ -8,7 +8,7 @@ interface ICharacterRaceProps {
 const CreateCharacterRace = ({ CharacterRace, switchRace }: ICharacterRaceProps) => {
     return (
         <div className="create-character__race-variable" onClick={switchRace}>
-            <img src={CharacterRace} alt="img" />
+            <img src={CharacterRace} alt="img" title='Some descr of img' />
         </div>
     );
 };
