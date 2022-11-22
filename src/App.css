@@ -4,3 +4,66 @@
 
   background: url('./assets/img/main_bg_black.png') no-repeat center/cover;
 }
+
+.btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  letter-spacing: 0.3rem;
+  font-size: 25px;
+  line-height: 120%;
+  text-transform: uppercase;
+  background-color: #d6441b;
+  color: white;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.btn:hover {
+  background-color: #f54818;
+}
+
+.arrow-down {
+  display: none;
+  position: absolute;
+  top: -75px;
+  left: 30%;
+  margin: 30px;
+}
+
+.arrow-down span {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-bottom: 5px solid #f54818;
+  border-right: 5px solid #f54818;
+  transform: rotate(45deg);
+  margin: -16px;
+  animation: arrow-down 2s infinite;
+}
+
+.arrow-down span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+.arrow-down span:nth-child(3) {
+  animation-delay: -0.4s;
+}
+
+@keyframes arrow-down {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-20px, -20px);
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(20px, 20px);
+  }
+}

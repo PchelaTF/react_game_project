@@ -7,6 +7,8 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
+import { skillsImgArr } from "../CreateCharacter/testCRArr"
+
 interface IFightSceneProps {
     allyArr: Character[]
     enemyArr: Character[]
@@ -26,13 +28,13 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 
     React.useEffect(() => {
         setChoiceActive(false)
-        if(fightOrder[currentTurn].getIsNpc()) {
+        if (fightOrder[currentTurn].getIsNpc()) {
             npcTurn()
         }
     }, [currentTurn])
 
     React.useEffect(() => {
-        if(!isСhoiceActive)
+        if (!isСhoiceActive)
             doDamage()
     }, [enemyIndex])
 
@@ -41,7 +43,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     }, [currentTurn])
 
     const npcTurn = () => {
-        if(!deadEnemies[currentTurn])
+        if (!deadEnemies[currentTurn])
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
                 setPlayerHp(allyArr[0].getHp())
@@ -50,13 +52,13 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     }
 
     const passTurn = () => {
-        if(playerHp <= 0)
+        if (playerHp <= 0)
             return
         let newTurn = currentTurn
         dispatch(setChoiceActive(false))
-        if (currentTurn < fightOrder.length-1)
+        if (currentTurn < fightOrder.length - 1)
             dispatch(setTurn(newTurn + 1))
-        else 
+        else
             dispatch(setTurn(0))
     }
 
@@ -96,15 +98,23 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                 </div>
             </div>
-            <div className="fight-scene__panel">
-                <div className="fight-scene__panel-left">
-                    <div className="skills__panel">
-                        {/* <img src='' alt="img" /> */}
-                        <button onClick={handleAttack} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button>
-                    </div>
-                </div>
-                <div className="fight-scene__panel-right"></div>
-            </div>
+
+            {/* <button onClick={handleAttack} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
+
+            <ul className="fight-scene__skills-panel">
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[0]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[1]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[2]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[3]} alt="img" />
+                </li>
+            </ul>
 
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
@@ -113,3 +123,4 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 };
 
 export default FightScene;
+

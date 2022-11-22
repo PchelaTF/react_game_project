@@ -13,14 +13,19 @@ import fullFace2 from '../../assets/img/characters_img/full_face2.png'
 import fullFace3 from '../../assets/img/characters_img/full_face3.png'
 import fullFace4 from '../../assets/img/characters_img/full_face4.png'
 
+import atk from '../../assets/img/skills/atk.png'
+import atk2 from '../../assets/img/skills/Icon10.png'
+import atk3 from '../../assets/img/skills/Icon11.png'
+import atk4 from '../../assets/img/skills/Icon12.png'
 
 export const classArr = [assasin, mage, warrior, eny]
-export const raceArr = [face1, face2, face3, face4]
-export const raceFullArr = [fullFace1, fullFace2, fullFace3, fullFace4]
+export const raceArr = [face4, face2, face3, face1]
+export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
+export const skillsImgArr = [atk, atk2, atk3, atk4]  
 
 export const descrArr = [
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, architecto.',
-    'Lorem ipsum dolor sit amet.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam blanditiis deserunt quae sequi et dolorum!',
+    'Nimble combatant focused on stealth and social skills, also capable of high-damage special attacks balanced by sub-par resistance to injury.',
+    'Featuring powerful magical abilities, but physically weak.',
+    'Focused on combat abilities, but almost entirely lacking in magical abilities',
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, nam dicta! Tenetur rem aliquid, doloribus magnam temporibus corrupti provident doloremque!'
 ]

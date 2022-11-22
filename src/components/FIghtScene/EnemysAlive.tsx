@@ -15,6 +15,11 @@ const EnemysAlive = ({ enemyImg, enemyHp, maxEnemyHp, widthHpBar }: IEnemysAlive
                 <span style={{ width: `${widthHpBar}%` }}></span>
                 <p>{enemyHp} / {maxEnemyHp}</p>
             </div>
+            <div className="arrow-down">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </>
     );
 };
