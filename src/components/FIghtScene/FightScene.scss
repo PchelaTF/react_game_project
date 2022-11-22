@@ -1,10 +1,14 @@
 .fight-scene {
+    box-sizing: border-box;
     &__wrapper {
         display: flex;
         flex-direction: column;
         min-height: 100%;
         // background-color: #000;
         backdrop-filter: blur(10px);
+
+        // ?
+        position: relative;
     }
 
     &__main {
@@ -19,9 +23,10 @@
         &-backimg {
             position: relative;
             // height: 700px;
-            height: 100%;
+            // height: 100%;
+            height: 100vh;
             width: 100%;
-            padding-bottom: 35%;
+            // padding-bottom: 35%;
 
             & img {
                 position: absolute;
@@ -36,24 +41,29 @@
         &-characters {
             display: flex;
             position: absolute;
+            gap: 100px;
             width: 100%;
-            bottom: 5%;
+            // bottom: 5%;
+            bottom: 13%;
             // left: 50%;
             justify-content: space-evenly;
 
             .player,
             .enemys {
                 display: flex;
-                justify-content: center;
-                gap: 10px;
+                // justify-content: center;
+                justify-content: space-evenly;
+                // gap: 10px;
+                // gap: 20px;
                 width: 100%;
 
                 &__content {
-                    flex: 0 1 15%;
+                    flex: 0 1 17%;
                     position: relative;
                     // width: 100px;
                     // height: 300px;
-                    padding-bottom: 30%;
+                    // padding-bottom: 30%;
+                    padding-bottom: 40%;
                     width: 100%;
 
                     &-img {
@@ -62,7 +72,7 @@
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        object-fit: contain;
+                        object-fit: cover;
 
                         &.enemy {
                             transform: rotateY(180deg);
@@ -112,26 +122,46 @@
     }
 
     &__panel {
-        flex: 1 1 100%;
-        max-width: 1140px;
-        width: 100%;
+        // flex: 1 1 100%;
+        // max-width: 1140px;
+        // width: 100%;
+        // margin: 0 auto;
+        // height: 300px;
+        // // background-color: #000;
+        // display: flex;
+
+        // &-left,
+        // &-right {
+        //     flex: 0 1 50%;
+        //     border: 1px dashed #fff;
+        // }
+
+        // .skills__panel {
+        //     cursor: pointer;
+        //     & img {
+        //         width: 70px;
+        //         height: 70px;
+        //     }
+        // }
+
+        // ?
+        position: absolute;
+        bottom: 1.5%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1440px;
         margin: 0 auto;
-        height: 300px;
-        // background-color: #000;
+        // height: 50px;
+        height: auto;
         display: flex;
+        justify-content: center;
+        gap: 20px;
 
-        &-left,
-        &-right {
-            flex: 0 1 50%;
-            border: 1px dashed #fff;
-        }
+        border: 1px solid red;
 
-        .skills__panel {
-            cursor: pointer;
-            & img {
-                width: 70px;
-                height: 70px;
-            }
+        & img {
+            width: 70px;
+            height: 70px;
         }
     }
 }

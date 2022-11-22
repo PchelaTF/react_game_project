@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './CreateCharacter.scss'
 
 import { raceArr, raceFullArr, classArr, descrArr } from './testCRArr';
@@ -13,14 +13,15 @@ const CreateCharacter = () => {
     const dispath = useAppDispatch()
     const { setPlayerCharacter } = userSlice.actions
     const { setScene } = sceneSlice.actions
-    const [fullImg, setFullImg] = useState(raceFullArr[0])
-    const [description, setDescription] = useState(descrArr[0])
+    const [fullImg, setFullImg] = React.useState(raceFullArr[0])
+    const [description, setDescription] = React.useState(descrArr[0])
+    const [reduxClass, setReduxClass] = React.useState(characterClasses[0])
+    const [name, setName] = React.useState('')
 
-    const [reduxClass, setReduxClass] = useState(characterClasses[0])
-
-    const [name, setName] = useState('')
+    const [activeIndex, setActiveIndex] = React.useState(0)
 
     function switchRace(key: any) {
+        setActiveIndex(key)
         setFullImg(raceFullArr[key])
         setDescription(descrArr[key])
         setReduxClass(characterClasses[key])
@@ -50,7 +51,11 @@ const CreateCharacter = () => {
 
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
-                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} />
+                                    if (activeIndex == i) {
+                                        return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={"_active"} />
+                                    } else {
+                                        return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={""} />
+                                    }
                                 })}
                             </div>
                         </div>

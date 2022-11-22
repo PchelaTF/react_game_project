@@ -7,6 +7,7 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
+import { skillsImgArr } from "../CreateCharacter/testCRArr" 
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -76,14 +77,19 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                 </div>
             </div>
-            <div className="fight-scene__panel">
+            {/* <div className="fight-scene__panel">
                 <div className="fight-scene__panel-left">
                     <div className="skills__panel">
-                        {/* <img src='' alt="img" /> */}
+                        <img src='' alt="img" />
                         <button onClick={handleAttack} disabled={isEnemyTurn}>ATK</button>
                     </div>
                 </div>
                 <div className="fight-scene__panel-right"></div>
+            </div> */}
+            <div className="fight-scene__panel">
+                {skillsImgArr.map((item) => {
+                    return <img src={item} alt="asd" />
+                })}
             </div>
 
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
