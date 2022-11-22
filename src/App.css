@@ -4,3 +4,23 @@
 
   background: url('./assets/img/main_bg_black.png') no-repeat center/cover;
 }
+
+.btn {
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
+  font-family: inherit;
+  letter-spacing: 0.3rem;
+  font-size: 25px;
+  line-height: 120%;
+  text-transform: uppercase;
+  background-color: #d6441b;
+  color: white;
+  transition: all 0.3s linear;
+  cursor: pointer;
+  transition: all 0.3s linear;
+}
+
+.btn:hover {
+  background-color: #f54818;
+}

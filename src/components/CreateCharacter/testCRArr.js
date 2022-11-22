@@ -24,8 +24,8 @@ export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
 export const skillsImgArr = [atk, atk2, atk3, atk4]  
 
 export const descrArr = [
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Est, architecto.',
-    'Lorem ipsum dolor sit amet.',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam blanditiis deserunt quae sequi et dolorum!',
+    'Nimble combatant focused on stealth and social skills, also capable of high-damage special attacks balanced by sub-par resistance to injury.',
+    'Featuring powerful magical abilities, but physically weak.',
+    'Focused on combat abilities, but almost entirely lacking in magical abilities',
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, nam dicta! Tenetur rem aliquid, doloribus magnam temporibus corrupti provident doloremque!'
 ]

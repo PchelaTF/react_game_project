@@ -8,6 +8,7 @@ import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import { characterStatsArr } from '../../mechanics/CreatingMechanic';
+import { skillsImgArr } from './testCRArr';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
@@ -103,6 +104,15 @@ const CreateCharacter = () => {
                                 </ul>
                             </div>
 
+                            <div className="create-character__info-skills skills">
+                                <p className="skills__title">Skills</p>
+                                <ul className="skills__lists">
+                                    {skillsImgArr.map((item, i) => {
+                                        return <li className="skills__elem" key={i}><img src={item} alt="img" /></li>
+                                    })}
+                                </ul>
+                            </div>
+
                         </div>
 
                     </div>
@@ -118,7 +128,9 @@ const CreateCharacter = () => {
                         onChange={(e) => onHandleNameChange(e)} />
                 </div>
 
-                <button className='create-character__btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button>
+                <div className="create-character__button">
+                    <button className='btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button>
+                </div>
 
             </div>
 

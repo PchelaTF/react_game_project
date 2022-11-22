@@ -18,16 +18,16 @@ export default function MainScene() {
             <div className={`${mainClass}__modal`}>
                 <ul className={`${mainClass}__list`}>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button value={"fight"} className={`item__list-button`} onClick={(e) => handleClick(e)}>To battle</button>
+                        <button value={"fight"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button>
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button className={`item__list-button`} onClick={handleClick}>To hab</button>
+                        <button className={`item__list-button btn`} onClick={handleClick}>To hab</button>
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button className={`item__list-button`} onClick={handleClick}>Shop</button>
+                        <button className={`item__list-button btn`} onClick={handleClick}>Shop</button>
                     </li>
                 </ul>
             </div>
         </div>
-  )
+    )
 }
