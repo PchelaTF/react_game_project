@@ -23,6 +23,7 @@ export default class Character {
     private imgSmall: string
     private imgBig: string
     private selfHealCount: number
+    private isDead: boolean
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
     constructor(characterStats: ICharacterStats) {
         this.hp = characterStats.initHp
@@ -35,6 +36,7 @@ export default class Character {
         this.imgSmall = characterStats.initImgSmall
         this.imgBig = characterStats.initImgBig
         this.selfHealCount = 0
+        this.isDead = false
     }
 
     setHp(newHp: number) {
@@ -76,7 +78,7 @@ export default class Character {
     }
 
     getIsNpc() {
-        return this.isNpc
+        return this.isNpc 
     }
 
     dealDamage(dmgToCharacter: Character) {

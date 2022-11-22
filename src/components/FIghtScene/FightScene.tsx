@@ -17,43 +17,64 @@ interface IFightSceneProps {
 
 const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
-    const [enemyHp, setEnemyHp] = React.useState(enemyArr[0].getHp())
+    const [isWon, setIsWon] = React.useState(false)
     const fightOrder = allyArr.concat(enemyArr)
-    const isEnemyTurn = useAppSelector(state => state.FightReducer.isEnemyTurn)
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
+    const enemyIndex = useAppSelector(state => state.FightReducer.enemyIndex)
+    const isСhoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
+    const deadEnemies = useAppSelector(state => state.FightReducer.deadEnemies)
     const dispatch = useAppDispatch()
-    const { setTurn, setIsEnemyTurn } = fightSlice.actions
-
-    const passTurn = () => {
-        let newTurn = currentTurn
-        if (currentTurn == fightOrder.length)
-            dispatch(setTurn(1))
-        else dispatch(setTurn(newTurn + 1))
-
-        if (currentTurn > allyArr.length)
-            dispatch(setIsEnemyTurn(false))
-        else dispatch(setIsEnemyTurn(true))
-    }
+    const { setTurn, setChoiceActive, setEnemyIndex } = fightSlice.actions
 
     React.useEffect(() => {
-        if (isEnemyTurn) {
+        setChoiceActive(false)
+        if (fightOrder[currentTurn].getIsNpc()) {
+            npcTurn()
+        }
+    }, [currentTurn])
+
+    React.useEffect(() => {
+        if (!isСhoiceActive)
+            doDamage()
+    }, [enemyIndex])
+
+    React.useEffect(() => {
+        setIsWon(deadEnemies.length == enemyArr.length)
+    }, [currentTurn])
+
+    const npcTurn = () => {
+        if (!deadEnemies[currentTurn])
             setTimeout(() => {
-                enemyArr[0].doNpcLogic(allyArr[0])
+                fightOrder[currentTurn].doNpcLogic(allyArr[0])
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)
-        }
-    }, [isEnemyTurn])
+    }
+
+    const passTurn = () => {
+        if (playerHp <= 0)
+            return
+        let newTurn = currentTurn
+        dispatch(setChoiceActive(false))
+        if (currentTurn < fightOrder.length - 1)
+            dispatch(setTurn(newTurn + 1))
+        else
+            dispatch(setTurn(0))
+    }
 
     const handleAttack = () => {
-        allyArr[0].dealDamage(enemyArr[0])
-        setEnemyHp(enemyArr[0].getHp())
-        passTurn()
+        dispatch(setChoiceActive(true))
+        dispatch(setEnemyIndex(-1))
     }
 
     const heal = () => {
         allyArr[0].selfHeal(6)
         setPlayerHp(allyArr[0].getHp())
+        passTurn()
+    }
+
+    const doDamage = () => {
+        allyArr[0].dealDamage(enemyArr[enemyIndex])
         passTurn()
     }
 
@@ -72,20 +93,14 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     </div>
                     <div className="enemys">
                         {enemyArr.map((item, i) => {
-                            return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} key={i} />
+                            return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
                         })}
                     </div>
                 </div>
             </div>
-            {/* <div className="fight-scene__panel">
-                <div className="fight-scene__panel-left">
-                    <div className="skills__panel">
-                        <img src='' alt="img" />
-                        <button onClick={handleAttack} disabled={isEnemyTurn}>ATK</button>
-                    </div>
-                </div>
-                <div className="fight-scene__panel-right"></div>
-            </div> */}
+
+            {/* <button onClick={handleAttack} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
+
             <div className="fight-scene__panel">
                 {skillsImgArr.map((item) => {
                     return <div className='test' onClick={handleAttack}><img src={item} alt="asd" /></div>
@@ -93,9 +108,10 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
             </div>
 
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
-            {enemyHp <= 0 ? <FightScenIsWin /> : ''}
+            {isWon && <FightScenIsWin />}
         </div>
     );
 };
 
 export default FightScene;
+
