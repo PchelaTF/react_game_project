@@ -1,6 +1,5 @@
 import React from 'react';
 import './CreateCharacter.scss'
-
 import { raceArr, raceFullArr, classArr, descrArr } from './testCRArr';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
@@ -8,6 +7,7 @@ import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMe
 import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
+import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
@@ -20,11 +20,14 @@ const CreateCharacter = () => {
 
     const [activeIndex, setActiveIndex] = React.useState(0)
 
+    const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
+
     function switchRace(key: any) {
         setActiveIndex(key)
         setFullImg(raceFullArr[key])
         setDescription(descrArr[key])
         setReduxClass(characterClasses[key])
+        setViewCharacterStats(characterStatsArr[key])
     }
 
     const onHandleNameChange = (e: any) => {
@@ -91,9 +94,9 @@ const CreateCharacter = () => {
                             <div className="create-character__info-stats stats">
                                 <p className="stats__title">Stats</p>
                                 <ul className="stats__lists">
-                                    <li className="stats__elem">HP - maxHp</li>
-                                    <li className="stats__elem">attak - (min - max)</li>
-                                    <li className="stats__elem">armor - armor</li>
+                                    <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
+                                    <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
+                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li>
                                     <li className="stats__elem">INT - 15</li>
                                     <li className="stats__elem">MEN - 15</li>
                                     <li className="stats__elem">WIT - 15</li>
