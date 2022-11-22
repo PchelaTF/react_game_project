@@ -41,7 +41,7 @@ function App() {
       case "main":
         return <MainScene />
       case "fight":
-        return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter, mainCharacter, mainCharacter, mainCharacter,]} enemyArr={[enemyCharacter, enemyCharacter, enemyCharacter, enemyCharacter,]} />
+        return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[enemyCharacter, enemyCharacter]} />
       default:
         return <MainScene />
     }

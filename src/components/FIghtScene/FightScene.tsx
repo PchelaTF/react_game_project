@@ -7,7 +7,7 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
-import { skillsImgArr } from "../CreateCharacter/testCRArr" 
+import { skillsImgArr } from "../CreateCharacter/testCRArr"
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -88,7 +88,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
             </div> */}
             <div className="fight-scene__panel">
                 {skillsImgArr.map((item) => {
-                    return <img src={item} alt="asd" />
+                    return <div className='test' onClick={handleAttack}><img src={item} alt="asd" /></div>
                 })}
             </div>
 
