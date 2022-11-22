@@ -133,7 +133,7 @@
         }
     }
 
-    &__panel {
+    &__skills-panel {
         // flex: 1 1 100%;
         // max-width: 1140px;
         // width: 100%;
@@ -163,6 +163,7 @@
         transform: translateX(-50%);
         width: 1440px;
         margin: 0 auto;
+        padding: 0;
         // height: 50px;
         height: auto;
         display: flex;
@@ -170,7 +171,8 @@
         gap: 20px;
 
         // border: 1px solid red;
-        .test {
+        .skills__item {
+            list-style: none;
             cursor: pointer;
         }
 

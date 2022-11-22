@@ -101,11 +101,20 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 
             {/* <button onClick={handleAttack} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
 
-            <div className="fight-scene__panel">
-                {skillsImgArr.map((item) => {
-                    return <div className='test' onClick={handleAttack}><img src={item} alt="asd" /></div>
-                })}
-            </div>
+            <ul className="fight-scene__skills-panel">
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[0]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[1]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[2]} alt="img" />
+                </li>
+                <li className="skills__item" onClick={handleAttack}>
+                    <img src={skillsImgArr[3]} alt="img" />
+                </li>
+            </ul>
 
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
