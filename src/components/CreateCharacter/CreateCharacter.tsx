@@ -11,7 +11,7 @@ import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 import { skillsImgArr } from './Images';
 
 const CreateCharacter = () => {
-    const dispath = useAppDispatch()
+    const dispatch = useAppDispatch()
     const { setPlayerCharacter } = userSlice.actions
     const { setScene } = sceneSlice.actions
     const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
@@ -42,8 +42,8 @@ const CreateCharacter = () => {
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
         const newCharacter = createNewCharacter(name, reduxClass, fullImg, classArr[activeRace][activeIndex].iconImg)
         const playerCharacter = setPlayerCharacter(newCharacter)
-        dispath(playerCharacter)
-        dispath(setScene("main"))
+        dispatch(playerCharacter)
+        dispatch(setScene("main"))
     }
 
     return (
@@ -58,7 +58,7 @@ const CreateCharacter = () => {
 
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
-                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeIndex == i ? "_active" : "")} />
+                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
                                 })}
                             </div>
                         </div>
