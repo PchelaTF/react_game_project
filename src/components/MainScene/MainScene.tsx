@@ -1,4 +1,5 @@
 import React from 'react'
+import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch } from '../../store/store'
 import "./MainScene.scss"
@@ -6,10 +7,13 @@ import "./MainScene.scss"
 export default function MainScene() {
     const dispatch = useAppDispatch()
     const { setScene } = sceneSlice.actions
+    const { clearDeadEnemies } = fightSlice.actions
 
     const mainClass = "Main-scene"
 
     const handleClick = (e: any) => {
+        if(e.target.value == "fight")
+            dispatch(clearDeadEnemies())
         dispatch(setScene(e.target.value))
     }
 
