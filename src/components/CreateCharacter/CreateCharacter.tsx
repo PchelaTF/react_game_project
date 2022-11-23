@@ -58,7 +58,7 @@ const CreateCharacter = () => {
 
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
-                                        return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={activeRace == i ? "_active" : ""} />
+                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeIndex == i ? "_active" : "")} />
                                 })}
                             </div>
                         </div>

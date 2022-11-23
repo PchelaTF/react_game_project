@@ -1,0 +1,58 @@
+.inventory {
+    height: 100%;
+    backdrop-filter: blur(10px);
+
+    &__wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__container {
+        width: 500px;
+        height: 500px;
+        background-color: #fff;
+    }
+
+    &__header {
+        margin-top: 20px;
+        font-size: 21px;
+        line-height: 120%;
+    }
+
+    &__body {
+        padding: 15px;
+
+        &-items {
+            margin: 0;
+            padding: 0;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            justify-items: center;
+            row-gap: 10px;
+        }
+
+        &-item {
+            display: flex;
+            align-items: center;
+            // width: 100%;
+            // height: 100%;
+            width: 67px;
+            height: 67px;
+            list-style: none;
+            background-color: rgba(128, 128, 128, 0.555);
+            border: 1px solid #000;
+            border-radius: 5px;
+            & img {
+                width: 64px;
+                height: 64px;
+            }
+        }
+    }
+
+    &__footer {
+    }
+}
