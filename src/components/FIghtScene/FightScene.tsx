@@ -35,6 +35,8 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
         }
     }, [currentTurn])
 
+    
+    // вызывается при смене индекса по нажатию на противника
     React.useEffect(() => {
         if (!isСhoiceActive && !initial){
             switch(skillIndex) {

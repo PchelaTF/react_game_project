@@ -5,9 +5,8 @@ import FightScene from './components/FIghtScene/FightScene';
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
 import fightSceneImg from "./assets/img/War2.png"
-import Inventory from './components/Inventory/Inventory';
 import { createEnemy } from './mechanics/CreatingMechanic';
-
+import Levels from './components/Levels/Levels';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
@@ -21,6 +20,8 @@ function App() {
         return <MainScene />
       case "fight":
         return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[createEnemy(), createEnemy()]} />
+      case "levels":
+        return <Levels/>
       default:
         return <MainScene />
     }

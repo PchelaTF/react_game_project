@@ -34,8 +34,11 @@ import atk2 from '../../assets/img/skills/Icon10.png'
 import atk3 from '../../assets/img/skills/Icon11.png'
 import atk4 from '../../assets/img/skills/Icon12.png'
 
+import background from "../../assets/img/main_bg.png"
+
 export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
 export const skillsImgArr = [atk, atk2, atk3, atk4] 
+export const backgrounds = [background]
 
 interface IImages {
     fullImg: string,
