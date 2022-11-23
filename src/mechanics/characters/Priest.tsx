@@ -5,9 +5,8 @@ export class Mage extends Character {
         super(characterStats)
     }
 
-    firstSkill(dmgToCharacter: Character) {
-        const dmg = this.getAttack()
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+    healTouch(dmgToCharacter: Character) {
+        dmgToCharacter.setHp(dmgToCharacter.getHp() + 12)
     }
 
 }

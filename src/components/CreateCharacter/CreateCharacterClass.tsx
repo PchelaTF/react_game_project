@@ -1,12 +1,14 @@
 import React from 'react';
 
 interface ICharacterRaceProps {
-    CharacterClass: string
+    CharacterClass: string,
+    switchClass: () => void,
+    activeClassName: string
 }
 
-const CreateCharacterClass = ({ CharacterClass }: ICharacterRaceProps) => {
+const CreateCharacterClass = ({ CharacterClass, switchClass, activeClassName }: ICharacterRaceProps) => {
     return (
-        <div className="create-character__class-variable">
+        <div className={`create-character__class-variable ${activeClassName}`} onClick={switchClass}>
             <img src={CharacterClass} alt="img" />
         </div>
     );
