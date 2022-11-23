@@ -95,8 +95,8 @@ const CreateCharacter = () => {
                                 <p className="stats__title">Stats</p>
                                 <ul className="stats__lists">
                                     <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                                    <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
-                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li>
+                                    {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
+                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
                                     <li className="stats__elem">INT - 15</li>
                                     <li className="stats__elem">MEN - 15</li>
                                     <li className="stats__elem">WIT - 15</li>

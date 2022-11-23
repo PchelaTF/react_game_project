@@ -13,48 +13,59 @@ export type classes = "warrior" | "mage" | "rogue"
 
 export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLASS]
 
+export const rollForStats = () => {
+    const roll = 3 * Math.floor(Math.random() * (20 - 1 + 1) + 1)
+    if(roll < 13)
+        rollForStats()
+    return roll
+}
+
 const warriorStats: ICharacterStats = {
-    initHp: 25,
-    initArmor: 10,
-    initAttack: { min: 10, max: 25 },
+    initHp: 10,
+    initAttack: 1,
     initIsNpc: false,
-    initActionPoints: 2,
     initName: '',
     initImgSmall: 'string',
-    initImgBig: raceFullArr[2]
+    initImgBig: raceFullArr[2],
+    initConstitution: rollForStats(),
+    initDexterety: rollForStats(),
+    initStrength: rollForStats()
 }
 
 const mageStats: ICharacterStats = {
-    initHp: 10,
-    initArmor: 8,
-    initAttack: { min: 5, max: 15 },
+    initHp: 6,
+    initAttack: 0,
     initIsNpc: false,
-    initActionPoints: 2,
     initName: '',
     initImgSmall: 'string',
-    initImgBig: raceFullArr[1]
+    initImgBig: raceFullArr[1],
+    initConstitution: rollForStats(),
+    initDexterety: rollForStats(),
+    initStrength: rollForStats()
 }
 
 const rogueStats: ICharacterStats = {
-    initHp: 12,
-    initArmor: 10,
-    initAttack: { min: 10, max: 30 },
+    initHp: 8,
+    initAttack: 0,
     initIsNpc: false,
-    initActionPoints: 2,
     initName: '',
     initImgSmall: 'string',
-    initImgBig: raceFullArr[0]
+    initImgBig: raceFullArr[0],
+    initConstitution: rollForStats(),
+    initDexterety: rollForStats(),
+    initStrength: rollForStats()
 }
 
 const defaultStats: ICharacterStats = {
     initHp: 10,
-    initArmor: 10,
-    initAttack: { min: 10, max: 10 },
+    initAttack: 0,
     initIsNpc: false,
-    initActionPoints: 2,
     initName: '',
     initImgSmall: 'string',
-    initImgBig: 'string'
+    initImgBig: 'string',
+    initConstitution: rollForStats(),
+    initDexterety: rollForStats(),
+    initStrength: rollForStats()
 }
 
 export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats] 
