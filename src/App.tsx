@@ -43,8 +43,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {getScene()} */}
-      <Inventory/>
+      {getScene()}
     </div>
   )
 }
