@@ -8,6 +8,7 @@ import fullFace1 from './assets/img/characters_img/full_face1.png'
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
 import fightSceneImg from "./assets/img/War2.png"
+import Inventory from './components/Inventory/Inventory';
 
 const npcStats: ICharacterStats = {
   initHp: 2,
@@ -42,7 +43,8 @@ function App() {
 
   return (
     <div className="App">
-      {getScene()}
+      {/* {getScene()} */}
+      <Inventory/>
     </div>
   )
 }
