@@ -123,9 +123,14 @@
                         line-height: 120%;
                     }
 
-                    &:hover{ 
-                        .arrow-down{
-                            display: block;
+                    .arrow-down{
+                        display: none;
+                    }
+
+                    &:hover {
+                        .arrow-down span {  
+                            border-bottom: 5px solid #f54818;
+                            border-right: 5px solid #f54818;
                         }
                     }
                 }

@@ -14,7 +14,7 @@ const initialState: IinitialState  = {
     currentTurn: 0,
     enemyIndex: -1,
     skillIndex: 0,
-    ischoiceActive: true,
+    ischoiceActive: false,
     deadEnemies: [],
     enemies: []
 }

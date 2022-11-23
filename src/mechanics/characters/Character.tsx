@@ -87,7 +87,8 @@ export default class Character {
 
     dealDamage(dmgToCharacter: Character) {
         const dmg = this.getAttack() - dmgToCharacter.getArmor()
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        if(this.getAttack() > dmgToCharacter.getArmor())
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
     }
 
     firstSkill(dmgToCharacter: Character) {

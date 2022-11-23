@@ -13,12 +13,12 @@ import fullFace2 from '../../assets/img/characters_img/elfs/full_face2.png'
 import fullFace3 from '../../assets/img/characters_img/elfs/full_face3.png'
 import fullFace4 from '../../assets/img/characters_img/elfs/full_face4.png'
 
-import fullHalffling1 from "../../assets/img/characters_img/hulflings/Character1_face1.png"
-import fullHalffling2 from "../../assets/img/characters_img/hulflings/Character2_face1.png"
+import fullHalffling2 from "../../assets/img/characters_img/hulflings/Character1_face1.png"
+import fullHalffling1 from "../../assets/img/characters_img/hulflings/Character2_face1.png"
 import fullHalffling3 from "../../assets/img/characters_img/hulflings/Character8_face1.png"
 
-import iconHalfling1 from "../../assets/img/characters_icons/halfflings/Character1_face1.png"
-import iconHalfling2 from "../../assets/img/characters_icons/halfflings/Character2_face1.png"
+import iconHalfling2 from "../../assets/img/characters_icons/halfflings/Character1_face1.png"
+import iconHalfling1 from "../../assets/img/characters_icons/halfflings/Character2_face1.png"
 import iconHalfling3 from "../../assets/img/characters_icons/halfflings/Character8_face1.png"
 
 import fullDemons1 from "../../assets/img/characters_img/demons/Character2_face1.png"

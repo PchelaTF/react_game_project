@@ -18,6 +18,7 @@ interface IFightSceneProps {
 const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
     const [isWon, setIsWon] = React.useState(false)
+    const [initial, setInitial] = React.useState(true)
     const fightOrder = allyArr.concat(enemyArr)
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
     const enemyIndex = useAppSelector(state => state.FightReducer.enemyIndex)
@@ -35,7 +36,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     }, [currentTurn])
 
     React.useEffect(() => {
-        if (!isСhoiceActive){
+        if (!isСhoiceActive && !initial){
             switch(skillIndex) {
                 case 1:
                     doFirstSkill()
@@ -46,6 +47,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                     break;
             }
         }
+        setInitial(false)
     }, [enemyIndex])
 
     React.useEffect(() => {
@@ -117,7 +119,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 
             {/* <button onClick={handleSkillClick} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
 
-            <ul className="fight-scene__skills-panel">
+            <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? {filter: "grayscale(1)"} : {}}>
                 <li className="skills__item" onClick={() => handleSkillClick(0)}>
                     <img src={skillsImgArr[0]} alt="img" />
                 </li>
