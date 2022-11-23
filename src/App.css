@@ -37,19 +37,23 @@
   display: block;
   width: 16px;
   height: 16px;
-  border-bottom: 5px solid #f54818;
-  border-right: 5px solid #f54818;
+  border-bottom: 5px solid grey;
+  border-right: 5px solid grey;
   transform: rotate(45deg);
   margin: -16px;
   animation: arrow-down 2s infinite;
-}
 
+}
 .arrow-down span:nth-child(2) {
   animation-delay: -0.2s;
 }
 
 .arrow-down span:nth-child(3) {
   animation-delay: -0.4s;
+}
+
+.player__content-taken-damage {
+  animation: damage-up forwards 2s;
 }
 
 @keyframes arrow-down {
@@ -66,4 +70,19 @@
     opacity: 0;
     transform: rotate(45deg) translate(20px, 20px);
   }
+}
+
+@keyframes damage-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  
 }

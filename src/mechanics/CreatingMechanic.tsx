@@ -4,9 +4,9 @@ import { Rogue } from "./characters/Rogue";
 import { Warrior } from "./characters/Warrior";
 import { raceFullArr } from '../components/CreateCharacter/Images';
 
-const WARRIOR_CLASS = "warrior"
-const MAGE_CLASS = "mage"
-const ROGUE_CLASS = "rogue"
+const WARRIOR_CLASS: classes = "warrior"
+const MAGE_CLASS: classes = "mage"
+const ROGUE_CLASS: classes = "rogue"
 
 export type race = "elf" | "halfling" | "demon"
 export type classes = "warrior" | "mage" | "rogue"
