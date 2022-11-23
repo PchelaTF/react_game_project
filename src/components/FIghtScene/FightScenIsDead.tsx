@@ -7,7 +7,7 @@ const FightScenIsDead = () => {
     const dispatch = useAppDispatch()
 
     function exitFightScene() {
-        dispatch(setScene("main"))
+        dispatch(setScene("create"))
     }
 
     return (

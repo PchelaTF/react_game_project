@@ -1,42 +1,48 @@
-export interface IAttack {
-    min: number,
-    max: number
-}
 export interface ICharacterStats {
     initHp: number,
-    initArmor: number,
-    initAttack: IAttack,
+    initAttack: number,
     initIsNpc: boolean,
-    initActionPoints: number,
     initName: string,
     initImgSmall: string,
-    initImgBig: string
+    initImgBig: string,
+    initDexterety: number,
+    initStrength: number,
+    initConstitution: number,
+    // initWisdom: number,
+    // initCharm: number,
+    // initIntelligent: number
 }
 export default class Character {
     private hp: number
     private maxHp: number
     private armor: number
-    private attack: IAttack
+    private attack: number
     private isNpc: boolean
-    private actionPoints: number
     private name: string
     private imgSmall: string
     private imgBig: string
     private selfHealCount: number
     private isDead: boolean
+    private constitution: number
+    private dexterety : number
+    private strength: number
+    private damage: number
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
     constructor(characterStats: ICharacterStats) {
-        this.hp = characterStats.initHp
-        this.maxHp = characterStats.initHp
-        this.armor = characterStats.initArmor
+        this.constitution = characterStats.initConstitution
+        this.dexterety = characterStats.initDexterety
+        this.hp = this.calcMod(this.constitution) + characterStats.initHp
+        this.armor = this.calcMod(this.dexterety) + 10
+        this.strength = characterStats.initStrength
         this.attack = characterStats.initAttack
+        this.maxHp = this.hp
         this.isNpc = characterStats.initIsNpc
-        this.actionPoints = characterStats.initActionPoints
         this.name = characterStats.initName
         this.imgSmall = characterStats.initImgSmall
         this.imgBig = characterStats.initImgBig
         this.selfHealCount = 0
         this.isDead = false
+        this.damage = 8
     }
 
     setHp(newHp: number) {
@@ -47,8 +53,12 @@ export default class Character {
         return this.hp
     }
 
+    resetHp() {
+        this.hp = this.maxHp
+    }
+
     getAttack() {
-        return Math.floor(Math.random() * (this.attack.max - this.attack.min + 1) + this.attack.min)
+        return Math.floor(Math.random() * (20 - 1 + 1) + 1) + this.attack + this.calcMod(this.strength)
     }
 
     getArmor() {
@@ -82,9 +92,12 @@ export default class Character {
     }
 
     dealDamage(dmgToCharacter: Character) {
-        const dmg = this.getAttack() - dmgToCharacter.getArmor()
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
+        if(this.getAttack() > dmgToCharacter.getArmor())
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
     }
+
+    firstSkill(dmgToCharacter: Character) {}
 
     doNpcLogic(playerCharacter: Character) {
         if (this.hp <= 0)
@@ -93,5 +106,9 @@ export default class Character {
             this.selfHeal(7)
         else 
             this.dealDamage(playerCharacter)
+    }
+
+    calcMod(ability: number) {
+        return ability % 2 == 0 ? (ability - 10) / 2 : (ability - 11) / 2
     }
 }

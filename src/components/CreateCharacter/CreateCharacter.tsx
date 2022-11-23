@@ -1,6 +1,6 @@
 import React from 'react';
 import './CreateCharacter.scss'
-import { raceArr, raceFullArr, classArr, descrArr } from './testCRArr';
+import { raceArr, classArr, descrArr } from './Images';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
 import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMechanic';
@@ -8,24 +8,28 @@ import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import { characterStatsArr } from '../../mechanics/CreatingMechanic';
-import { skillsImgArr } from './testCRArr';
+import { skillsImgArr } from './Images';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
     const { setPlayerCharacter } = userSlice.actions
     const { setScene } = sceneSlice.actions
-    const [fullImg, setFullImg] = React.useState(raceFullArr[0])
+    const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
     const [description, setDescription] = React.useState(descrArr[0])
     const [reduxClass, setReduxClass] = React.useState(characterClasses[0])
     const [name, setName] = React.useState('')
-
+    const [activeRace, setActiveRace] = React.useState(0)
     const [activeIndex, setActiveIndex] = React.useState(0)
-
     const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
 
     function switchRace(key: any) {
+        setActiveRace(key)
+        setFullImg(classArr[key][activeIndex].fullImg)
+    }
+
+    function switchClass(key: any) {
         setActiveIndex(key)
-        setFullImg(raceFullArr[key])
+        setFullImg(classArr[activeRace][key].fullImg)
         setDescription(descrArr[key])
         setReduxClass(characterClasses[key])
         setViewCharacterStats(characterStatsArr[key])
@@ -36,11 +40,10 @@ const CreateCharacter = () => {
     }
 
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
-        const newCharacter = createNewCharacter(name, reduxClass)
+        const newCharacter = createNewCharacter(name, reduxClass, fullImg, classArr[activeRace][activeIndex].iconImg)
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
         dispath(setScene("main"))
-        // dispath(setPlayerCharacter(createNewCharacter(name, reduxClass)))
     }
 
     return (
@@ -64,8 +67,8 @@ const CreateCharacter = () => {
                             <p className='create-character__select-title'>class</p>
 
                             <div className="create-character__class">
-                                {classArr.map((item, i) => {
-                                    return <CreateCharacterClass key={i} CharacterClass={item} />
+                                {classArr[activeRace].map((item, i) => {
+                                    return <CreateCharacterClass key={i} CharacterClass={item.iconImg} switchClass={() => switchClass(i)} activeClassName={activeIndex == i ? "_active" : ""} />
                                 })}
                             </div>
                         </div>
@@ -92,8 +95,8 @@ const CreateCharacter = () => {
                                 <p className="stats__title">Stats</p>
                                 <ul className="stats__lists">
                                     <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                                    <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
-                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li>
+                                    {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
+                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
                                     <li className="stats__elem">INT - 15</li>
                                     <li className="stats__elem">MEN - 15</li>
                                     <li className="stats__elem">WIT - 15</li>
