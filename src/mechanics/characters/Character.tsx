@@ -47,6 +47,10 @@ export default class Character {
         return this.hp
     }
 
+    resetHp() {
+        this.hp = this.maxHp
+    }
+
     getAttack() {
         return Math.floor(Math.random() * (this.attack.max - this.attack.min + 1) + this.attack.min)
     }
@@ -82,6 +86,11 @@ export default class Character {
     }
 
     dealDamage(dmgToCharacter: Character) {
+        const dmg = this.getAttack() - dmgToCharacter.getArmor()
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+    }
+
+    firstSkill(dmgToCharacter: Character) {
         const dmg = this.getAttack() - dmgToCharacter.getArmor()
         dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
     }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import "./FightScene.scss"
 import Enemys from './Enemys';
 import Character from '../../mechanics/characters/Character';
@@ -7,7 +7,7 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
-import { skillsImgArr } from "../CreateCharacter/testCRArr"
+import { skillsImgArr } from "../CreateCharacter/Images"
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -23,8 +23,9 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const enemyIndex = useAppSelector(state => state.FightReducer.enemyIndex)
     const isСhoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
     const deadEnemies = useAppSelector(state => state.FightReducer.deadEnemies)
+    const skillIndex = useAppSelector(state => state.FightReducer.skillIndex)
     const dispatch = useAppDispatch()
-    const { setTurn, setChoiceActive, setEnemyIndex } = fightSlice.actions
+    const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex } = fightSlice.actions
 
     React.useEffect(() => {
         setChoiceActive(false)
@@ -34,8 +35,17 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     }, [currentTurn])
 
     React.useEffect(() => {
-        if (!isСhoiceActive)
-            doDamage()
+        if (!isСhoiceActive){
+            switch(skillIndex) {
+                case 1:
+                    doFirstSkill()
+                    break;
+                case 0:
+                default:
+                    doDamage()
+                    break;
+            }
+        }
     }, [enemyIndex])
 
     React.useEffect(() => {
@@ -62,8 +72,9 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
             dispatch(setTurn(0))
     }
 
-    const handleAttack = () => {
+    const handleSkillClick = (index: number) => {
         dispatch(setChoiceActive(true))
+        dispatch(setSkillIndex(index))
         dispatch(setEnemyIndex(-1))
     }
 
@@ -72,9 +83,14 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
         setPlayerHp(allyArr[0].getHp())
         passTurn()
     }
-
+    
     const doDamage = () => {
         allyArr[0].dealDamage(enemyArr[enemyIndex])
+        passTurn()
+    }
+
+    const doFirstSkill = () => {
+        allyArr[0].firstSkill(enemyArr[enemyIndex])
         passTurn()
     }
 
@@ -99,19 +115,19 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
                 </div>
             </div>
 
-            {/* <button onClick={handleAttack} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
+            {/* <button onClick={handleSkillClick} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
 
             <ul className="fight-scene__skills-panel">
-                <li className="skills__item" onClick={handleAttack}>
+                <li className="skills__item" onClick={() => handleSkillClick(0)}>
                     <img src={skillsImgArr[0]} alt="img" />
                 </li>
-                <li className="skills__item" onClick={handleAttack}>
+                <li className="skills__item" onClick={() => handleSkillClick(1)}>
                     <img src={skillsImgArr[1]} alt="img" />
                 </li>
-                <li className="skills__item" onClick={handleAttack}>
+                <li className="skills__item" onClick={() => handleSkillClick(0)}>
                     <img src={skillsImgArr[2]} alt="img" />
                 </li>
-                <li className="skills__item" onClick={handleAttack}>
+                <li className="skills__item" onClick={() => handleSkillClick(0)}>
                     <img src={skillsImgArr[3]} alt="img" />
                 </li>
             </ul>
@@ -123,4 +139,3 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
 };
 
 export default FightScene;
-
