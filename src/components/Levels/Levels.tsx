@@ -18,6 +18,10 @@ export default function Levels() {
         dispatch(setScene("fight"))
     }
 
+    const backClick = () => {
+        dispatch(setScene("main"))
+    }
+
     return (
         <div className={mainClass}>
             <div className={`${mainClass}__modal`}>
@@ -27,6 +31,7 @@ export default function Levels() {
                     </div>
                 })}
             </div>
+            <button className={`item__list-button btn`} onClick={backClick}>Back</button>
         </div>
     )
 }
