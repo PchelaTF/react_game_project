@@ -7,7 +7,7 @@ import "./Levels.scss"
 export default function Levels() {
     const dispatch = useAppDispatch()
     const { setScene, setCurrentLevel } = sceneSlice.actions
-    const { clearDeadEnemies } = fightSlice.actions
+    const { clearDeadEnemies, setBackground } = fightSlice.actions
     const levels = useAppSelector(state => state.SceneReducer.levels)
 
     const mainClass = "Levels"
@@ -15,6 +15,7 @@ export default function Levels() {
     const handleClick = (index: number) => {
         dispatch(clearDeadEnemies())
         dispatch(setCurrentLevel(index))
+        dispatch(setBackground(levels[index].background))
         dispatch(setScene("fight"))
     }
 
