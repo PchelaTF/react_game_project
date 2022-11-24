@@ -28,6 +28,7 @@ export default function Levels() {
                 {levels.map((item, key) => {
                     return <div className={`${mainClass}__modal-item`} onClick={() => handleClick(key)} key={key}>
                         <img src={item.background} style={!item.isCompleted ? {filter: "grayscale(1)"} : {}}></img>
+                        <span>{item.name}</span>
                     </div>
                 })}
             </div>

@@ -19,12 +19,21 @@
         margin-bottom: 70px;
 
         &-item {
+            display: flex;
             background-color: rgb(141, 143, 145);
             width: 300px;
             height: 200px;
             box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
             position: relative;
             cursor: pointer;
+
+            & span {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%);
+                color: white;
+            }
 
             & img {
                 position: absolute;
