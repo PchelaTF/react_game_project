@@ -27,6 +27,7 @@
             color: white;
             font-size: 21px;
             line-height: 120%;
+
         }
 
         &-item {
@@ -37,6 +38,11 @@
             box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
             position: relative;
             cursor: pointer;
+
+            &:hover {
+                border: 1px solid;
+                border-color: #d6441b;
+            }
 
             & span {
                 position: absolute;
