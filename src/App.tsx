@@ -5,7 +5,6 @@ import FightScene from './components/FIghtScene/FightScene';
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
 import fightSceneImg from "./assets/img/War2.png"
-import Inventory from './components/Inventory/Inventory';
 import { createEnemy } from './mechanics/CreatingMechanic';
 
 

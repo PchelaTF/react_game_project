@@ -9,10 +9,11 @@ import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 import { skillsImgArr } from './Images';
+import Inventory from '../../mechanics/inventory/Inventory';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
-    const { setPlayerCharacter } = userSlice.actions
+    const { setPlayerCharacter, setPlayerInventory } = userSlice.actions
     const { setScene } = sceneSlice.actions
     const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
     const [description, setDescription] = React.useState(descrArr[0])
@@ -43,6 +44,8 @@ const CreateCharacter = () => {
         const newCharacter = createNewCharacter(name, reduxClass, fullImg, classArr[activeRace][activeIndex].iconImg)
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
+        const playerInventory = new Inventory([])
+        dispath(setPlayerInventory(playerInventory))
         dispath(setScene("main"))
     }
 
@@ -58,7 +61,7 @@ const CreateCharacter = () => {
 
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
-                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeIndex == i ? "_active" : "")} />
+                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
                                 })}
                             </div>
                         </div>
