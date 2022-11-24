@@ -25,6 +25,7 @@ export default function Levels() {
     return (
         <div className={mainClass}>
             <div className={`${mainClass}__modal`}>
+                <p className=''>Game level</p>
                 {levels.map((item, key) => {
                     return <div className={`${mainClass}__modal-item`} onClick={() => handleClick(key)} key={key}>
                         <img src={item.background} style={!item.isCompleted ? {filter: "grayscale(1)"} : {}}></img>

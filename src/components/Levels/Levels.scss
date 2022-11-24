@@ -7,6 +7,7 @@
     backdrop-filter: blur(10px);
     
     &__modal {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(3, 300px);
         grid-template-rows: repeat(2, 200px) ;
@@ -17,6 +18,16 @@
         border-radius: 5px 5px 0 0;
         padding: 30px 40px;
         margin-bottom: 70px;
+
+        & p {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translate(-50%);
+            color: white;
+            font-size: 21px;
+            line-height: 120%;
+        }
 
         &-item {
             display: flex;
