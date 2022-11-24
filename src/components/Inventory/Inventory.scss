@@ -17,7 +17,7 @@
     }
 
     &__header {
-        margin-top: 20px;
+        margin: 20px 0 0;
         font-size: 21px;
         line-height: 120%;
     }
@@ -26,6 +26,7 @@
         padding: 15px;
 
         &-items {
+            max-height: 390px;
             margin: 0;
             padding: 0;
             display: grid;
@@ -33,22 +34,38 @@
             grid-template-rows: repeat(5, 1fr);
             justify-items: center;
             row-gap: 10px;
+            overflow: auto;
         }
 
         &-item {
             display: flex;
             align-items: center;
-            // width: 100%;
-            // height: 100%;
             width: 67px;
             height: 67px;
             list-style: none;
             background-color: rgba(128, 128, 128, 0.555);
             border: 1px solid #000;
             border-radius: 5px;
+
+            position: relative;
+            cursor: pointer;
+            scrollbar-width: none;
+
             & img {
-                width: 64px;
-                height: 64px;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                object-fit: cover;
+            }
+
+            & span {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                font-size: 20px;
+                line-height: 120%;
             }
         }
     }

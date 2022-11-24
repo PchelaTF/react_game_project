@@ -1,12 +1,22 @@
-export class Inventory {
-    private items: object[]
+export interface IInventoryItem {
+    id?: number
+    img: string
+    count: number
+}
 
-    constructor() {
-        this.items = []
+export default class Inventory {
+    private items: IInventoryItem[]
+
+    constructor(initItems: IInventoryItem[]) {
+        this.items = initItems
     }
 
-    setInventory() {
-        this.items.push()
+    pushInInventory(item: IInventoryItem) {
+        this.items.push(item)
+    }
+
+    setInventory(newItems: IInventoryItem[]) {
+        this.items = newItems
     }
 
     getInventory() {

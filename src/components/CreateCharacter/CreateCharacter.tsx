@@ -9,10 +9,11 @@ import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 import { skillsImgArr } from './Images';
+import Inventory from '../../mechanics/inventory/Inventory';
 
 const CreateCharacter = () => {
-    const dispatch = useAppDispatch()
-    const { setPlayerCharacter } = userSlice.actions
+    const dispath = useAppDispatch()
+    const { setPlayerCharacter, setPlayerInventory } = userSlice.actions
     const { setScene } = sceneSlice.actions
     const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
     const [description, setDescription] = React.useState(descrArr[0])
@@ -42,8 +43,10 @@ const CreateCharacter = () => {
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
         const newCharacter = createNewCharacter(name, reduxClass, fullImg, classArr[activeRace][activeIndex].iconImg)
         const playerCharacter = setPlayerCharacter(newCharacter)
-        dispatch(playerCharacter)
-        dispatch(setScene("main"))
+        dispath(playerCharacter)
+        const playerInventory = new Inventory([])
+        dispath(setPlayerInventory(playerInventory))
+        dispath(setScene("main"))
     }
 
     return (
