@@ -19,7 +19,7 @@ function App() {
       case "main":
         return <MainScene />
       case "fight":
-        return <FightScene fightSceneImg={fightSceneImg} allyArr={[mainCharacter]} enemyArr={[createEnemy(), createEnemy()]} />
+        return <FightScene allyArr={[mainCharacter]} enemyArr={[createEnemy(), createEnemy()]} />
       case "levels":
         return <Levels/>
       default:
