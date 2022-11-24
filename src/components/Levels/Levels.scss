@@ -7,6 +7,7 @@
     backdrop-filter: blur(10px);
     
     &__modal {
+        position: relative;
         display: grid;
         grid-template-columns: repeat(3, 300px);
         grid-template-rows: repeat(2, 200px) ;
@@ -15,8 +16,19 @@
         height: 400px;
         background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
         border-radius: 5px 5px 0 0;
-        padding: 30px 40px;
+        padding: 40px 40px;
         margin-bottom: 70px;
+
+        & p {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translate(-50%);
+            color: white;
+            font-size: 21px;
+            line-height: 120%;
+
+        }
 
         &-item {
             display: flex;
@@ -26,6 +38,11 @@
             box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
             position: relative;
             cursor: pointer;
+
+            &:hover {
+                border: 1px solid;
+                border-color: #d6441b;
+            }
 
             & span {
                 position: absolute;
