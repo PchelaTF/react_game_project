@@ -1,12 +1,14 @@
+import { levels } from '../../mechanics/Levels';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
-import { useAppDispatch } from '../../store/store';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import './FightScenIsDead.scss'
 
 const FightScenIsDead = () => {
-    const { setScene } = sceneSlice.actions
     const dispatch = useAppDispatch()
+    const { setScene, resetLevels } = sceneSlice.actions
 
     function exitFightScene() {
+        dispatch(resetLevels(levels))
         dispatch(setScene("create"))
     }
 

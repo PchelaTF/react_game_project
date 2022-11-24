@@ -7,7 +7,8 @@ export interface IinitialState {
     skillIndex: number,
     ischoiceActive: boolean,
     deadEnemies: boolean[],
-    enemies: Character[]
+    enemies: Character[],
+    background: string
 }
 
 const initialState: IinitialState  = {
@@ -16,7 +17,8 @@ const initialState: IinitialState  = {
     skillIndex: 0,
     ischoiceActive: false,
     deadEnemies: [],
-    enemies: []
+    enemies: [],
+    background: ""
 }
 
 export const NEXT_TURN = "NEXT_TURN"
@@ -45,6 +47,9 @@ export const fightSlice = createSlice({
         },
         setSkillIndex(state, action: PayloadAction<number>) {
             state.skillIndex = action.payload
+        },
+        setBackground(state, action: PayloadAction<string>) {
+            state.background = action.payload
         }
     }
 })

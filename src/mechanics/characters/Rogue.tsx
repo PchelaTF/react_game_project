@@ -6,7 +6,7 @@ export class Rogue extends Character {
     }
 
     firstSkill(dmgToCharacter: Character) {
-        const dmg = this.getAttack() - dmgToCharacter.getArmor() / 2
+        const dmg = this.getAttack()
         dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
     }
 

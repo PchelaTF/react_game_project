@@ -12,10 +12,9 @@ import { skillsImgArr } from "../CreateCharacter/Images"
 interface IFightSceneProps {
     allyArr: Character[]
     enemyArr: Character[]
-    fightSceneImg: string
 }
 
-const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
+const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
     const [isWon, setIsWon] = React.useState(false)
     const [initial, setInitial] = React.useState(true)
@@ -25,6 +24,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
     const isСhoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
     const deadEnemies = useAppSelector(state => state.FightReducer.deadEnemies)
     const skillIndex = useAppSelector(state => state.FightReducer.skillIndex)
+    const background = useAppSelector(state => state.FightReducer.background)
     const dispatch = useAppDispatch()
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex } = fightSlice.actions
 
@@ -35,6 +35,8 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
         }
     }, [currentTurn])
 
+    
+    // вызывается при смене индекса по нажатию на противника
     React.useEffect(() => {
         if (!isСhoiceActive && !initial){
             switch(skillIndex) {
@@ -100,7 +102,7 @@ const FightScene = ({ allyArr, enemyArr, fightSceneImg }: IFightSceneProps) => {
         <div className="fight-scene__wrapper">
             <div className="fight-scene__main">
                 <div className="fight-scene__main-backimg">
-                    <img src={fightSceneImg} alt="img" />
+                    <img src={background} alt="img" />
                 </div>
 
                 <div className="fight-scene__main-characters">
