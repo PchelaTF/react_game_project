@@ -8,6 +8,8 @@ import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
 import { skillsImgArr } from "../CreateCharacter/Images"
+import inventory from "../../assets/img/chest.png"
+import Inventory from '../Inventory/Inventory';
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -27,6 +29,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const background = useAppSelector(state => state.FightReducer.background)
     const dispatch = useAppDispatch()
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex } = fightSlice.actions
+    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
 
     React.useEffect(() => {
         setChoiceActive(false)
@@ -35,11 +38,10 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         }
     }, [currentTurn])
 
-    
     // вызывается при смене индекса по нажатию на противника
     React.useEffect(() => {
-        if (!isСhoiceActive && !initial){
-            switch(skillIndex) {
+        if (!isСhoiceActive && !initial) {
+            switch (skillIndex) {
                 case 1:
                     doFirstSkill()
                     break;
@@ -87,7 +89,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         setPlayerHp(allyArr[0].getHp())
         passTurn()
     }
-    
+
     const doDamage = () => {
         allyArr[0].dealDamage(enemyArr[enemyIndex])
         passTurn()
@@ -96,6 +98,14 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const doFirstSkill = () => {
         allyArr[0].firstSkill(enemyArr[enemyIndex])
         passTurn()
+    }
+
+    const openInventory = () => {
+        setIsInventoryOpen(true)
+    }
+
+    const closeInventory = () => {
+        setIsInventoryOpen(false)
     }
 
     return (
@@ -117,27 +127,33 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                         })}
                     </div>
                 </div>
+
+                <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
+                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                        <img src={skillsImgArr[0]} alt="img" />
+                    </li>
+                    <li className="skills__item" onClick={() => handleSkillClick(1)}>
+                        <img src={skillsImgArr[1]} alt="img" />
+                    </li>
+                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                        <img src={skillsImgArr[2]} alt="img" />
+                    </li>
+                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                        <img src={skillsImgArr[3]} alt="img" />
+                    </li>
+                </ul>
+
+                <div className="fight-scene__header-panel">
+                    <div className="header-panel__inventory" onClick={openInventory}>
+                        <img src={inventory} alt="" />
+                    </div>
+                </div>
             </div>
 
-            {/* <button onClick={handleSkillClick} disabled={fightOrder[currentTurn].getIsNpc()}>ATK</button> */}
-
-            <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? {filter: "grayscale(1)"} : {}}>
-                <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                    <img src={skillsImgArr[0]} alt="img" />
-                </li>
-                <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                    <img src={skillsImgArr[1]} alt="img" />
-                </li>
-                <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                    <img src={skillsImgArr[2]} alt="img" />
-                </li>
-                <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                    <img src={skillsImgArr[3]} alt="img" />
-                </li>
-            </ul>
-
+            {isInventoryOpen ? <Inventory closeInventory={() => closeInventory()}/> : ''}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
+
         </div>
     );
 };

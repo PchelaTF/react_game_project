@@ -21,7 +21,7 @@ function App() {
       case "fight":
         return <FightScene allyArr={[mainCharacter]} enemyArr={[createEnemy(), createEnemy()]} />
       case "levels":
-        return <Levels/>
+        return <Levels />
       default:
         return <MainScene />
     }
