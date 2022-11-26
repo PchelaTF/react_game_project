@@ -1,0 +1,15 @@
+.exploration-scene {
+    & ul {
+        position: absolute;
+        bottom: 0;
+        list-style: none;
+        display: flex;
+        width: 100vw;
+        justify-content: space-around;
+        padding: 0;
+
+        & li {
+            display: inline;
+        }
+    }
+}

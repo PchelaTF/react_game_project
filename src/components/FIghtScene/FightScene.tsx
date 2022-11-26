@@ -8,6 +8,7 @@ import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
 import { skillsImgArr } from "../CreateCharacter/Images"
+import { playSound } from '../../mechanics/sounds/sound';
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -29,12 +30,10 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex } = fightSlice.actions
 
     React.useEffect(() => {
-        setChoiceActive(false)
         if (fightOrder[currentTurn].getIsNpc()) {
             npcTurn()
         }
     }, [currentTurn])
-
     
     // вызывается при смене индекса по нажатию на противника
     React.useEffect(() => {
@@ -48,6 +47,8 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                     doDamage()
                     break;
             }
+            
+            playSound()
         }
         setInitial(false)
     }, [enemyIndex])
@@ -57,12 +58,15 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     const npcTurn = () => {
-        if (!deadEnemies[currentTurn])
+        if (!deadEnemies[currentTurn - 1])
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
+                playSound()
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)
+        else 
+            passTurn()
     }
 
     const passTurn = () => {

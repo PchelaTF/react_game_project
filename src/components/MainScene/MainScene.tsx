@@ -1,4 +1,5 @@
 import React from 'react'
+import { buttonClick } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch } from '../../store/store'
@@ -15,6 +16,7 @@ export default function MainScene() {
         if(e.target.value == "levels")
             dispatch(clearDeadEnemies())
         dispatch(setScene(e.target.value))
+        buttonClick()
     }
 
     return (
