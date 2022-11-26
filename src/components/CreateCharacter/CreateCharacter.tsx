@@ -10,6 +10,7 @@ import { sceneSlice } from '../../store/reducers/SceneReducer';
 import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 import { skillsImgArr } from './Images';
 import Inventory from '../../mechanics/inventory/Inventory';
+import { buttonClick } from '../../mechanics/sounds/sound';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
@@ -47,6 +48,7 @@ const CreateCharacter = () => {
         const playerInventory = new Inventory([])
         dispath(setPlayerInventory(playerInventory))
         dispath(setScene("main"))
+        buttonClick()
     }
 
     return (

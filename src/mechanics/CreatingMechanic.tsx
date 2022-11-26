@@ -14,7 +14,7 @@ export type classes = "warrior" | "mage" | "rogue"
 export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLASS]
 
 export const rollForStats = () => {
-    const roll = 3 * Math.floor(Math.random() * (20 - 1 + 1) + 1)
+    const roll = Math.floor(Math.random() * (18 - 1 + 1) + 1)
     if(roll < 13)
         rollForStats()
     return roll
