@@ -1,4 +1,5 @@
 import React from 'react'
+import { buttonClick } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -8,7 +9,7 @@ export default function Levels() {
     const dispatch = useAppDispatch()
     const { setScene, setCurrentLevel } = sceneSlice.actions
     const { clearDeadEnemies, setBackground } = fightSlice.actions
-    const levels = useAppSelector(state => state.SceneReducer.levels)
+    const levels = useAppSelector(state => state.SceneReducer.locations)
 
     const mainClass = "Levels"
 
@@ -16,11 +17,12 @@ export default function Levels() {
         dispatch(clearDeadEnemies())
         dispatch(setCurrentLevel(index))
         dispatch(setBackground(levels[index].background))
-        dispatch(setScene("fight"))
+        dispatch(setScene("explore"))
     }
 
     const backClick = () => {
         dispatch(setScene("main"))
+        buttonClick()
     }
 
     return (

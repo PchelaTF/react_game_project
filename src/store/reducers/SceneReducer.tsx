@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { ILevel, levels } from "../../mechanics/Levels"
+import { ILocations, locations } from "../../mechanics/Locations"
 
-export type TScene = "fight" | "dialog" | "create" | "main" | "levels"
+export type TScene = "fight" | "dialog" | "create" | "main" | "levels" | "explore"
 
 export interface IinitialState {
     scene: TScene,
-    levels: ILevel[],
+    locations: ILocations[],
     currentLevel: number
 }
 
 const initialState: IinitialState  = {
     scene: "create",
-    levels: levels,
+    locations: locations,
     currentLevel: 0
 }
 
@@ -27,14 +27,14 @@ export const sceneSlice = createSlice({
         setCurrentLevel(state, action: PayloadAction<number>) {
             state.currentLevel = action.payload
         },
-        setLevels(state, action: PayloadAction<ILevel[]>) {
-            state.levels = action.payload
+        setLocations(state, action: PayloadAction<ILocations[]>) {
+            state.locations = action.payload
         },
-        changeCurrentLevel(state, action: PayloadAction<ILevel>) {
-            state.levels[state.currentLevel] = action.payload
+        changeCurrentLevel(state, action: PayloadAction<ILocations>) {
+            state.locations[state.currentLevel] = action.payload
         },
-        resetLevels(state, action: PayloadAction<ILevel[]>) {
-            state.levels = action.payload
+        resetLocations(state, action: PayloadAction<ILocations[]>) {
+            state.locations = action.payload
         }
     }
 })

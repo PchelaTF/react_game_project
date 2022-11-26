@@ -10,6 +10,7 @@ import FightScenIsWin from './FightScenIsWin';
 import { skillsImgArr } from "../CreateCharacter/Images"
 import inventory from "../../assets/img/chest.png"
 import Inventory from '../Inventory/Inventory';
+import { playSound } from '../../mechanics/sounds/sound';
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -32,7 +33,6 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
 
     React.useEffect(() => {
-        setChoiceActive(false)
         if (fightOrder[currentTurn].getIsNpc()) {
             npcTurn()
         }
@@ -50,6 +50,8 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                     doDamage()
                     break;
             }
+            
+            playSound()
         }
         setInitial(false)
     }, [enemyIndex])
@@ -59,12 +61,15 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     const npcTurn = () => {
-        if (!deadEnemies[currentTurn])
+        if (!deadEnemies[currentTurn - 1])
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
+                playSound()
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)
+        else 
+            passTurn()
     }
 
     const passTurn = () => {

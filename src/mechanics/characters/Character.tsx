@@ -26,7 +26,7 @@ export default class Character {
     private constitution: number
     private dexterety : number
     private strength: number
-    private damage: number
+    protected damage: number
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
     constructor(characterStats: ICharacterStats) {
         this.constitution = characterStats.initConstitution
@@ -95,6 +95,7 @@ export default class Character {
         const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
         if(this.getAttack() > dmgToCharacter.getArmor())
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        else (console.log(this.name + " is missed with "+ dmg + "against: "+ dmgToCharacter.getArmor()))
     }
 
     firstSkill(dmgToCharacter: Character) {}
