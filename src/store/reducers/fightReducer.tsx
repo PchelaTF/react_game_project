@@ -11,7 +11,7 @@ export interface IinitialState {
     background: string
 }
 
-const initialState: IinitialState  = {
+const initialState: IinitialState = {
     currentTurn: 0,
     enemyIndex: -1,
     skillIndex: 0,
