@@ -41,7 +41,6 @@ import dungeon from "../../assets/img/dungeon.jpg"
 export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
 export const skillsImgArr = [atk, atk2, atk3, atk4] 
 export const backgrounds = [background, desert, dungeon]
-
 interface IImages {
     fullImg: string,
     iconImg: string

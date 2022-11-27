@@ -42,7 +42,7 @@ const CreateCharacter = () => {
     }
 
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
-        const newCharacter = createNewCharacter(name, reduxClass, fullImg, classArr[activeRace][activeIndex].iconImg)
+        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg)
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
         const playerInventory = new Inventory([])

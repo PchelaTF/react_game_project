@@ -13,7 +13,7 @@ export default function MainScene() {
     const mainClass = "Main-scene"
 
     const handleClick = (e: any) => {
-        if(e.target.value == "levels")
+        if(e.target.value == "Locations")
             dispatch(clearDeadEnemies())
         dispatch(setScene(e.target.value))
         buttonClick()
@@ -24,13 +24,13 @@ export default function MainScene() {
             <div className={`${mainClass}__modal`}>
                 <ul className={`${mainClass}__list`}>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button value={"levels"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button>
+                        <button value={"Locations"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button>
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
                         <button className={`item__list-button btn`} onClick={handleClick}>To hab</button>
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button className={`item__list-button btn`} onClick={handleClick}>Shop</button>
+                        <button value={"shop"} className={`item__list-button btn`} onClick={handleClick}>Shop</button>
                     </li>
                 </ul>
             </div>
