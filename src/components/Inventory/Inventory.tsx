@@ -4,7 +4,13 @@ import InventoryItem from './InventoryItem';
 import { useAppSelector } from '../../store/store';
 import { IInventoryItem } from '../../mechanics/inventory/Inventory';
 
-const Inventory = () => {
+import potion from '../../assets/img/potions/potion.png'
+
+interface IInventoryProps {
+    closeInventory: () => void
+}
+
+const Inventory = ({ closeInventory }: IInventoryProps) => {
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
 
     const healingPotion: IInventoryItem = {
@@ -16,12 +22,7 @@ const Inventory = () => {
 
     characterInventory.pushInInventory(healingPotion)
     characterInventory.pushInInventory(healingPotion)
-interface IInventoryProps {
-    closeInventory: () => void
-}
 
-const Inventory = ({ closeInventory }: IInventoryProps) => {
-    const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const emptyInventorySquares = Array(60 - characterInventory.getInventory().length).fill({ img: '', count: 0 })
     const currentInventory = [...characterInventory.getInventory(), ...emptyInventorySquares]
 

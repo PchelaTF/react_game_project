@@ -25,7 +25,8 @@ export default function MainScene() {
     const healingPotion: IInventoryItem = {
         id: 1,
         img: potion,
-        count: 1
+        count: 1,
+        cost: 50
     }
 
     characterInventory.pushInInventory(healingPotion)
