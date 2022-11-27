@@ -4,20 +4,48 @@ import { Rogue } from "./characters/Rogue";
 import { Warrior } from "./characters/Warrior";
 import { raceFullArr } from '../components/CreateCharacter/Images';
 
-const WARRIOR_CLASS: classes = "warrior"
-const MAGE_CLASS: classes = "mage"
-const ROGUE_CLASS: classes = "rogue"
+const WARRIOR_CLASS: TClasses = "warrior"
+const MAGE_CLASS: TClasses = "mage"
+const ROGUE_CLASS: TClasses = "rogue"
 
-export type race = "elf" | "halfling" | "demon"
-export type classes = "warrior" | "mage" | "rogue"
+export type TRace = "elf" | "halfling" | "demon"
+export type TClasses = "warrior" | "mage" | "rogue"
 
 export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLASS]
+export const characterRace: TRace[] = ["elf", "halfling", "demon"]
 
-export const rollForStats = () => {
-    const roll = Math.floor(Math.random() * (18 - 1 + 1) + 1)
-    if(roll < 13)
-        rollForStats()
-    return roll
+const returnRaceMod = (race: TRace) => {
+    switch(race) {
+        case "elf":     
+            return {
+                initConstitution: -2,
+                initDexterety: 2,
+                initStrength: 0,
+                initCharisma: 0,
+                initWisdom: 0,
+                initIntilegent: 2
+            }
+        case "demon":
+            return {
+                initConstitution: 0,
+                initDexterety: 2,
+                initStrength: 0,
+                initCharisma: -2,
+                initWisdom: 0,
+                initIntilegent: 2
+            }
+        case "halfling":
+            return {
+                initConstitution: 0,
+                initDexterety: 2,
+                initStrength: -2,
+                initCharisma: 2,
+                initWisdom: 0,
+                initIntilegent: 0
+            }
+        default: 
+            return {}
+    }
 }
 
 const warriorStats: ICharacterStats = {
@@ -27,9 +55,13 @@ const warriorStats: ICharacterStats = {
     initName: '',
     initImgSmall: 'string',
     initImgBig: raceFullArr[2],
-    initConstitution: rollForStats(),
-    initDexterety: rollForStats(),
-    initStrength: rollForStats()
+    initConstitution: 10,
+    initDexterety: 10,
+    initStrength: 10,
+    initCharm: 10,
+    initIntelligent: 10,
+    initWisdom: 10,
+    initGold: 175
 }
 
 const mageStats: ICharacterStats = {
@@ -39,9 +71,13 @@ const mageStats: ICharacterStats = {
     initName: '',
     initImgSmall: 'string',
     initImgBig: raceFullArr[1],
-    initConstitution: rollForStats(),
-    initDexterety: rollForStats(),
-    initStrength: rollForStats()
+    initConstitution: 10,
+    initDexterety: 10,
+    initStrength: 10,
+    initCharm: 10,
+    initIntelligent: 10,
+    initWisdom: 10,
+    initGold: 300
 }
 
 const rogueStats: ICharacterStats = {
@@ -51,9 +87,13 @@ const rogueStats: ICharacterStats = {
     initName: '',
     initImgSmall: 'string',
     initImgBig: raceFullArr[0],
-    initConstitution: rollForStats(),
-    initDexterety: rollForStats(),
-    initStrength: rollForStats()
+    initConstitution: 10,
+    initDexterety: 10,
+    initStrength: 10,
+    initCharm: 10,
+    initIntelligent: 10,
+    initWisdom: 10,
+    initGold: 140 
 }
 
 const defaultStats: ICharacterStats = {
@@ -63,27 +103,43 @@ const defaultStats: ICharacterStats = {
     initName: '',
     initImgSmall: 'string',
     initImgBig: 'string',
-    initConstitution: rollForStats(),
-    initDexterety: rollForStats(),
-    initStrength: rollForStats()
+    initConstitution: 10,
+    initDexterety: 10,
+    initStrength: 10,
+    initCharm: 10,
+    initIntelligent: 10,
+    initWisdom: 10,
+    initGold: 70 
 }
 
 export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats] 
 
-export function createNewCharacter(name: string, characterClass: string, img: string, icon: string) {
+export function objSum(first: ICharacterStats, second: object) {
+    const newSecond = {...first, ...second}
+    return {...first, 
+        initConstitution: first.initConstitution + newSecond.initConstitution,
+        initDexterety: first.initDexterety + newSecond.initDexterety,
+        initStrength: first.initStrength + newSecond.initStrength,
+        initCharm: first.initCharm + newSecond.initCharm,
+        initIntelligent: first.initIntelligent + newSecond.initIntelligent,
+        initWisdom: first.initWisdom + newSecond.initWisdom
+    }
+}
+
+export function createNewCharacter(name: string, characterClass: string, activeRace: number, img: string, icon: string) {
     switch (characterClass) {
         case WARRIOR_CLASS:
             // return new Warrior(25, 10, { min: 10, max: 25 }, name, false, 2)
-            return new Warrior({...warriorStats, initName: name, initImgBig: img, initImgSmall: icon})
+            return new Warrior({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
         case MAGE_CLASS:
             // return new Mage(10, 8, { min: 5, max: 15 }, name, false, 2)
-            return new Mage({...mageStats, initName: name, initImgBig: img, initImgSmall: icon})
+            return new Mage({...objSum(mageStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
         case ROGUE_CLASS:
             // return new Rogue(12, 10, { min: 10, max: 30 }, name, false, 2)
-            return new Rogue({...rogueStats, initName: name, initImgBig: img, initImgSmall: icon})
+            return new Rogue({...objSum(rogueStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
         default:
             // return new Character(10, 10, { min: 10, max: 10 }, false, 2, name)
-            return new Character({...defaultStats, initName: name, initImgBig: img, initImgSmall: icon})
+            return new Character({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
     }
 }
 

@@ -1,7 +1,8 @@
 export interface IInventoryItem {
     id?: number
     img: string
-    count: number
+    count: number,
+    cost: number
 }
 
 export default class Inventory {

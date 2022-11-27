@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import Character from "../../mechanics/characters/Character"
 import { Warrior } from "../../mechanics/characters/Warrior"
-import { rollForStats } from "../../mechanics/CreatingMechanic"
 import Inventory from "../../mechanics/inventory/Inventory"
 
 export interface IinitialState {
@@ -17,9 +16,13 @@ const initialState: IinitialState = {
         initName: "name",
         initImgSmall: 'string',
         initImgBig: 'string',
-        initConstitution: rollForStats(),
-        initDexterety: rollForStats(),
-        initStrength: rollForStats()
+        initConstitution: 10,
+        initDexterety: 10,
+        initStrength: 10,
+        initCharm: 10,
+        initIntelligent: 10,
+        initWisdom: 10,
+        initGold: 300
     }),
     inventory: new Inventory([])
 }

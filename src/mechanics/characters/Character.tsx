@@ -8,9 +8,10 @@ export interface ICharacterStats {
     initDexterety: number,
     initStrength: number,
     initConstitution: number,
-    // initWisdom: number,
-    // initCharm: number,
-    // initIntelligent: number
+    initWisdom: number,
+    initCharm: number,
+    initIntelligent: number,
+    initGold: number
 }
 export default class Character {
     private hp: number
@@ -27,6 +28,7 @@ export default class Character {
     private dexterety : number
     private strength: number
     protected damage: number
+    protected gold: number
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
     constructor(characterStats: ICharacterStats) {
         this.constitution = characterStats.initConstitution
@@ -43,6 +45,7 @@ export default class Character {
         this.selfHealCount = 0
         this.isDead = false
         this.damage = 8
+        this.gold = characterStats.initGold
     }
 
     setHp(newHp: number) {
@@ -89,6 +92,14 @@ export default class Character {
 
     getIsNpc() {
         return this.isNpc 
+    }
+
+    getGold() {
+        return this.gold
+    }
+
+    setGold(newGold: number) {
+        this.gold = newGold
     }
 
     dealDamage(dmgToCharacter: Character) {

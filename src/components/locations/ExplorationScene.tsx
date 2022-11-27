@@ -12,7 +12,6 @@ export default function ExplorationScene() {
 
     const getRandomScene = () => {
         // TODO добавить свитч кейс после разработки других сцен
-        // сцена диа
         dispatch(setScene("fight"))
     }
 

@@ -4,6 +4,18 @@ import InventoryItem from './InventoryItem';
 import { useAppSelector } from '../../store/store';
 import { IInventoryItem } from '../../mechanics/inventory/Inventory';
 
+const Inventory = () => {
+    const characterInventory = useAppSelector(state => state.userReducer.inventory)
+
+    const healingPotion: IInventoryItem = {
+        id: 1,
+        img: potion,
+        count: 1,
+        cost: 50
+    }
+
+    characterInventory.pushInInventory(healingPotion)
+    characterInventory.pushInInventory(healingPotion)
 interface IInventoryProps {
     closeInventory: () => void
 }

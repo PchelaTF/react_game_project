@@ -1,0 +1,54 @@
+import React from 'react'
+import { buttonClick } from '../../mechanics/sounds/sound'
+import { sceneSlice } from '../../store/reducers/SceneReducer'
+import { useAppDispatch, useAppSelector } from '../../store/store'
+import "./Shop.scss"
+import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
+import { IInventoryItem } from '../../mechanics/inventory/Inventory'
+import potion from '../../assets/img/potions/potion.png'
+
+export default function Shop() {
+    const dispatch = useAppDispatch()
+    const { setScene } = sceneSlice.actions
+    const characterInventory = useAppSelector(state => state.userReducer.inventory)
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
+    
+    const healingPotion: IInventoryItem = {
+        id: 1,
+        img: potion,
+        count: 1,
+        cost: 50
+    }
+
+    const shopItems: IInventoryItem[] = Array(9).fill(healingPotion)
+    
+    const backClick = () => {
+        dispatch(setScene("main"))
+        buttonClick()
+    }
+
+    const itemClick = (index: number) => {
+        if(mainCharacter.getGold() > shopItems[index].cost) {
+            characterInventory.pushInInventory(shopItems[index])
+            mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].cost)
+        }
+    }
+
+    return (
+        <div className='shop'>
+            <div className="shop__modal">
+                <p className=''>Shop</p>
+                <img className="shop__img" src={shopkeeper}/>
+                <div className='shop__modal-items'>
+                    {shopItems.map((item,i) => {
+                        return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
+                            {item.img ? <img src={item.img} alt="" /> : ''}
+                            <span>{item.cost}g</span>
+                        </div>
+                    })}
+                </div>
+            </div>
+            <button className={`shop__btn btn`} onClick={backClick}>Back</button>
+        </div>
+    );
+}

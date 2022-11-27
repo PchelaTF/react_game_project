@@ -3,15 +3,15 @@ import { buttonClick } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
-import "./Levels.scss"
+import "./Locations.scss"
 
-export default function Levels() {
+export default function Locations() {
     const dispatch = useAppDispatch()
     const { setScene, setCurrentLevel } = sceneSlice.actions
     const { clearDeadEnemies, setBackground } = fightSlice.actions
     const levels = useAppSelector(state => state.SceneReducer.locations)
 
-    const mainClass = "Levels"
+    const mainClass = "Locations"
 
     const handleClick = (index: number) => {
         dispatch(clearDeadEnemies())
