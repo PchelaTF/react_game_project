@@ -12,6 +12,7 @@ export default function Shop() {
     const { setScene } = sceneSlice.actions
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const mainCharacter = useAppSelector(state => state.userReducer.character)
+    const [playerGold, setPlayerGold] = React.useState(mainCharacter.getGold())
     
     const healingPotion: IInventoryItem = {
         id: 1,
@@ -31,6 +32,7 @@ export default function Shop() {
         if(mainCharacter.getGold() > shopItems[index].cost) {
             characterInventory.pushInInventory(shopItems[index])
             mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].cost)
+            setPlayerGold(mainCharacter.getGold())
         }
     }
 
@@ -39,13 +41,16 @@ export default function Shop() {
             <div className="shop__modal">
                 <p className=''>Shop</p>
                 <img className="shop__img" src={shopkeeper}/>
-                <div className='shop__modal-items'>
-                    {shopItems.map((item,i) => {
-                        return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
-                            {item.img ? <img src={item.img} alt="" /> : ''}
-                            <span>{item.cost}g</span>
-                        </div>
-                    })}
+                <div>
+                    <div className='shop__modal-items'>
+                        {shopItems.map((item,i) => {
+                            return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
+                                {item.img ? <img src={item.img} alt="" /> : ''}
+                                <span>{item.cost}g</span>
+                            </div>
+                        })}
+                    </div>
+                    <span className="shop__modal-gold">your gold: {playerGold}</span>
                 </div>
             </div>
             <button className={`shop__btn btn`} onClick={backClick}>Back</button>
