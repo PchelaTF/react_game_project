@@ -2,13 +2,16 @@ import React from 'react'
 import { buttonClick } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
-import { useAppDispatch } from '../../store/store'
+import { useAppDispatch, useAppSelector } from '../../store/store'
 import "./MainScene.scss"
+import potion from '../../assets/img/potions/potion.png'
+import { IInventoryItem } from '../../mechanics/inventory/Inventory'
 
 export default function MainScene() {
     const dispatch = useAppDispatch()
     const { setScene } = sceneSlice.actions
     const { clearDeadEnemies } = fightSlice.actions
+    const characterInventory = useAppSelector(state => state.userReducer.inventory)
 
     const mainClass = "Main-scene"
 
@@ -18,6 +21,16 @@ export default function MainScene() {
         dispatch(setScene(e.target.value))
         buttonClick()
     }
+
+    const healingPotion: IInventoryItem = {
+        id: 1,
+        img: potion,
+        count: 1,
+        cost: 50
+    }
+
+    characterInventory.pushInInventory(healingPotion)
+    characterInventory.pushInInventory(healingPotion)
 
     return (
         <div className={mainClass}>
