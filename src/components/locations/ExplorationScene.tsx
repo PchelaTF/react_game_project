@@ -21,7 +21,7 @@ export default function ExplorationScene() {
     }
 
     return (
-        <div className="exploration-scene fight-scene__main-backimg">
+        <div className="exploration-scene">
             <img src={background} alt="img" />
             <ul>
                 <li>

@@ -29,7 +29,7 @@ export default function Shop() {
     }
 
     const itemClick = (index: number) => {
-        if(mainCharacter.getGold() > shopItems[index].cost) {
+        if(mainCharacter.getGold() >= shopItems[index].cost) {
             characterInventory.pushInInventory(shopItems[index])
             mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].cost)
             setPlayerGold(mainCharacter.getGold())
