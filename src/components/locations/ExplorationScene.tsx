@@ -20,7 +20,7 @@ export default function ExplorationScene() {
             case 1:
                 return dispatch(setScene("chest"))
             default:
-                dispatch(setScene("fight"))
+                return dispatch(setScene("fight"))
         }
     }
 
