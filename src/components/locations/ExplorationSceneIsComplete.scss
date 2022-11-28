@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap");
 
-.character-is-win {
+.exploretion-is-complite {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -13,13 +13,7 @@
     justify-content: center;
     z-index: 100;
     flex-direction: column;
-
     background-color: rgba(15, 15, 15, 0.363);
-
-    & button {
-        margin-left: 20px;
-        width: 200px;
-    }
 
     & p {
         margin: 0;
