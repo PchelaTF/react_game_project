@@ -12,7 +12,16 @@ export default function ExplorationScene() {
 
     const getRandomScene = () => {
         // TODO добавить свитч кейс после разработки других сцен
-        dispatch(setScene("fight"))
+        const rndScene = Math.random() > 0.5 ? 1 : 0
+
+        switch (rndScene) {
+            case 0:
+                return dispatch(setScene("fight"))
+            case 1:
+                return dispatch(setScene("chest"))
+            default:
+                return dispatch(setScene("fight"))
+        }
     }
 
     const handleClick = () => {
@@ -25,13 +34,13 @@ export default function ExplorationScene() {
             <img src={background} alt="img" />
             <ul>
                 <li>
-                    <button className={`item__list-button btn`} onClick = {handleClick}>Left</button>
+                    <button className={`item__list-button btn`} onClick={handleClick}>Left</button>
                 </li>
                 <li>
-                    <button className={`item__list-button btn`} onClick = {handleClick}>Forward</button>
+                    <button className={`item__list-button btn`} onClick={handleClick}>Forward</button>
                 </li>
                 <li>
-                    <button className={`item__list-button btn`} onClick = {handleClick}>Right</button>
+                    <button className={`item__list-button btn`} onClick={handleClick}>Right</button>
                 </li>
             </ul>
         </div>

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ILocations, locations } from "../../mechanics/Locations"
 
-export type TScene = "fight" | "dialog" | "create" | "main" | "Locations" | "explore" | "shop"
+export type TScene = "fight" | "dialog" | "create" | "main" | "Locations" | "explore" | "shop" | "chest"
 
 export interface IinitialState {
     scene: TScene,
