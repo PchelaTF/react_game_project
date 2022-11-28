@@ -3,29 +3,16 @@ import { useAppDispatch, useAppSelector } from "../../store/store";
 import './FightScenIsWin.scss'
 
 const FightScenIsWin = () => {
-    const { setScene, changeCurrentLevel } = sceneSlice.actions
-    const currentLevel = useAppSelector(state => state.SceneReducer.currentLevel)
-    const levels = useAppSelector(state => state.SceneReducer.locations)
+    const { setScene } = sceneSlice.actions
     const dispatch = useAppDispatch()
-
-    function exitFightScene() {
-        const newCurrentLevel = {...levels[currentLevel]}
-        newCurrentLevel.isCompleted = true
-        dispatch(changeCurrentLevel(newCurrentLevel))
-        dispatch(setScene("main"))
-    }
 
     function continueExplore() {
         dispatch(setScene("explore"))
     }
 
     return (
-        <div className='character-is-win'>
+        <div className='character-is-win' onClick={() => continueExplore()}>
             <p>You are win</p>
-            <div style={{marginTop: "60px"}}>
-                <button className={`item__list-button btn`} onClick={exitFightScene}>to main</button>
-                <button className={`item__list-button btn`} onClick={continueExplore}>continue</button>
-            </div>
         </div>
     );
 };

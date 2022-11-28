@@ -6,16 +6,16 @@ export type TScene = "fight" | "dialog" | "create" | "main" | "Locations" | "exp
 export interface IinitialState {
     scene: TScene,
     locations: ILocations[],
-    currentLevel: number
+    currentLocation: number,
+    passsedLocationLevels: number
 }
 
-const initialState: IinitialState  = {
+const initialState: IinitialState = {
     scene: "create",
     locations: locations,
-    currentLevel: 0
+    currentLocation: 0,
+    passsedLocationLevels: 0
 }
-
-export const SET_ENEMY_TEXT = "SET_ENEMY_TEXT"
 
 export const sceneSlice = createSlice({
     name: "scene",
@@ -24,17 +24,20 @@ export const sceneSlice = createSlice({
         setScene(state, action: PayloadAction<TScene>) {
             state.scene = action.payload
         },
-        setCurrentLevel(state, action: PayloadAction<number>) {
-            state.currentLevel = action.payload
+        setCurrentLocation(state, action: PayloadAction<number>) {
+            state.currentLocation = action.payload
         },
-        setLocations(state, action: PayloadAction<ILocations[]>) {
-            state.locations = action.payload
-        },
-        changeCurrentLevel(state, action: PayloadAction<ILocations>) {
-            state.locations[state.currentLevel] = action.payload
+        changeCurrentLocation(state, action: PayloadAction<ILocations>) {
+            state.locations[state.currentLocation] = action.payload
         },
         resetLocations(state, action: PayloadAction<ILocations[]>) {
             state.locations = action.payload
+        },
+        setPasssedLocationLevels(state, action: PayloadAction<number>) {
+            state.passsedLocationLevels = state.passsedLocationLevels + action.payload
+        },
+        resetPassedLocationLevels(state, action: PayloadAction<number>) {
+            state.passsedLocationLevels = action.payload
         }
     }
 })

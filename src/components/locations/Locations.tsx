@@ -7,7 +7,7 @@ import "./Locations.scss"
 
 export default function Locations() {
     const dispatch = useAppDispatch()
-    const { setScene, setCurrentLevel } = sceneSlice.actions
+    const { setScene, setCurrentLocation } = sceneSlice.actions
     const { clearDeadEnemies, setBackground } = fightSlice.actions
     const levels = useAppSelector(state => state.SceneReducer.locations)
 
@@ -15,7 +15,7 @@ export default function Locations() {
 
     const handleClick = (index: number) => {
         dispatch(clearDeadEnemies())
-        dispatch(setCurrentLevel(index))
+        dispatch(setCurrentLocation(index))
         dispatch(setBackground(levels[index].background))
         dispatch(setScene("explore"))
     }
