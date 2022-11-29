@@ -7,6 +7,7 @@ import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png
 import { IInventoryItem } from '../../mechanics/inventory/Inventory'
 import potion from '../../assets/img/potions/potion.png'
 import { Potion } from '../../mechanics/items/Potion'
+import { Item } from '../../mechanics/items/Item'
 
 export default function Shop() {
     const dispatch = useAppDispatch()
@@ -17,7 +18,7 @@ export default function Shop() {
 
     const healingPotion = new Potion(50, 1, potion)
 
-    const shopItems: IInventoryItem[] = Array(9).fill(healingPotion)
+    const shopItems: Item[] = Array(9).fill(healingPotion)
     
     const backClick = () => {
         dispatch(setScene("main"))
@@ -25,9 +26,9 @@ export default function Shop() {
     }
 
     const itemClick = (index: number) => {
-        if(mainCharacter.getGold() >= shopItems[index].cost) {
+        if(mainCharacter.getGold() >= shopItems[index].getCost()) {
             characterInventory.pushInInventory(shopItems[index])
-            mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].cost)
+            mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].getCost())
             setPlayerGold(mainCharacter.getGold())
         }
     }
@@ -41,8 +42,8 @@ export default function Shop() {
                     <div className='shop__modal-items'>
                         {shopItems.map((item,i) => {
                             return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
-                                {item.img ? <img src={item.img} alt="" /> : ''}
-                                <span>{item.cost}g</span>
+                                {item.getImg() ? <img src={item.getImg()} alt="" /> : ''}
+                                <span>{item.getCost()}g</span>
                             </div>
                         })}
                     </div>
