@@ -1,3 +1,5 @@
+import { Item } from "../items/Item"
+
 export interface IInventoryItem {
     id?: number
     img: string
@@ -6,17 +8,17 @@ export interface IInventoryItem {
 }
 
 export default class Inventory {
-    private items: IInventoryItem[]
+    private items: Item[]
 
-    constructor(initItems: IInventoryItem[]) {
+    constructor(initItems: Item[]) {
         this.items = initItems
     }
 
-    pushInInventory(item: IInventoryItem) {
+    pushInInventory(item: Item) {
         this.items.push(item)
     }
 
-    setInventory(newItems: IInventoryItem[]) {
+    setInventory(newItems: Item[]) {
         this.items = newItems
     }
 

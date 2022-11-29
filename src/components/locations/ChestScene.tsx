@@ -5,6 +5,7 @@ import { IInventoryItem } from '../../mechanics/inventory/Inventory';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import chest from '../../assets/img/chest.png'
 import potion from '../../assets/img/potions/potion.png'
+import { Potion } from '../../mechanics/items/Potion';
 
 const ChestScene = () => {
     const dispath = useAppDispatch()
@@ -13,12 +14,7 @@ const ChestScene = () => {
     const [isLootGetted, setIsLootGetted] = React.useState(false)
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
 
-    const healingPotion: IInventoryItem = {
-        id: 1,
-        img: potion,
-        count: 1,
-        cost: 50
-    }
+    const healingPotion = new Potion(50, 1, potion)
 
     const getLoot = () => {
         setIsLootGetted(true)
