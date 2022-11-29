@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .Main-scene {
     width: 100vw;
     height: 100vh;
@@ -12,8 +14,8 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
-        border-radius: 5px 5px 0 0;
+        background: $bacgroundColorGradient;
+        border-radius: $borderRadius;
         padding: 0 60px;
     }
 
@@ -26,16 +28,6 @@
             position: relative;
 
             &-button {
-                //     padding: 15px 50px;
-                //     margin: 50px 0 0;
-                //     border-radius: 10px;
-                //     font-size: 16px;
-                //     line-height: 120%;
-                //     cursor: pointer;
-                //     transition: all 0.3s linear;
-                //     width: 165px;
-                //     background-color: #d6441b;
-                //     color: white;
                 width: 205px;
             }
         }
