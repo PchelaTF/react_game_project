@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   height: 100vh;
-
   background: url('./assets/img/main_bg_black.png') no-repeat center/cover;
 }
 
@@ -16,14 +15,14 @@
   line-height: 120%;
   text-transform: uppercase;
   background-color: #d6441b;
-  color: white;
+  color: #fff;
   transition: all 0.3s linear;
   cursor: pointer;
   transition: all 0.3s linear;
 }
 
 .btn:hover {
-  background-color: #f54818;
+  background-color: #f35c33;
 }
 
 /* select arrow in battle */

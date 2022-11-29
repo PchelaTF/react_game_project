@@ -34,11 +34,6 @@ const Enemys = ({ enemyImg, enemyHp, maxEnemyHp, enemyIndex }: IEnemyProps) => {
 
     return (
         <div className="enemys__content" onClick={handleClick}>
-            {/* <img className='enemys__content-img enemy' src={enemyImg} alt="img" />
-            <div className="player__content-hp">
-                <span style={{ width: `${widthHpBar}%` }}></span>
-                <p>{enemyHp} / {maxEnemyHp}</p>
-            </div> */}
             {isAlive ? <EnemysAlive
             enemyImg={enemyImg}
             enemyHp={enemyHp}

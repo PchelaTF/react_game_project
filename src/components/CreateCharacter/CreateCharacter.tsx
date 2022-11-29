@@ -54,48 +54,38 @@ const CreateCharacter = () => {
     return (
         <div className='create-character'>
             <div className="create-character__wrapper">
+                <h1 className="create-character__title">
+                    create character
+                </h1>
                 <div className="create-character__content">
-
                     <div className="create-character__select">
-
                         <div className="create-character__select-item">
                             <p className='create-character__select-title'>race</p>
-
                             <div className="create-character__race">
                                 {raceArr.map((item, i) => {
                                     return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
                                 })}
                             </div>
                         </div>
-
                         <div className="create-character__select-item">
                             <p className='create-character__select-title'>class</p>
-
                             <div className="create-character__class">
                                 {classArr[activeRace].map((item, i) => {
                                     return <CreateCharacterClass key={i} CharacterClass={item.iconImg} switchClass={() => switchClass(i)} activeClassName={activeIndex == i ? "_active" : ""} />
                                 })}
                             </div>
                         </div>
-
-
                     </div>
-
                     <div className="create-character__bigimg">
                         <img src={fullImg} alt="img" />
                     </div>
-
-
                     <div className="create-character__info">
                         <p className="create-character__info-title">Information</p>
-
                         <div className="create-character__info-descr">
                             <p>Description</p>
                             {description}
                         </div>
-
                         <div className="create-character__info-content">
-
                             <div className="create-character__info-stats stats">
                                 <p className="stats__title">Stats</p>
                                 <ul className="stats__lists">
@@ -107,7 +97,6 @@ const CreateCharacter = () => {
                                     <li className="stats__elem">WIT - 15</li>
                                 </ul>
                             </div>
-
                             <div className="create-character__info-skills skills">
                                 <p className="skills__title">Skills</p>
                                 <ul className="skills__lists">
@@ -116,13 +105,9 @@ const CreateCharacter = () => {
                                     })}
                                 </ul>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
-
-
                 <div className="create-character__name">
                     <input
                         type="text"
@@ -131,13 +116,10 @@ const CreateCharacter = () => {
                         placeholder='CHARACTER NAME'
                         onChange={(e) => onHandleNameChange(e)} />
                 </div>
-
                 <div className="create-character__button">
                     <button className='btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button>
                 </div>
-
             </div>
-
         </div>
     );
 };

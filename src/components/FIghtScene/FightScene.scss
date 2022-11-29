@@ -1,34 +1,20 @@
 .fight-scene {
     box-sizing: border-box;
-    &__wrapper {
-        // display: flex;
-        // flex-direction: column;
-        height: 100%;
-        // background-color: #000;
-        backdrop-filter: blur(10px);
 
-        // ?
+    &__wrapper {
+        height: 100%;
+        backdrop-filter: blur(10px);
         position: relative;
     }
 
     &__main {
         height: 100%;
-        // width: 1440px;
-        // margin: 0 auto;
-
-        // padding-bottom: 35%;
-        // flex: 0 1 50%;
         position: relative;
 
         &-backimg {
             position: relative;
-            // height: 700px;
-            // height: 100%;
-            // height: 100vh;
-            // height: 100vh;
             height: 89vh;
             width: 100%;
-            // padding-bottom: 35%;
 
             & img {
                 position: absolute;
@@ -36,7 +22,6 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                // object-fit: fill;
                 object-fit: cover;
             }
 
@@ -47,7 +32,6 @@
                 left: 0;
                 width: 100%;
                 height: 50px;
-                // background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
                 background: linear-gradient(rgba(3, 3, 3, 0.1), rgba(3, 3, 3, 1));
             }
         }
@@ -57,29 +41,20 @@
             position: absolute;
             gap: 200px;
             width: 100%;
-            // bottom: 5%;
             bottom: 13%;
-            // left: 50%;
             justify-content: space-evenly;
 
             .player,
             .enemys {
                 display: flex;
-                // justify-content: center;
                 justify-content: space-evenly;
-                // gap: 10px;
-                // gap: 20px;
                 width: 100%;
                 gap: 20px;
 
                 &__content {
                     flex: 0 1 25%;
                     position: relative;
-                    // width: 100px;
-                    // height: 300px;
                     padding-bottom: 30%;
-                    // padding-bottom: 40%;
-                    // padding-bottom: 53%;
                     width: 100%;
 
                     &-img {
@@ -134,7 +109,7 @@
                         left: 50%;
                         transform: translateX(-50%);
                         color: red;
-                        font-size: 20px;
+                        font-size: 30px;
                         line-height: 120%;
                     }
 

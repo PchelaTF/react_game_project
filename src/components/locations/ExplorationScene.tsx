@@ -44,13 +44,17 @@ export default function ExplorationScene() {
     }
 
     return (
-        <div className="exploration-scene fight-scene__main-backimg">
-            <img src={background} alt="img" />
-            {passedLocationLevels === maxLocationLevels ?
-                <ExplorationSceneIsComplete exitExploration={exitExploration} />
-                :
-                <ExplorationSceneDirections handleClick={handleClick} />
-            }
+        <div className="exploration-scene">
+            <div className="exploration-scene__backimg">
+                <img src={background} alt="img" />
+            </div>
+            <div className="exploration-scene__wrapper">
+                {passedLocationLevels === maxLocationLevels ?
+                    <ExplorationSceneIsComplete exitExploration={exitExploration} />
+                    :
+                    <ExplorationSceneDirections handleClick={handleClick} />
+                }
+            </div>
         </div>
     )
 }

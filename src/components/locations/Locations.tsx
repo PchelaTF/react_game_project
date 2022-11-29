@@ -27,11 +27,11 @@ export default function Locations() {
 
     return (
         <div className={mainClass}>
+            <h1 className={`${mainClass}__title`}>Game locations</h1>
             <div className={`${mainClass}__modal`}>
-                <p className=''>Game level</p>
                 {levels.map((item, key) => {
                     return <div className={`${mainClass}__modal-item`} onClick={() => handleClick(key)} key={key}>
-                        <img src={item.background} style={!item.isCompleted ? {filter: "grayscale(1)"} : {}}></img>
+                        <img src={item.background} style={!item.isCompleted ? { filter: "grayscale(1)" } : {}}></img>
                         <span>{item.name}</span>
                     </div>
                 })}
