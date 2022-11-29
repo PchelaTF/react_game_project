@@ -11,7 +11,6 @@ export default function MainScene() {
     const dispatch = useAppDispatch()
     const { setScene } = sceneSlice.actions
     const { clearDeadEnemies } = fightSlice.actions
-    const characterInventory = useAppSelector(state => state.userReducer.inventory)
 
     const mainClass = "Main-scene"
 
@@ -21,16 +20,6 @@ export default function MainScene() {
         dispatch(setScene(e.target.value))
         buttonClick()
     }
-
-    const healingPotion: IInventoryItem = {
-        id: 1,
-        img: potion,
-        count: 1,
-        cost: 50
-    }
-
-    characterInventory.pushInInventory(healingPotion)
-    characterInventory.pushInInventory(healingPotion)
 
     return (
         <div className={mainClass}>

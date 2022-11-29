@@ -17,6 +17,7 @@ export default function ExplorationScene() {
     const maxLocationLevels = locations[currentLocation].maxLocationLevels
 
     const getRandomScene = () => {
+<<<<<<< Updated upstream
         const rndScene = Math.random() > 0.5 ? 1 : 0
 
         switch (rndScene) {
@@ -26,6 +27,18 @@ export default function ExplorationScene() {
                 return dispatch(setScene("chest"))
             default:
                 return dispatch(setScene("fight"))
+=======
+        // TODO добавить свитч кейс после разработки других сцен
+        switch(Math.floor(Math.random() * (1 - 0 + 1) + 0)) {
+            case 0:
+                dispatch(setScene("fight"))
+                break;
+            case 1:
+                dispatch(setScene("fight"))
+                break;
+            default:
+                dispatch(setScene("fight"))
+>>>>>>> Stashed changes
         }
     }
 

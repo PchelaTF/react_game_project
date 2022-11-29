@@ -2,9 +2,7 @@ import React from 'react';
 import './Inventory.scss'
 import InventoryItem from './InventoryItem';
 import { useAppSelector } from '../../store/store';
-import { IInventoryItem } from '../../mechanics/inventory/Inventory';
-
-import potion from '../../assets/img/potions/potion.png'
+import { Item } from '../../mechanics/items/Item';
 
 interface IInventoryProps {
     closeInventory: () => void
@@ -12,19 +10,16 @@ interface IInventoryProps {
 
 const Inventory = ({ closeInventory }: IInventoryProps) => {
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
+    const [render, setRender] = React.useState(false)
 
-    const healingPotion: IInventoryItem = {
-        id: 1,
-        img: potion,
-        count: 1,
-        cost: 50
-    }
+    const emptyItem = new Item(0, 0, "")
 
-    characterInventory.pushInInventory(healingPotion)
-    characterInventory.pushInInventory(healingPotion)
+    const emptyInventorySquares = Array(20 - characterInventory.getInventory().length).fill(emptyItem)
+    const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
 
-    const emptyInventorySquares = Array(60 - characterInventory.getInventory().length).fill({ img: '', count: 0 })
-    const currentInventory = [...characterInventory.getInventory(), ...emptyInventorySquares]
+    React.useEffect(() => {
+        setRender(!render)
+    }, [currentInventory])
 
     return (
         <div className='inventory'>

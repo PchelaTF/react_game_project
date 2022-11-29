@@ -6,6 +6,7 @@ import "./Shop.scss"
 import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
 import { IInventoryItem } from '../../mechanics/inventory/Inventory'
 import potion from '../../assets/img/potions/potion.png'
+import { Potion } from '../../mechanics/items/Potion'
 
 export default function Shop() {
     const dispatch = useAppDispatch()
@@ -13,13 +14,8 @@ export default function Shop() {
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const mainCharacter = useAppSelector(state => state.userReducer.character)
     const [playerGold, setPlayerGold] = React.useState(mainCharacter.getGold())
-    
-    const healingPotion: IInventoryItem = {
-        id: 1,
-        img: potion,
-        count: 1,
-        cost: 50
-    }
+
+    const healingPotion = new Potion(50, 1, potion)
 
     const shopItems: IInventoryItem[] = Array(9).fill(healingPotion)
     

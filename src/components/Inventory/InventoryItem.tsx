@@ -1,15 +1,22 @@
 import React from 'react';
-import { IInventoryItem } from '../../mechanics/inventory/Inventory';
+import { Item } from '../../mechanics/items/Item';
+import { useAppSelector } from '../../store/store';
 
 interface IInventoryItemProps {
-    item: IInventoryItem
+    item: Item
 }
 
 const InventoryItem = ({ item }: IInventoryItemProps) => {
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
+
+    const handleClick = () => {
+        item.itemClick(mainCharacter)
+    }
+    
     return (
-        <li className="inventory__body-item">
-            {item.img ? <img src={item.img} alt="" /> : ''}
-            {item.count ? <span>{item.count}</span> : ''}
+        <li className="inventory__body-item" onClick={handleClick}>
+            {item.getCount() ? <img src={item.getImg()} alt="" /> : ''}
+            {item.getCount() ? <span>{item.getCount()}</span> : ''}
         </li>
     );
 };
