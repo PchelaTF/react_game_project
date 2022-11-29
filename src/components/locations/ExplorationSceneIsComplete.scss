@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Distressed&display=swap");
 
-.character-is-dead {
+.exploretion-is-complite {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -12,6 +12,7 @@
     align-items: center;
     justify-content: center;
     z-index: 100;
+    flex-direction: column;
     background-color: rgba(15, 15, 15, 0.363);
 
     & p {
@@ -20,6 +21,6 @@
         font-size: 100px;
         line-height: 120%;
         text-transform: uppercase;
-        color: red;
+        color: rgb(255, 208, 0);
     }
 }

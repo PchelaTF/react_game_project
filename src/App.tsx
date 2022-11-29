@@ -8,6 +8,7 @@ import { createEnemy } from './mechanics/CreatingMechanic';
 import Locations from './components/locations/Locations';
 import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
+import ChestScene from './components/locations/ChestScene';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
@@ -22,11 +23,13 @@ function App() {
       case "fight":
         return <FightScene allyArr={[mainCharacter]} enemyArr={[createEnemy(), createEnemy()]} />
       case "Locations":
-        return <Locations/>
+        return <Locations />
       case "shop":
-        return <Shop/>
+        return <Shop />
       case "explore":
         return <ExplorationScene />
+      case "chest":
+        return <ChestScene />
       default:
         return <MainScene />
     }
