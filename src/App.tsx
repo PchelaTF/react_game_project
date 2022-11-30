@@ -14,7 +14,7 @@ function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
   const mainCharacter = useAppSelector(state => state.userReducer.character)
 
-  const getScene = () => {
+  const getScene = React.useMemo (() => {
     switch (scene) {
       case "create":
         return <CreateCharacter />
@@ -33,11 +33,11 @@ function App() {
       default:
         return <MainScene />
     }
-  }
+  }, [scene])
 
   return (
     <div className="App">
-      {getScene()}
+      {getScene}
     </div>
   )
 }

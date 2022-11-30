@@ -51,6 +51,53 @@ const CreateCharacter = () => {
         buttonClick()
     }
 
+    const getCharacterRace = React.useMemo(() => {
+        return <div className="create-character__select-item">
+                <p className='create-character__select-title'>race</p>
+                <div className="create-character__race">
+                    {raceArr.map((item, i) => {
+                        return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
+                    })}
+                </div>
+            </div>
+    },[activeRace])
+
+    const getCharacterClass = React.useMemo(() => {
+        return <div className="create-character__select-item">
+                <p className='create-character__select-title'>class</p>
+                <div className="create-character__class">
+                    {classArr[activeRace].map((item, i) => {
+                        return <CreateCharacterClass key={i} CharacterClass={item.iconImg} switchClass={() => switchClass(i)} activeClassName={activeIndex == i ? "_active" : ""} />
+                    })}
+                </div>
+            </div>
+    },[activeIndex, activeRace])
+
+    const getStats = React.useMemo(() => {
+        return <div className="create-character__info-stats stats">
+                <p className="stats__title">Stats</p>
+                <ul className="stats__lists">
+                    <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
+                    {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
+                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
+                    <li className="stats__elem">INT - 15</li>
+                    <li className="stats__elem">MEN - 15</li>
+                    <li className="stats__elem">WIT - 15</li>
+                </ul>
+            </div>
+    }, [])
+
+    const getSkills = React.useMemo(() => {
+        return <div className="create-character__info-skills skills">
+                <p className="skills__title">Skills</p>
+                <ul className="skills__lists">
+                    {skillsImgArr.map((item, i) => {
+                        return <li className="skills__elem" key={i}><img src={item} alt="img" /></li>
+                    })}
+                </ul>
+            </div>
+    },[skillsImgArr])
+
     return (
         <div className='create-character'>
             <div className="create-character__wrapper">
@@ -59,22 +106,8 @@ const CreateCharacter = () => {
                 </h1>
                 <div className="create-character__content">
                     <div className="create-character__select">
-                        <div className="create-character__select-item">
-                            <p className='create-character__select-title'>race</p>
-                            <div className="create-character__race">
-                                {raceArr.map((item, i) => {
-                                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
-                                })}
-                            </div>
-                        </div>
-                        <div className="create-character__select-item">
-                            <p className='create-character__select-title'>class</p>
-                            <div className="create-character__class">
-                                {classArr[activeRace].map((item, i) => {
-                                    return <CreateCharacterClass key={i} CharacterClass={item.iconImg} switchClass={() => switchClass(i)} activeClassName={activeIndex == i ? "_active" : ""} />
-                                })}
-                            </div>
-                        </div>
+                        {getCharacterRace}
+                        {getCharacterClass}
                     </div>
                     <div className="create-character__bigimg">
                         <img src={fullImg} alt="img" />
@@ -86,25 +119,8 @@ const CreateCharacter = () => {
                             {description}
                         </div>
                         <div className="create-character__info-content">
-                            <div className="create-character__info-stats stats">
-                                <p className="stats__title">Stats</p>
-                                <ul className="stats__lists">
-                                    <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                                    {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
-                                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
-                                    <li className="stats__elem">INT - 15</li>
-                                    <li className="stats__elem">MEN - 15</li>
-                                    <li className="stats__elem">WIT - 15</li>
-                                </ul>
-                            </div>
-                            <div className="create-character__info-skills skills">
-                                <p className="skills__title">Skills</p>
-                                <ul className="skills__lists">
-                                    {skillsImgArr.map((item, i) => {
-                                        return <li className="skills__elem" key={i}><img src={item} alt="img" /></li>
-                                    })}
-                                </ul>
-                            </div>
+                            {getStats}
+                            {getSkills}
                         </div>
                     </div>
                 </div>
