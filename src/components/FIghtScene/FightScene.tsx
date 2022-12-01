@@ -60,14 +60,15 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     const npcTurn = () => {
-        if (!deadEnemies[currentTurn - 1])
+        // !deadEnemies[currentTurn - 1]
+        if (enemyArr[currentTurn - 1].getHp() > 0)
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
                 playSound()
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)
-        else 
+        else
             passTurn()
     }
 
@@ -108,19 +109,19 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
 
     const getCharacter = React.useMemo(() => {
         return <div className="player">
-                {allyArr.map((item, i) => {
-                    return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
-                })}
-            </div>
-    },[allyArr])
+            {allyArr.map((item, i) => {
+                return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
+            })}
+        </div>
+    }, [playerHp])
 
     const getEnemies = React.useMemo(() => {
         return <div className="enemys">
-                {enemyArr.map((item, i) => {
-                    return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
-                })}
-            </div>
-    },[enemyArr])
+            {enemyArr.map((item, i) => {
+                return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
+            })}
+        </div>
+    }, [enemyArr])
 
     const getSkills = React.useMemo(() => {
         return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
@@ -137,10 +138,10 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 <img src={skillsImgArr[3]} alt="img" />
             </li>
         </ul>
-    },[])
+    }, [currentTurn])
 
     const getInventory = React.useMemo(() => {
-        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()}/> : ''
+        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} setPlayerHp={setPlayerHp} /> : ''
     }, [isInventoryOpen])
 
     return (
@@ -163,7 +164,6 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
             {getInventory}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
-
         </div>
     );
 };

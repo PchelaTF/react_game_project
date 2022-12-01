@@ -1,4 +1,5 @@
 import Character from "../characters/Character";
+import Inventory from "../inventory/Inventory";
 import { Item } from "./Item";
 
 export class Potion extends Item {
@@ -7,7 +8,16 @@ export class Potion extends Item {
     }
 
     itemClick(character: Character): void {
-        character.setHp(character.getHp() + 5)
+        // * бесконечніе зелья восстанавливающие свіше макс ХП
+        // character.setHp(character.getHp() + 5)
+        // this.setCount(this.getCount() - 1)
+
+        if (character.getHp() + 5 > character.getMaxHp()) {
+            character.setHp(character.getMaxHp())
+        } else {
+            character.setHp(character.getHp() + 5)
+        }
         this.setCount(this.getCount() - 1)
     }
+
 }

@@ -17,7 +17,7 @@ export default function ExplorationScene() {
     const maxLocationLevels = locations[currentLocation].maxLocationLevels
 
     const getRandomScene = () => {
-        const rndScene = Math.random() > 0.5 ? 1 : 0
+        const rndScene = Math.random() > 0.7 ? 1 : 0
 
         switch (rndScene) {
             case 0:

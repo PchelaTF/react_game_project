@@ -5,10 +5,11 @@ import './FightScenIsDead.scss'
 
 const FightScenIsDead = () => {
     const dispatch = useAppDispatch()
-    const { setScene, resetLocations } = sceneSlice.actions
+    const { setScene, resetLocations, resetPassedLocationLevels } = sceneSlice.actions
 
     function exitFightScene() {
         dispatch(resetLocations(locations))
+        dispatch(resetPassedLocationLevels(0))
         dispatch(setScene("create"))
     }
 
