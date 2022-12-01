@@ -6,20 +6,16 @@ import { Item } from '../../mechanics/items/Item';
 
 interface IInventoryProps {
     closeInventory: () => void
+    setPlayerHp: React.Dispatch<React.SetStateAction<number>>
 }
 
-const Inventory = ({ closeInventory }: IInventoryProps) => {
+const Inventory = ({ closeInventory, setPlayerHp }: IInventoryProps) => {
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
-    const [render, setRender] = React.useState(false)
 
     const emptyItem = new Item(0, 0, "")
 
     const emptyInventorySquares = Array(20 - characterInventory.getInventory().length).fill(emptyItem)
     const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
-
-    // React.useEffect(() => {
-    //     setRender(!render)
-    // }, [currentInventory])
 
     return (
         <div className='inventory'>
@@ -29,7 +25,7 @@ const Inventory = ({ closeInventory }: IInventoryProps) => {
                     <div className="inventory__body">
                         <ul className="inventory__body-items">
                             {currentInventory.map((item, i) => {
-                                return <InventoryItem item={item} key={i} />
+                                return <InventoryItem item={item} key={i} index={i} setPlayerHp={setPlayerHp} />
                             })}
                         </ul>
                     </div>

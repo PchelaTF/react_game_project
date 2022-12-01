@@ -25,4 +25,8 @@ export default class Inventory {
     getInventory() {
         return this.items
     }
+
+    deleteFromInventory(index: number) {
+        this.items.splice(index, 1)
+    }
 }
