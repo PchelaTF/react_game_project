@@ -17,9 +17,9 @@ const Inventory = ({ closeInventory }: IInventoryProps) => {
     const emptyInventorySquares = Array(20 - characterInventory.getInventory().length).fill(emptyItem)
     const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
 
-    React.useEffect(() => {
-        setRender(!render)
-    }, [currentInventory])
+    // React.useEffect(() => {
+    //     setRender(!render)
+    // }, [currentInventory])
 
     return (
         <div className='inventory'>

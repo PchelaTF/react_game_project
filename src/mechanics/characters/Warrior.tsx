@@ -6,8 +6,8 @@ export class Warrior extends Character {
     }
 
     firstSkill(dmgToCharacter: Character) {
-        const dmg = 2 * this.getAttack() - dmgToCharacter.getArmor()
-        if(2 * this.getAttack() > dmgToCharacter.getArmor())
+        const dmg = Math.abs(2 * this.getAttack() - dmgToCharacter.getArmor())
+        if (2 * this.getAttack() > dmgToCharacter.getArmor())
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
     }
 

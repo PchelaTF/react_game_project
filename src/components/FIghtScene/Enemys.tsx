@@ -21,12 +21,12 @@ const Enemys = ({ enemyImg, enemyHp, maxEnemyHp, enemyIndex }: IEnemyProps) => {
     const ischoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
 
     React.useEffect(() => {
-        if(!isAlive)
+        if (!isAlive)
             dispatch(pushToDeadEnemies(true))
-    },[isAlive])
+    }, [isAlive])
 
     const handleClick = () => {
-        if(ischoiceActive && isAlive) {
+        if (ischoiceActive && isAlive) {
             dispatch(setChoiceActive(false))
             dispatch(setEnemyIndex(enemyIndex))
         }
@@ -34,14 +34,16 @@ const Enemys = ({ enemyImg, enemyHp, maxEnemyHp, enemyIndex }: IEnemyProps) => {
 
     return (
         <div className="enemys__content" onClick={handleClick}>
-            {isAlive ? <EnemysAlive
-            enemyImg={enemyImg}
-            enemyHp={enemyHp}
-            maxEnemyHp={maxEnemyHp}
-            widthHpBar={widthHpBar}/>
+            {isAlive ?
+                <EnemysAlive
+                    enemyImg={enemyImg}
+                    enemyHp={enemyHp}
+                    maxEnemyHp={maxEnemyHp}
+                    widthHpBar={widthHpBar}
+                />
                 :
-                <EnemysDead 
-                maxEnemyHp={maxEnemyHp}
+                <EnemysDead
+                    maxEnemyHp={maxEnemyHp}
                 />
             }
             {(takenDamage > 0) ? <span className="player__content-taken-damage">-{takenDamage}</span> : ""}

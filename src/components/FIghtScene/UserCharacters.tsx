@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePrevious } from '../../customHooks/usePrevious';
+import { useAppSelector } from '../../store/store';
 import UserCharactersAlive from './UserCharactersAlive';
 import UserCharactersDead from './UserCharactersDead';
 

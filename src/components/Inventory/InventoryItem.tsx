@@ -12,7 +12,7 @@ const InventoryItem = ({ item }: IInventoryItemProps) => {
     const handleClick = () => {
         item.itemClick(mainCharacter)
     }
-    
+
     return (
         <li className="inventory__body-item" onClick={handleClick}>
             {item.getCount() ? <img src={item.getImg()} alt="" /> : ''}

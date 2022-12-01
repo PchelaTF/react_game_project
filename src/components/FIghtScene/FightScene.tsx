@@ -50,7 +50,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                     doDamage()
                     break;
             }
-            
+
             playSound()
         }
         setInitial(false)
@@ -68,7 +68,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)
-        else 
+        else
             passTurn()
     }
 
@@ -155,7 +155,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 </div>
             </div>
 
-            {isInventoryOpen ? <Inventory closeInventory={() => closeInventory()}/> : ''}
+            {isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} /> : ''}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
 
