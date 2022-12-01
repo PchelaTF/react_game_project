@@ -50,7 +50,6 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                     doDamage()
                     break;
             }
-
             playSound()
         }
         setInitial(false)
@@ -89,12 +88,6 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         dispatch(setEnemyIndex(-1))
     }
 
-    const heal = () => {
-        allyArr[0].selfHeal(6)
-        setPlayerHp(allyArr[0].getHp())
-        passTurn()
-    }
-
     const doDamage = () => {
         allyArr[0].dealDamage(enemyArr[enemyIndex])
         passTurn()
@@ -113,52 +106,63 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         setIsInventoryOpen(false)
     }
 
+    const getCharacter = React.useMemo(() => {
+        return <div className="player">
+            {allyArr.map((item, i) => {
+                return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
+            })}
+        </div>
+    }, [allyArr])
+
+    const getEnemies = React.useMemo(() => {
+        return <div className="enemys">
+            {enemyArr.map((item, i) => {
+                return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
+            })}
+        </div>
+    }, [enemyArr])
+
+    const getSkills = React.useMemo(() => {
+        return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
+            <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                <img src={skillsImgArr[0]} alt="img" />
+            </li>
+            <li className="skills__item" onClick={() => handleSkillClick(1)}>
+                <img src={skillsImgArr[1]} alt="img" />
+            </li>
+            <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                <img src={skillsImgArr[2]} alt="img" />
+            </li>
+            <li className="skills__item" onClick={() => handleSkillClick(0)}>
+                <img src={skillsImgArr[3]} alt="img" />
+            </li>
+        </ul>
+    }, [])
+
+    const getInventory = React.useMemo(() => {
+        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} /> : ''
+    }, [isInventoryOpen])
+
     return (
         <div className="fight-scene__wrapper">
             <div className="fight-scene__main">
                 <div className="fight-scene__main-backimg">
                     <img src={background} alt="img" />
                 </div>
-
                 <div className="fight-scene__main-characters">
-                    <div className="player">
-                        {allyArr.map((item, i) => {
-                            return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
-                        })}
-                    </div>
-                    <div className="enemys">
-                        {enemyArr.map((item, i) => {
-                            return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
-                        })}
-                    </div>
+                    {getCharacter}
+                    {getEnemies}
                 </div>
-
-                <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
-                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                        <img src={skillsImgArr[0]} alt="img" />
-                    </li>
-                    <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                        <img src={skillsImgArr[1]} alt="img" />
-                    </li>
-                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                        <img src={skillsImgArr[2]} alt="img" />
-                    </li>
-                    <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                        <img src={skillsImgArr[3]} alt="img" />
-                    </li>
-                </ul>
-
+                {getSkills}
                 <div className="fight-scene__header-panel">
                     <div className="header-panel__inventory" onClick={openInventory}>
                         <img src={inventory} alt="" />
                     </div>
                 </div>
             </div>
-
-            {isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} /> : ''}
+            {getInventory}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
-
         </div>
     );
 };
