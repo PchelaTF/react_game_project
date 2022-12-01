@@ -18,24 +18,38 @@ interface IFightSceneProps {
 }
 
 const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
+    //useState const
     const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
     const [isWon, setIsWon] = React.useState(false)
     const [initial, setInitial] = React.useState(true)
-    const fightOrder = allyArr.concat(enemyArr)
+    const [enemiesHp, setEnemiesHp] = React.useState<number[]>([])
+    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
+    //Redux const
+    const dispatch = useAppDispatch()
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
     const enemyIndex = useAppSelector(state => state.FightReducer.enemyIndex)
     const isСhoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
     const deadEnemies = useAppSelector(state => state.FightReducer.deadEnemies)
     const skillIndex = useAppSelector(state => state.FightReducer.skillIndex)
     const background = useAppSelector(state => state.FightReducer.background)
-    const dispatch = useAppDispatch()
-    const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex } = fightSlice.actions
-    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
+    const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex, pushToDeadEnemies } = fightSlice.actions
+    //other const
+    const fightOrder = allyArr.concat(enemyArr)
 
     React.useEffect(() => {
         if (fightOrder[currentTurn].getIsNpc()) {
             npcTurn()
         }
+    }, [currentTurn])
+
+    React.useEffect(() => {
+        const newHp: number[] = []
+
+        for (let i = 0; i < enemyArr.length; i++) {
+            newHp.push(enemyArr[i].getHp())
+        }
+
+        setEnemiesHp(newHp)
     }, [currentTurn])
 
     // вызывается при смене индекса по нажатию на противника
@@ -58,10 +72,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     React.useEffect(() => {
         setIsWon(deadEnemies.length == enemyArr.length)
     }, [currentTurn])
-
-    const npcTurn = () => {
-        // !deadEnemies[currentTurn - 1]
-        if (enemyArr[currentTurn - 1].getHp() > 0)
+    
+    function npcTurn() {
+        if(enemyArr[currentTurn - 1].getHp() <= 0 && !deadEnemies[currentTurn - 1]) {
+            dispatch(pushToDeadEnemies(true))
+        }
+        if (fightOrder[currentTurn].getHp() >= 0)
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
                 playSound()
@@ -117,11 +133,11 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
 
     const getEnemies = React.useMemo(() => {
         return <div className="enemys">
-            {enemyArr.map((item, i) => {
-                return <Enemys enemyImg={item.getImgBig()} enemyHp={item.getHp()} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
-            })}
-        </div>
-    }, [enemyArr])
+                {enemyArr.map((item, i) => {
+                    return <Enemys enemyImg={item.getImgBig()} enemyHp={enemiesHp[i]} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
+                })}
+            </div>
+    },[enemiesHp])
 
     const getSkills = React.useMemo(() => {
         return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
@@ -138,7 +154,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 <img src={skillsImgArr[3]} alt="img" />
             </li>
         </ul>
-    }, [currentTurn])
+    },[currentTurn])
 
     const getInventory = React.useMemo(() => {
         return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} setPlayerHp={setPlayerHp} /> : ''

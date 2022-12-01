@@ -19,11 +19,11 @@ const Enemys = ({ enemyImg, enemyHp, maxEnemyHp, enemyIndex }: IEnemyProps) => {
     const dispatch = useAppDispatch()
     const { setChoiceActive, setEnemyIndex, pushToDeadEnemies } = fightSlice.actions
     const ischoiceActive = useAppSelector(state => state.FightReducer.ischoiceActive)
-
-    React.useEffect(() => {
-        if (!isAlive)
-            dispatch(pushToDeadEnemies(true))
-    }, [isAlive])
+    
+    // React.useEffect(() => {
+    //     if(!isAlive)
+    //         dispatch(pushToDeadEnemies(true))
+    // },[isAlive])
 
     const handleClick = () => {
         if (ischoiceActive && isAlive) {
