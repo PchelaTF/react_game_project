@@ -60,7 +60,7 @@ const CreateCharacter = () => {
                     })}
                 </div>
             </div>
-    },[activeRace])
+    },[activeRace, switchRace])
 
     const getCharacterClass = React.useMemo(() => {
         return <div className="create-character__select-item">
@@ -71,7 +71,7 @@ const CreateCharacter = () => {
                     })}
                 </div>
             </div>
-    },[activeIndex, activeRace])
+    },[activeIndex, activeRace, switchClass])
 
     const getStats = React.useMemo(() => {
         return <div className="create-character__info-stats stats">
