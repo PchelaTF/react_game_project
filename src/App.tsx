@@ -9,6 +9,7 @@ import Locations from './components/locations/Locations';
 import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
 import ChestScene from './components/locations/ChestScene';
+import CharacterWindow from './components/CharacterWindow/CharacterWindow';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
@@ -37,7 +38,8 @@ function App() {
 
   return (
     <div className="App">
-      {getScene}
+      {/* {getScene} */}
+      <CharacterWindow mainCharacter={mainCharacter}/>
     </div>
   )
 }

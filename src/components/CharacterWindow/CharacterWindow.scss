@@ -1,0 +1,119 @@
+@import "../../variables.scss";
+
+.character-window {
+    box-sizing: border-box;
+    height: 100%;
+    color: $mainTextColor;
+    backdrop-filter: $backdropFilter;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__wrapper {
+        width: 520px;
+        height: 574px;
+        background: $bacgroundColorGradient;
+        border-radius: $borderRadius;
+    }
+
+    &__title {
+        margin: 0 10px;
+        padding: 5px 0;
+        line-height: 120%;
+        border-bottom: $borderBottom;
+    }
+
+    &__body {
+        // height: 610px;
+        padding: 15px 15px 40px;
+        display: grid;
+        grid-template-columns: 62% 38%;
+    }
+
+    .body__column {
+        &:not(:last-child) {
+            border-right: 2px solid $mainBorderColor;
+        }
+
+        &-name {
+            margin: 0 0 23px 0;
+        }
+
+        .equipment {
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+            min-height: 310px;
+
+            &__slots {
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+                padding: 6px 0;
+
+                &.weapon {
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 15px;
+                    min-height: 80px;
+                    padding: 0;
+                }
+            }
+
+            &__slot {
+                list-style: none;
+                position: relative;
+                flex: 0 1 11.8%;
+                width: 35px;
+                border: 2px solid $mainBorderColor;
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    opacity: 0.3;
+                }
+
+                &.weapon {
+                    padding-bottom: 11.8%;
+                }
+            }
+
+            &__character-img {
+                position: relative;
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+    .stats {
+        &__lists {
+            margin: 0%;
+            padding: 0;
+        }
+
+        &__elem {
+            list-style: none;
+        }
+    }
+}
+
+.delete-after-finish {
+    margin: 4px;
+    line-height: 120%;
+}
