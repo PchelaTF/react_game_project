@@ -7,7 +7,6 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
-import { skillsImgArr } from "../CreateCharacter/Images"
 import inventory from "../../assets/img/chest.png"
 import Inventory from '../Inventory/Inventory';
 import { playSound } from '../../mechanics/sounds/sound';
@@ -59,6 +58,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 case 1:
                     doFirstSkill()
                     break;
+                case 2:
+                    doSecondSkill()
+                    break;
+                case 3:
+                    doThirdSkill()
+                    break;
                 case 0:
                 default:
                     doDamage()
@@ -72,12 +77,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     React.useEffect(() => {
         setIsWon(deadEnemies.length == enemyArr.length)
     }, [currentTurn])
-    
+
     function npcTurn() {
         if(enemyArr[currentTurn - 1].getHp() <= 0 && !deadEnemies[currentTurn - 1]) {
             dispatch(pushToDeadEnemies(true))
         }
-        if (fightOrder[currentTurn].getHp() >= 0)
+        if (enemyArr[currentTurn - 1].getHp() >= 0)
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
                 playSound()
@@ -115,6 +120,16 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         passTurn()
     }
 
+    const doSecondSkill = () => {
+        allyArr[0].secondSkill(enemyArr[enemyIndex])
+        passTurn()
+    }
+
+    const doThirdSkill = () => {
+        allyArr[0].thirdSkill(allyArr[0])
+        passTurn()
+    }
+
     const openInventory = () => {
         setIsInventoryOpen(true)
     }
@@ -142,16 +157,16 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const getSkills = React.useMemo(() => {
         return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[0]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[0]} alt="img" />
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                <img src={skillsImgArr[1]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[1]} alt="img" />
+            </li>
+            <li className="skills__item" onClick={() => handleSkillClick(2)}>
+                <img src={allyArr[0].getSkillImgs()[2]} alt="img" />
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[2]} alt="img" />
-            </li>
-            <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[3]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[3]} alt="img" />
             </li>
         </ul>
     },[currentTurn])

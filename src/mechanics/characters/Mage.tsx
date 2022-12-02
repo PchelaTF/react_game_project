@@ -6,8 +6,15 @@ export class Mage extends Character {
     }
 
     firstSkill(dmgToCharacter: Character) {
-        const dmg = this.getAttack()
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.calcMod(this.getInt()) - 1 + 1) + 1)))
+    }
+
+    secondSkill(dmgToCharacter: Character): void {
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (10 - 1 + 1) + 1) + this.calcMod(this.getInt())))
+    }
+
+    thirdSkill(dmgToCharacter: Character): void {
+        dmgToCharacter.setHp(dmgToCharacter.getHp() + 3)
     }
 
 }

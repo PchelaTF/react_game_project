@@ -6,9 +6,19 @@ export class Warrior extends Character {
     }
 
     firstSkill(dmgToCharacter: Character) {
-        const dmg = Math.abs(2 * this.getAttack() - dmgToCharacter.getArmor())
-        if (2 * this.getAttack() > dmgToCharacter.getArmor())
-            dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        const atk = this.getAttack() + 3
+        if(atk > dmgToCharacter.getArmor())
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength) + 3))
+    }
+
+    secondSkill(dmgToCharacter: Character): void {
+        const atk = this.getAttack() + 5
+        if(atk > dmgToCharacter.getArmor())
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - 3*(Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)))
+    }
+
+    thirdSkill(dmgToCharacter: Character): void {
+        dmgToCharacter.setHp(dmgToCharacter.getHp() + 3)
     }
 
 }

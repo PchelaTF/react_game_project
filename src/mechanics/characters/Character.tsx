@@ -11,7 +11,8 @@ export interface ICharacterStats {
     initWisdom: number,
     initCharm: number,
     initIntelligent: number,
-    initGold: number
+    initGold: number,
+    initSkillImgs: string[]
 }
 export default class Character {
     private hp: number
@@ -24,9 +25,11 @@ export default class Character {
     private imgBig: string
     private selfHealCount: number
     private isDead: boolean
+    private skillImgs: string[]
     private constitution: number
     private dexterety : number
-    private strength: number
+    private intelligent: number
+    protected strength: number
     protected damage: number
     protected gold: number
     // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
@@ -36,6 +39,7 @@ export default class Character {
         this.hp = this.calcMod(this.constitution) + characterStats.initHp
         this.armor = this.calcMod(this.dexterety) + 10
         this.strength = characterStats.initStrength
+        this.intelligent = characterStats.initIntelligent
         this.attack = characterStats.initAttack
         this.maxHp = this.hp
         this.isNpc = characterStats.initIsNpc
@@ -46,6 +50,7 @@ export default class Character {
         this.isDead = false
         this.damage = 8
         this.gold = characterStats.initGold
+        this.skillImgs = characterStats.initSkillImgs
     }
 
     setHp(newHp: number) {
@@ -102,6 +107,14 @@ export default class Character {
         this.gold = newGold
     }
 
+    getInt() {
+        return this.intelligent
+    }
+
+    getSkillImgs() {
+        return this.skillImgs
+    }
+
     dealDamage(dmgToCharacter: Character) {
         const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
         if(this.getAttack() > dmgToCharacter.getArmor())
@@ -111,13 +124,17 @@ export default class Character {
 
     firstSkill(dmgToCharacter: Character) {}
 
+    secondSkill(dmgToCharacter: Character) {}
+
+    thirdSkill(dmgToCharacter: Character) {}
+
     doNpcLogic(playerCharacter: Character) {
         if (this.hp <= 0)
             return
-        if(this.getHp() < this.maxHp / 2 && this.selfHealCount < 1)
-            this.selfHeal(7)
-        else 
-            this.dealDamage(playerCharacter)
+        // if(this.getHp() < this.maxHp / 2 && this.selfHealCount < 1)
+        //     this.selfHeal(7)
+        // else 
+        this.dealDamage(playerCharacter)
     }
 
     calcMod(ability: number) {
