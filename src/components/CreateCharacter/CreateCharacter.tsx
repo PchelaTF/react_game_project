@@ -85,7 +85,7 @@ const CreateCharacter = () => {
                     <li className="stats__elem">WIT - 15</li>
                 </ul>
             </div>
-    }, [])
+    }, [viewCharacterStats, activeIndex])
 
     const getSkills = React.useMemo(() => {
         return <div className="create-character__info-skills skills">
