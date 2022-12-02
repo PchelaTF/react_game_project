@@ -105,6 +105,8 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }
 
     const handleSkillClick = (index: number) => {
+        if(allyArr[0].getskillsCooldown()[index] > 0)
+            return
         dispatch(setChoiceActive(true))
         dispatch(setSkillIndex(index))
         dispatch(setEnemyIndex(-1))
@@ -157,16 +159,20 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const getSkills = React.useMemo(() => {
         return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={allyArr[0].getSkillImgs()[0]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[0]} alt="img"  style={allyArr[0].getskillsCooldown()[0] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[0] !== 0 ? allyArr[0].getskillsCooldown()[0] : null }</span>
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                <img src={allyArr[0].getSkillImgs()[1]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[1]} alt="img"  style={allyArr[0].getskillsCooldown()[1] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[1] !== 0 ? allyArr[0].getskillsCooldown()[1] : null }</span>
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(2)}>
-                <img src={allyArr[0].getSkillImgs()[2]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[2]} alt="img"  style={allyArr[0].getskillsCooldown()[2] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[2] !== 0 ? allyArr[0].getskillsCooldown()[2] : null }</span>
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={allyArr[0].getSkillImgs()[3]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[3]} alt="img"  style={allyArr[0].getskillsCooldown()[3] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[3] !== 0 ? allyArr[0].getskillsCooldown()[3] : null }</span>
             </li>
         </ul>
     },[currentTurn])

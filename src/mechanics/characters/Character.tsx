@@ -23,8 +23,6 @@ export default class Character {
     private name: string
     private imgSmall: string
     private imgBig: string
-    private selfHealCount: number
-    private isDead: boolean
     private skillImgs: string[]
     private constitution: number
     private dexterety : number
@@ -32,7 +30,8 @@ export default class Character {
     protected strength: number
     protected damage: number
     protected gold: number
-    // initHp: number, initArmor: number, initAttack: IAttack, initIsNpc: boolean = false, initActionPoints: number, initName?: string
+    protected skillsCooldown: number[]
+
     constructor(characterStats: ICharacterStats) {
         this.constitution = characterStats.initConstitution
         this.dexterety = characterStats.initDexterety
@@ -46,11 +45,10 @@ export default class Character {
         this.name = characterStats.initName
         this.imgSmall = characterStats.initImgSmall
         this.imgBig = characterStats.initImgBig
-        this.selfHealCount = 0
-        this.isDead = false
         this.damage = 8
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
+        this.skillsCooldown = [0,0,0,0]
     }
 
     setHp(newHp: number) {
@@ -86,13 +84,10 @@ export default class Character {
     selfHeal(value: number) {
         if (this.hp + value > this.maxHp) {
             this.hp = this.maxHp
-            console.log("max healed")
         }
         else {
             this.hp = this.hp + value
-            console.log("healed on: " + value + "hp")
         }
-        this.selfHealCount = 1
     }
 
     getIsNpc() {
@@ -116,6 +111,7 @@ export default class Character {
     }
 
     dealDamage(dmgToCharacter: Character) {
+        this.decSkillsCooldown()
         const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
         if(this.getAttack() > dmgToCharacter.getArmor())
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
@@ -128,12 +124,28 @@ export default class Character {
 
     thirdSkill(dmgToCharacter: Character) {}
 
+    getskillsCooldown () {
+        return this.skillsCooldown
+    }
+
+    resetSkillsCooldowm() {
+        this.skillsCooldown = [0,0,0,0]
+    }
+
+    decSkillsCooldown() {
+        for(let i = 0; i < this.skillsCooldown.length; i++) {
+            if(this.skillsCooldown[i] > 0)
+                this.skillsCooldown[i]--
+        }
+    }
+
+    setSkillCooldown(index: number, cooldownValue: number) {
+        this.skillsCooldown[index] = cooldownValue
+    }
+
     doNpcLogic(playerCharacter: Character) {
         if (this.hp <= 0)
             return
-        // if(this.getHp() < this.maxHp / 2 && this.selfHealCount < 1)
-        //     this.selfHeal(7)
-        // else 
         this.dealDamage(playerCharacter)
     }
 
