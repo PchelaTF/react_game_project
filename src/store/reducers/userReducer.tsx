@@ -22,7 +22,8 @@ const initialState: IinitialState = {
         initCharm: 10,
         initIntelligent: 10,
         initWisdom: 10,
-        initGold: 300
+        initGold: 300,
+        initSkillImgs: []
     }),
     inventory: new Inventory([])
 }

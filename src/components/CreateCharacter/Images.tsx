@@ -34,12 +34,26 @@ import atk2 from '../../assets/img/skills/Icon10.png'
 import atk3 from '../../assets/img/skills/Icon11.png'
 import atk4 from '../../assets/img/skills/Icon12.png'
 
+import warriorSkill from "../../assets/img/skills/active1.png"
+import warriorSkillTwo from "../../assets/img/skills/active2.png"
+import warriorSkillThree from "../../assets/img/skills/active3.png"
+import warriorSkillFour from "../../assets/img/skills/active4.png"
+
+import mageSkill from "../../assets/img/skills/1.png"
+import mageSkillTwo from "../../assets/img/skills/2.png"
+import mageSkillThree from "../../assets/img/skills/3.png"
+import mageSkillFour from "../../assets/img/skills/4.png"
+
 import background from "../../assets/img/main_bg.png"
 import desert from "../../assets/img/desert.png"
 import dungeon from "../../assets/img/dungeon.jpg"
 
 export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
-export const skillsImgArr = [atk, atk2, atk3, atk4] 
+export const skillsImgArr = [
+    [atk, atk2, atk3, atk4], 
+    [mageSkill, mageSkillTwo, mageSkillThree, mageSkillFour],
+    [warriorSkill, warriorSkillTwo, warriorSkillThree, warriorSkillFour] 
+]
 export const backgrounds = [background, desert, dungeon]
 interface IImages {
     fullImg: string,
