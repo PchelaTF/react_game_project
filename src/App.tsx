@@ -9,13 +9,12 @@ import Locations from './components/locations/Locations';
 import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
 import ChestScene from './components/locations/ChestScene';
-import CharacterWindow from './components/CharacterWindow/CharacterWindow';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
   const mainCharacter = useAppSelector(state => state.userReducer.character)
 
-  const getScene = React.useMemo (() => {
+  const getScene = React.useMemo(() => {
     switch (scene) {
       case "create":
         return <CreateCharacter />
@@ -38,8 +37,7 @@ function App() {
 
   return (
     <div className="App">
-      {/* {getScene} */}
-      <CharacterWindow mainCharacter={mainCharacter}/>
+      {getScene}
     </div>
   )
 }

@@ -1,8 +1,6 @@
 import React from 'react';
 import Character from '../../mechanics/characters/Character';
 import './CharacterWindow.scss'
-import characterImg from "../../assets/img/characters_img/demons/Character2_face1.png"
-// import characterImg from "../../assets/img/characters_img/hulflings/Character8_face1.png"
 
 import headSlots from '../../assets/img/item_slots/Head.png'
 import chestSlots from '../../assets/img/item_slots/Chest.png'
@@ -22,17 +20,20 @@ import shieldSlots from '../../assets/img/item_slots/Shield.png'
 
 interface ICharacterWindowProps {
     mainCharacter: Character
+    classIfInventoryOpen: string
 }
 
-const CharacterWindow = ({ mainCharacter }: ICharacterWindowProps) => {
+const CharacterWindow = ({ mainCharacter, classIfInventoryOpen }: ICharacterWindowProps) => {
     return (
-        <div className='character-window'>
+        <div className={`character-window ${classIfInventoryOpen}`}>
             <div className="character-window__wrapper">
                 <h1 className="character-window__title">Character</h1>
                 {/* <h2 className="delete-after-finish">delete-after-finish</h2> */}
                 <div className="character-window__body">
                     <div className="body__column">
-                        <h3 className="body__column-name">Character name</h3>
+                        <h3 className="body__column-name">
+                            {mainCharacter.getName() ? mainCharacter.getName() : 'Character name'}
+                        </h3>
                         <div className="body__column-equipment equipment">
                             <ul className="equipment__slots">
                                 <li className="equipment__slot">
@@ -55,8 +56,7 @@ const CharacterWindow = ({ mainCharacter }: ICharacterWindowProps) => {
                                 </li>
                             </ul>
                             <div className="equipment__character-img">
-                                {/* <img src={mainCharacter.getImgBig()} alt="" /> */}
-                                <img src={characterImg} alt="" />
+                                <img src={mainCharacter.getImgBig()} alt="" />
                             </div>
                             <ul className="equipment__slots">
                                 <li className="equipment__slot">

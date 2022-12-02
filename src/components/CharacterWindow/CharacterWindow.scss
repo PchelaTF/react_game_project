@@ -4,7 +4,22 @@
     box-sizing: border-box;
     height: 100%;
     color: $mainTextColor;
-    backdrop-filter: $backdropFilter;
+    // backdrop-filter: $backdropFilter;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    // * default
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    // * if inventory open
+    &._inventory-open {
+        right: 50%;
+        align-items: flex-end;
+        padding-right: 25px;
+    }
 
     display: flex;
     flex-direction: column;
@@ -29,7 +44,7 @@
         // height: 610px;
         padding: 15px 15px 40px;
         display: grid;
-        grid-template-columns: 62% 38%;
+        grid-template-columns: 70% 30%;
     }
 
     .body__column {
@@ -38,7 +53,8 @@
         }
 
         &-name {
-            margin: 0 0 23px 0;
+            // margin: 0 0 23px 0;
+            margin: 0 0 10px 0;
         }
 
         .equipment {
@@ -48,11 +64,12 @@
 
             &__slots {
                 margin: 0;
-                padding: 0;
+                // padding: 0;
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
+                // justify-content: space-between;
                 align-items: center;
+                gap: 6px;
                 padding: 6px 0;
 
                 &.weapon {
@@ -67,8 +84,10 @@
             &__slot {
                 list-style: none;
                 position: relative;
-                flex: 0 1 11.8%;
-                width: 35px;
+                // flex: 0 1 11.8%;
+                // width: 35px;
+                width: 48px;
+                height: 48px;
                 border: 2px solid $mainBorderColor;
 
                 & img {
@@ -82,7 +101,9 @@
                 }
 
                 &.weapon {
-                    padding-bottom: 11.8%;
+                    // padding-bottom: 11.8%;
+                    width: 64px;
+                    height: 64px;
                 }
             }
 

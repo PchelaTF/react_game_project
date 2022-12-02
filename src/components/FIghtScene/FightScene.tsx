@@ -11,6 +11,7 @@ import { skillsImgArr } from "../CreateCharacter/Images"
 import inventory from "../../assets/img/chest.png"
 import Inventory from '../Inventory/Inventory';
 import { playSound } from '../../mechanics/sounds/sound';
+import CharacterWindow from '../CharacterWindow/CharacterWindow';
 
 interface IFightSceneProps {
     allyArr: Character[]
@@ -35,6 +36,10 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex, pushToDeadEnemies } = fightSlice.actions
     //other const
     const fightOrder = allyArr.concat(enemyArr)
+
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
+    const [isCharacterWindowOpen, setIsCharacterWindowOpen] = React.useState(false)
+
 
     React.useEffect(() => {
         if (fightOrder[currentTurn].getIsNpc()) {
@@ -116,11 +121,15 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }
 
     const openInventory = () => {
-        setIsInventoryOpen(true)
+        setIsInventoryOpen(!isInventoryOpen)
     }
 
     const closeInventory = () => {
         setIsInventoryOpen(false)
+    }
+
+    const openCharWin = () => {
+        setIsCharacterWindowOpen(!isCharacterWindowOpen)
     }
 
     const getCharacter = React.useMemo(() => {
@@ -157,8 +166,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     const getInventory = React.useMemo(() => {
-        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} setPlayerHp={setPlayerHp} /> : ''
-    }, [isInventoryOpen])
+        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} setPlayerHp={setPlayerHp} classIfCharWindowOpen={isCharacterWindowOpen ? '_character-window-open' : ''}/> : ''
+    }, [isInventoryOpen, isCharacterWindowOpen])
+
+    const getCharWin = React.useMemo(() => {
+        return isCharacterWindowOpen ? <CharacterWindow mainCharacter={mainCharacter} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
+    }, [isCharacterWindowOpen, isInventoryOpen])
 
     return (
         <div className="fight-scene__wrapper">
@@ -172,12 +185,16 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 </div>
                 {getSkills}
                 <div className="fight-scene__header-panel">
+                    <div className="header-panel__character" onClick={openCharWin}>
+                        <img src={mainCharacter.getImgSmall()} alt="" />
+                    </div>
                     <div className="header-panel__inventory" onClick={openInventory}>
                         <img src={inventory} alt="" />
                     </div>
                 </div>
             </div>
             {getInventory}
+            {getCharWin}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}
         </div>
