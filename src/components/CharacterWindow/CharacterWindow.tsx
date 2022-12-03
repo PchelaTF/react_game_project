@@ -16,7 +16,8 @@ import ringSlots from '../../assets/img/item_slots/Ring.png'
 import WeaponSlots from '../../assets/img/item_slots/Weapon.png'
 import shieldSlots from '../../assets/img/item_slots/Shield.png'
 
-
+import mediumArmor from '../../assets/img/armor/3.png'
+import { Armor } from '../../mechanics/items/Armor'
 
 interface ICharacterWindowProps {
     mainCharacter: Character
@@ -25,6 +26,16 @@ interface ICharacterWindowProps {
 }
 
 const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
+    // ?
+    // const djopa = new Armor('medium', 2, 0, 0, mediumArmor)
+    // console.log(djopa.definitionArmorValue());
+    // console.log('mainCharacter:', mainCharacter);
+    // djopa.equpped(mainCharacter)
+    // console.log('mainCharacter:', mainCharacter);
+    console.log(mainCharacter);
+    
+    // ?
+
     return (
         <div className={`character-window ${classIfInventoryOpen}`}>
             <div className="character-window__wrapper">
@@ -42,7 +53,8 @@ const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWi
                                     <img src={headSlots} alt="" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={chestSlots} alt="" />
+                                    {/* <img src={chestSlots} alt="" /> */}
+                                    <img src={mediumArmor} alt="" style={{ opacity: 1 }} />
                                 </li>
                                 <li className="equipment__slot">
                                     <img src={beltSlots} alt="" />
@@ -100,6 +112,7 @@ const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWi
                             <li className="stats__elem">INT - 15</li>
                             <li className="stats__elem">MEN - 15</li>
                             <li className="stats__elem">WIT - 15</li>
+                            <li className="stats__elem">armor - {mainCharacter.getArmor()}</li>
                         </ul>
                     </div>
                 </div>

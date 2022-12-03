@@ -14,11 +14,14 @@ const InventoryItem = ({ item, index, setPlayerHp }: IInventoryItemProps) => {
     const [itemCount, setItemCount] = React.useState(item.getCount())
 
     const handleClick = () => {
-        if (itemCount) {
+        if (itemCount > 1) {
             item.itemClick(mainCharacter)
-            setPlayerHp(mainCharacter.getHp())
             setItemCount(item.getCount())
+            setPlayerHp(mainCharacter.getHp())
         } else {
+            item.itemClick(mainCharacter)
+            setItemCount(item.getCount())
+            setPlayerHp(mainCharacter.getHp())
             characterInventory.deleteFromInventory(index)
         }
     }

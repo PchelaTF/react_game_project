@@ -19,6 +19,8 @@ const Inventory = ({ closeInventory, setPlayerHp, classIfCharWindowOpen }: IInve
     const emptyInventorySquares = Array(25 - characterInventory.getInventory().length).fill(emptyItem)
     const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
 
+    console.log(characterInventory);
+    
     return (
         <div className={`inventory ${classIfCharWindowOpen}`}>
             <div className={`inventory__wrapper ${classIfCharWindowOpen}`} >

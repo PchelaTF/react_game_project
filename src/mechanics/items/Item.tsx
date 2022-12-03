@@ -1,5 +1,4 @@
 import Character from "../characters/Character"
-import Inventory from "../inventory/Inventory"
 
 export class Item {
     protected cost: number

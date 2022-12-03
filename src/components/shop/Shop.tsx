@@ -4,7 +4,6 @@ import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import "./Shop.scss"
 import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
-import { IInventoryItem } from '../../mechanics/inventory/Inventory'
 import potion from '../../assets/img/potions/potion.png'
 import { Potion } from '../../mechanics/items/Potion'
 import { Item } from '../../mechanics/items/Item'
