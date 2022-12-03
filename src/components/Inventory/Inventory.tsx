@@ -2,7 +2,7 @@ import React from 'react';
 import './Inventory.scss'
 import InventoryItem from './InventoryItem';
 import { useAppSelector } from '../../store/store';
-import { Item } from '../../mechanics/items/Item';
+import { initItem, Item } from '../../mechanics/items/Item';
 
 interface IInventoryProps {
     closeInventory: () => void
@@ -14,13 +14,13 @@ const Inventory = ({ closeInventory, setPlayerHp, classIfCharWindowOpen }: IInve
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const mainCharacter = useAppSelector(state => state.userReducer.character)
 
-    const emptyItem = new Item(0, 0, "")
+    const emptyItem = new Item(initItem)
 
     const emptyInventorySquares = Array(25 - characterInventory.getInventory().length).fill(emptyItem)
     const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
 
     console.log(characterInventory);
-    
+
     return (
         <div className={`inventory ${classIfCharWindowOpen}`}>
             <div className={`inventory__wrapper ${classIfCharWindowOpen}`} >

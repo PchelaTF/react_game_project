@@ -1,5 +1,5 @@
 import { equal } from 'assert'
-import {Armor} from '../../mechanics/items/Armor'
+import {Armor, initArmor} from '../../mechanics/items/Armor'
 
 interface IEequipment {
     armor: Armor
@@ -57,7 +57,7 @@ export default class Character {
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
         this.skillsCooldown = [0,0,0,0]
-        this.equipment = {armor: new Armor(null, 0, 0, 0, '')}
+        this.equipment = {armor: new Armor(initArmor)}
     }
 
     setHp(newHp: number) {

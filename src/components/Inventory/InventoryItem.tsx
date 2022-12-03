@@ -15,11 +15,11 @@ const InventoryItem = ({ item, index, setPlayerHp }: IInventoryItemProps) => {
 
     const handleClick = () => {
         if (itemCount > 1) {
-            item.itemClick(mainCharacter)
+            item.useItem(mainCharacter)
             setItemCount(item.getCount())
             setPlayerHp(mainCharacter.getHp())
         } else {
-            item.itemClick(mainCharacter)
+            item.useItem(mainCharacter)
             setItemCount(item.getCount())
             setPlayerHp(mainCharacter.getHp())
             characterInventory.deleteFromInventory(index)

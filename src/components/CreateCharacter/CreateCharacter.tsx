@@ -11,8 +11,9 @@ import { characterStatsArr } from '../../mechanics/CreatingMechanic';
 import { skillsImgArr } from './Images';
 import Inventory from '../../mechanics/inventory/Inventory';
 import { buttonClick } from '../../mechanics/sounds/sound';
-import { Armor } from '../../mechanics/items/Armor';
+import { Armor, initArmor } from '../../mechanics/items/Armor';
 import mediumArmor from '../../assets/img/armor/3.png'
+import { IItem } from '../../mechanics/items/Item';
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
@@ -48,9 +49,10 @@ const CreateCharacter = () => {
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
         const playerInventory = new Inventory([])
+        // * временно. Выдача брони в рюкзак
 
-        const djopa = new Armor('medium', 2, 0, 1, mediumArmor)
-        playerInventory.pushInInventory(djopa)
+        const startArmor = new Armor({...initArmor, initImg: mediumArmor, initArmorType: 'medium'})
+        playerInventory.pushInInventory(startArmor)
 
         dispath(setPlayerInventory(playerInventory))
         dispath(setScene("main"))

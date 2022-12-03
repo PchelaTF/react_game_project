@@ -1,12 +1,21 @@
 import Character from "../characters/Character";
-import { Item } from "./Item";
+import { IItem, Item } from "./Item";
+import  healingPotion from '../../assets/img/potions/potion.png'
+
+export const initPotion: IItem = {
+    initType: 'potion',
+    initCount: 1,
+    initCost: 50,
+    initImg: healingPotion,
+    initArmorType: null
+} 
 
 export class Potion extends Item {
-    constructor(initCost: number, initCount: number, initImg: string) {
-        super(initCost, initCount, initImg)
+    constructor(potion: IItem) {
+        super(potion)
     }
 
-    itemClick(character: Character): void {
+    useItem(character: Character): void {
         if (this.getCount() <= 0) return
         if (character.getHp() + 5 > character.getMaxHp()) {
             character.setHp(character.getMaxHp())

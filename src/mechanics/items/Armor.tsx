@@ -1,26 +1,34 @@
-import { Item } from "./Item";
+import { IItem, Item } from "./Item";
 import Character from '../characters/Character'
 
 export type TArmor = 'light' | 'medium' | 'heavy ' | null
 
-export class Armor extends Item{
-    type: TArmor
-    armorValue: number
+export const initArmor: IItem = {
+    initType: 'armor',
+    initCount: 1,
+    initCost: 0,
+    initImg: '',
+    initArmorType: null
+}
 
-    constructor(initType: TArmor, initArmorValue: number, initCost: number, initCount: number, initImg: string) {
-        super(initCost, initCount, initImg)
-        this.type = initType
-        this.armorValue = initArmorValue
+export class Armor extends Item{
+    armorType: TArmor
+    // armorValue: number
+
+    constructor(armor: IItem) {
+        super(armor)
+        this.armorType = armor.initArmorType
+        // this.armorValue = armor.initArmorValue
     }
 
-    itemClick(character: Character) {
+    useItem(character: Character) {
         if (this.getCount() <= 0) return
         character.addEquippedArmor(this)
         this.setCount(this.getCount() - 1)
     }
 
     definitionArmorValue() {
-        switch (this.type) {
+        switch (this.armorType) {
             case 'light':
                 return 1
             case 'medium':
