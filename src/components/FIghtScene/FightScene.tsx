@@ -7,7 +7,6 @@ import { fightSlice } from '../../store/reducers/FightReducer';
 import UserCharacters from './UserCharacters';
 import FightScenIsDead from './FightScenIsDead';
 import FightScenIsWin from './FightScenIsWin';
-import { skillsImgArr } from "../CreateCharacter/Images"
 import inventory from "../../assets/img/chest.png"
 import Inventory from '../Inventory/Inventory';
 import { playSound } from '../../mechanics/sounds/sound';
@@ -64,6 +63,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 case 1:
                     doFirstSkill()
                     break;
+                case 2:
+                    doSecondSkill()
+                    break;
+                case 3:
+                    doThirdSkill()
+                    break;
                 case 0:
                 default:
                     doDamage()
@@ -105,6 +110,8 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }
 
     const handleSkillClick = (index: number) => {
+        if(allyArr[0].getskillsCooldown()[index] > 0)
+            return
         dispatch(setChoiceActive(true))
         dispatch(setSkillIndex(index))
         dispatch(setEnemyIndex(-1))
@@ -117,6 +124,16 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
 
     const doFirstSkill = () => {
         allyArr[0].firstSkill(enemyArr[enemyIndex])
+        passTurn()
+    }
+
+    const doSecondSkill = () => {
+        allyArr[0].secondSkill(enemyArr[enemyIndex])
+        passTurn()
+    }
+
+    const doThirdSkill = () => {
+        allyArr[0].thirdSkill(allyArr[0])
         passTurn()
     }
 
@@ -147,16 +164,20 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const getSkills = React.useMemo(() => {
         return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[0]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[0]} alt="img"  style={allyArr[0].getskillsCooldown()[0] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[0] !== 0 ? allyArr[0].getskillsCooldown()[0] : null }</span>
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                <img src={skillsImgArr[1]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[1]} alt="img"  style={allyArr[0].getskillsCooldown()[1] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[1] !== 0 ? allyArr[0].getskillsCooldown()[1] : null }</span>
+            </li>
+            <li className="skills__item" onClick={() => handleSkillClick(2)}>
+                <img src={allyArr[0].getSkillImgs()[2]} alt="img"  style={allyArr[0].getskillsCooldown()[2] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[2] !== 0 ? allyArr[0].getskillsCooldown()[2] : null }</span>
             </li>
             <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[2]} alt="img" />
-            </li>
-            <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={skillsImgArr[3]} alt="img" />
+                <img src={allyArr[0].getSkillImgs()[3]} alt="img"  style={allyArr[0].getskillsCooldown()[3] !== 0 ? { filter: "grayscale(1)" } : {}}/>
+                <span>{allyArr[0].getskillsCooldown()[3] !== 0 ? allyArr[0].getskillsCooldown()[3] : null }</span>
             </li>
         </ul>
     }, [currentTurn])

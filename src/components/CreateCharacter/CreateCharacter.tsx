@@ -42,7 +42,7 @@ const CreateCharacter = () => {
     }
 
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
-        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg)
+        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg, skillsImgArr[activeIndex])
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
         const playerInventory = new Inventory([])
@@ -60,7 +60,7 @@ const CreateCharacter = () => {
                     })}
                 </div>
             </div>
-    },[activeRace])
+    },[activeRace, switchRace])
 
     const getCharacterClass = React.useMemo(() => {
         return <div className="create-character__select-item">
@@ -71,7 +71,7 @@ const CreateCharacter = () => {
                     })}
                 </div>
             </div>
-    },[activeIndex, activeRace])
+    },[activeIndex, activeRace, switchClass])
 
     const getStats = React.useMemo(() => {
         return <div className="create-character__info-stats stats">
@@ -85,18 +85,18 @@ const CreateCharacter = () => {
                     <li className="stats__elem">WIT - 15</li>
                 </ul>
             </div>
-    }, [])
+    }, [viewCharacterStats, activeIndex])
 
     const getSkills = React.useMemo(() => {
         return <div className="create-character__info-skills skills">
                 <p className="skills__title">Skills</p>
                 <ul className="skills__lists">
-                    {skillsImgArr.map((item, i) => {
+                    {skillsImgArr[activeIndex].map((item, i) => {
                         return <li className="skills__elem" key={i}><img src={item} alt="img" /></li>
                     })}
                 </ul>
             </div>
-    },[skillsImgArr])
+    },[skillsImgArr, activeIndex])
 
     return (
         <div className='create-character'>

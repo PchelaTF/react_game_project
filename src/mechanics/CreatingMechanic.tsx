@@ -61,7 +61,8 @@ const warriorStats: ICharacterStats = {
     initCharm: 10,
     initIntelligent: 10,
     initWisdom: 10,
-    initGold: 175
+    initGold: 175,
+    initSkillImgs: []
 }
 
 const mageStats: ICharacterStats = {
@@ -77,7 +78,8 @@ const mageStats: ICharacterStats = {
     initCharm: 10,
     initIntelligent: 10,
     initWisdom: 10,
-    initGold: 300
+    initGold: 300,
+    initSkillImgs: []
 }
 
 const rogueStats: ICharacterStats = {
@@ -93,7 +95,8 @@ const rogueStats: ICharacterStats = {
     initCharm: 10,
     initIntelligent: 10,
     initWisdom: 10,
-    initGold: 140 
+    initGold: 140,
+    initSkillImgs: []
 }
 
 const defaultStats: ICharacterStats = {
@@ -109,7 +112,8 @@ const defaultStats: ICharacterStats = {
     initCharm: 10,
     initIntelligent: 10,
     initWisdom: 10,
-    initGold: 70 
+    initGold: 70,
+    initSkillImgs: []
 }
 
 export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats] 
@@ -126,20 +130,20 @@ export function objSum(first: ICharacterStats, second: object) {
     }
 }
 
-export function createNewCharacter(name: string, characterClass: string, activeRace: number, img: string, icon: string) {
+export function createNewCharacter(name: string, characterClass: string, activeRace: number, img: string, icon: string, skillImgs: string[]) {
     switch (characterClass) {
         case WARRIOR_CLASS:
             // return new Warrior(25, 10, { min: 10, max: 25 }, name, false, 2)
-            return new Warrior({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
+            return new Warrior({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
         case MAGE_CLASS:
             // return new Mage(10, 8, { min: 5, max: 15 }, name, false, 2)
-            return new Mage({...objSum(mageStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
+            return new Mage({...objSum(mageStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
         case ROGUE_CLASS:
             // return new Rogue(12, 10, { min: 10, max: 30 }, name, false, 2)
-            return new Rogue({...objSum(rogueStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
+            return new Rogue({...objSum(rogueStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
         default:
             // return new Character(10, 10, { min: 10, max: 10 }, false, 2, name)
-            return new Character({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon})
+            return new Character({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
     }
 }
 

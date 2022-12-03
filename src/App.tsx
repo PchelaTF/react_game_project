@@ -14,7 +14,11 @@ function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
   const mainCharacter = useAppSelector(state => state.userReducer.character)
 
-  const getScene = React.useMemo(() => {
+  React.useEffect(() => {
+    mainCharacter.resetSkillsCooldowm()
+  }, [scene])
+
+  const getScene = React.useMemo (() => {
     switch (scene) {
       case "create":
         return <CreateCharacter />
