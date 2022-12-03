@@ -1,0 +1,184 @@
+@import "../../variables.scss";
+
+.character-window {
+    box-sizing: border-box;
+    height: 100%;
+    color: $mainTextColor;
+    // backdrop-filter: $backdropFilter;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    // * default
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    // * if inventory open
+    &._inventory-open {
+        right: 50%;
+        align-items: flex-end;
+        padding-right: 25px;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__wrapper {
+        position: relative;
+        width: 520px;
+        height: 574px;
+        background: $bacgroundColorGradient;
+        border-radius: $borderRadius;
+    }
+
+    &__title {
+        margin: 0 10px;
+        padding: 5px 0;
+        line-height: 120%;
+        text-transform: uppercase;
+        border-bottom: $borderBottom;
+    }
+
+    &__close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        // font-size: 20px;
+        // line-height: 120%;
+        border: 2px solid $mainBorderColor;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:before,
+        &::after {
+            position: absolute;
+            top: 2px;
+            left: 9px;
+            content: " ";
+            height: 16px;
+            width: 2px;
+            background-color: $mainTextColor;
+            transition: all 0.2s ease;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:hover {
+            border-color: $activedBorderColor;
+
+            &:before,
+            &::after {
+                background-color: $activedBorderColor;
+            }
+        }
+    }
+
+    &__body {
+        // height: 610px;
+        padding: 15px 15px 40px;
+        display: grid;
+        grid-template-columns: 70% 30%;
+    }
+
+    .body__column {
+        &:not(:last-child) {
+            border-right: 2px solid $mainBorderColor;
+        }
+
+        &-name {
+            // margin: 0 0 23px 0;
+            margin: 0 0 10px 0;
+        }
+
+        .equipment {
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+            min-height: 310px;
+
+            &__slots {
+                margin: 0;
+                // padding: 0;
+                display: flex;
+                flex-direction: column;
+                // justify-content: space-between;
+                align-items: center;
+                gap: 6px;
+                padding: 6px 0;
+
+                &.weapon {
+                    flex-direction: row;
+                    justify-content: center;
+                    gap: 15px;
+                    min-height: 80px;
+                    padding: 0;
+                }
+            }
+
+            &__slot {
+                list-style: none;
+                position: relative;
+                // flex: 0 1 11.8%;
+                // width: 35px;
+                width: 48px;
+                height: 48px;
+                border: 2px solid $mainBorderColor;
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    opacity: 0.3;
+                }
+
+                &.weapon {
+                    // padding-bottom: 11.8%;
+                    width: 64px;
+                    height: 64px;
+                }
+            }
+
+            &__character-img {
+                position: relative;
+
+                & img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+    .stats {
+        &__lists {
+            margin: 0%;
+            padding: 0;
+        }
+
+        &__elem {
+            list-style: none;
+        }
+    }
+}
+
+.delete-after-finish {
+    margin: 4px;
+    line-height: 120%;
+}

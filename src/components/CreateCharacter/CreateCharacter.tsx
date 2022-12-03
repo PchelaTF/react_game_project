@@ -102,7 +102,7 @@ const CreateCharacter = () => {
         <div className='create-character'>
             <div className="create-character__wrapper">
                 <h1 className="create-character__title">
-                    create character
+                    character creation
                 </h1>
                 <div className="create-character__content">
                     <div className="create-character__select">
