@@ -120,15 +120,11 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         passTurn()
     }
 
-    const openInventory = () => {
+    const handleOpenCloseInventory = () => {
         setIsInventoryOpen(!isInventoryOpen)
     }
 
-    const closeInventory = () => {
-        setIsInventoryOpen(false)
-    }
-
-    const openCharWin = () => {
+    const handleOpenCloseCharacterWindow = () => {
         setIsCharacterWindowOpen(!isCharacterWindowOpen)
     }
 
@@ -166,11 +162,11 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     const getInventory = React.useMemo(() => {
-        return isInventoryOpen ? <Inventory closeInventory={() => closeInventory()} setPlayerHp={setPlayerHp} classIfCharWindowOpen={isCharacterWindowOpen ? '_character-window-open' : ''}/> : ''
+        return isInventoryOpen ? <Inventory closeInventory={handleOpenCloseInventory} setPlayerHp={setPlayerHp} classIfCharWindowOpen={isCharacterWindowOpen ? '_character-window-open' : ''} /> : ''
     }, [isInventoryOpen, isCharacterWindowOpen])
 
     const getCharWin = React.useMemo(() => {
-        return isCharacterWindowOpen ? <CharacterWindow mainCharacter={mainCharacter} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
+        return isCharacterWindowOpen ? <CharacterWindow mainCharacter={mainCharacter} closeCharacterWindow={handleOpenCloseCharacterWindow} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
     }, [isCharacterWindowOpen, isInventoryOpen])
 
     return (
@@ -185,10 +181,10 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                 </div>
                 {getSkills}
                 <div className="fight-scene__header-panel">
-                    <div className="header-panel__character" onClick={openCharWin}>
+                    <div className="header-panel__character" onClick={handleOpenCloseCharacterWindow}>
                         <img src={mainCharacter.getImgSmall()} alt="" />
                     </div>
-                    <div className="header-panel__inventory" onClick={openInventory}>
+                    <div className="header-panel__inventory" onClick={handleOpenCloseInventory}>
                         <img src={inventory} alt="" />
                     </div>
                 </div>

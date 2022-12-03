@@ -27,6 +27,7 @@
     align-items: center;
 
     &__wrapper {
+        position: relative;
         width: 520px;
         height: 574px;
         background: $bacgroundColorGradient;
@@ -37,7 +38,50 @@
         margin: 0 10px;
         padding: 5px 0;
         line-height: 120%;
+        text-transform: uppercase;
         border-bottom: $borderBottom;
+    }
+
+    &__close {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 20px;
+        height: 20px;
+        // font-size: 20px;
+        // line-height: 120%;
+        border: 2px solid $mainBorderColor;
+        cursor: pointer;
+        transition: all 0.1s ease;
+
+        &:before,
+        &::after {
+            position: absolute;
+            top: 2px;
+            left: 9px;
+            content: " ";
+            height: 16px;
+            width: 2px;
+            background-color: $mainTextColor;
+            transition: all 0.2s ease;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+
+        &:hover {
+            border-color: $activedBorderColor;
+
+            &:before,
+            &::after {
+                background-color: $activedBorderColor;
+            }
+        }
     }
 
     &__body {

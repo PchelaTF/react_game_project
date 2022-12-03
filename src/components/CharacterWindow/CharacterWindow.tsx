@@ -21,13 +21,15 @@ import shieldSlots from '../../assets/img/item_slots/Shield.png'
 interface ICharacterWindowProps {
     mainCharacter: Character
     classIfInventoryOpen: string
+    closeCharacterWindow: () => void
 }
 
-const CharacterWindow = ({ mainCharacter, classIfInventoryOpen }: ICharacterWindowProps) => {
+const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
     return (
         <div className={`character-window ${classIfInventoryOpen}`}>
             <div className="character-window__wrapper">
                 <h1 className="character-window__title">Character</h1>
+                <span className='character-window__close' onClick={closeCharacterWindow}></span>
                 {/* <h2 className="delete-after-finish">delete-after-finish</h2> */}
                 <div className="character-window__body">
                     <div className="body__column">

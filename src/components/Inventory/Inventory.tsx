@@ -21,9 +21,10 @@ const Inventory = ({ closeInventory, setPlayerHp, classIfCharWindowOpen }: IInve
 
     return (
         <div className={`inventory ${classIfCharWindowOpen}`}>
-            <div className={`inventory__wrapper ${classIfCharWindowOpen}`} onClick={closeInventory}>
-                <div className="inventory__container" onClick={(e) => e.stopPropagation()}>
-                    <h1 className="inventory__header">INVENTORY</h1>
+            <div className={`inventory__wrapper ${classIfCharWindowOpen}`} >
+                <div className="inventory__container">
+                    <h1 className="inventory__header">Inventory</h1>
+                    <span className='inventory__close' onClick={closeInventory}></span>
                     <div className="inventory__body">
                         <ul className="inventory__body-items">
                             {currentInventory.map((item, i) => {
