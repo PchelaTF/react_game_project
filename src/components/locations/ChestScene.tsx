@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import './ChestScene.scss'
-import { IInventoryItem } from '../../mechanics/inventory/Inventory';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
 import chest from '../../assets/img/chest.png'
 import potion from '../../assets/img/potions/potion.png'

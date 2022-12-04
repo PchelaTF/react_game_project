@@ -50,8 +50,7 @@ const CreateCharacter = () => {
         dispath(playerCharacter)
         const playerInventory = new Inventory([])
         // * временно. Выдача брони в рюкзак
-
-        const startArmor = new Armor({...initArmor, initImg: mediumArmor, initArmorType: 'medium'})
+        const startArmor = new Armor({ ...initArmor, initImg: mediumArmor, initArmorType: 'medium' })
         playerInventory.pushInInventory(startArmor)
 
         dispath(setPlayerInventory(playerInventory))

@@ -167,7 +167,10 @@ export default class Character {
     }
 
     addEquippedArmor(item: Armor) {
-        // this.armor = this.armor + value
         this.equipment.armor = item
+    }
+
+    getEquipment() {
+        return this.equipment
     }
 }

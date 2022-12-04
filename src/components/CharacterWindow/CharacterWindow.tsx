@@ -16,9 +16,6 @@ import ringSlots from '../../assets/img/item_slots/Ring.png'
 import WeaponSlots from '../../assets/img/item_slots/Weapon.png'
 import shieldSlots from '../../assets/img/item_slots/Shield.png'
 
-import mediumArmor from '../../assets/img/armor/3.png'
-import { Armor } from '../../mechanics/items/Armor'
-
 interface ICharacterWindowProps {
     mainCharacter: Character
     classIfInventoryOpen: string
@@ -26,15 +23,7 @@ interface ICharacterWindowProps {
 }
 
 const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
-    // ?
-    // const djopa = new Armor('medium', 2, 0, 0, mediumArmor)
-    // console.log(djopa.definitionArmorValue());
-    // console.log('mainCharacter:', mainCharacter);
-    // djopa.equpped(mainCharacter)
-    // console.log('mainCharacter:', mainCharacter);
-    console.log(mainCharacter);
-    
-    // ?
+    console.log(mainCharacter.getEquipment().armor.armorType);
 
     return (
         <div className={`character-window ${classIfInventoryOpen}`}>
@@ -50,46 +39,45 @@ const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWi
                         <div className="body__column-equipment equipment">
                             <ul className="equipment__slots">
                                 <li className="equipment__slot">
-                                    <img src={headSlots} alt="" />
+                                    <img src={headSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    {/* <img src={chestSlots} alt="" /> */}
-                                    <img src={mediumArmor} alt="" style={{ opacity: 1 }} />
+                                    {mainCharacter.getEquipment().armor.armorType ? <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped'/> : <img src={chestSlots} alt="img" />}
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={beltSlots} alt="" />
+                                    <img src={beltSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={legsSlots} alt="" />
+                                    <img src={legsSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={feetSlots} alt="" />
+                                    <img src={feetSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={feetSlots} alt="" />
+                                    <img src={feetSlots} alt="img" />
                                 </li>
                             </ul>
                             <div className="equipment__character-img">
-                                <img src={mainCharacter.getImgBig()} alt="" />
+                                <img src={mainCharacter.getImgBig()} alt="img" />
                             </div>
                             <ul className="equipment__slots">
                                 <li className="equipment__slot">
-                                    <img src={earLeftSlots} alt="" />
+                                    <img src={earLeftSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={earRightSlots} alt="" />
+                                    <img src={earRightSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={neckSlots} alt="" />
+                                    <img src={neckSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={ringSlots} alt="" />
+                                    <img src={ringSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={feetSlots} alt="" />
+                                    <img src={feetSlots} alt="img" />
                                 </li>
                                 <li className="equipment__slot">
-                                    <img src={feetSlots} alt="" />
+                                    <img src={feetSlots} alt="img" />
                                 </li>
                             </ul>
                         </div>
