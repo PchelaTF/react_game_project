@@ -27,6 +27,7 @@ export default class Character {
     private constitution: number
     private dexterety : number
     private intelligent: number
+    protected isDead: boolean
     protected strength: number
     protected damage: number
     protected gold: number
@@ -49,6 +50,7 @@ export default class Character {
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
         this.skillsCooldown = [0,0,0,0]
+        this.isDead = false
     }
 
     setHp(newHp: number) {
@@ -108,6 +110,14 @@ export default class Character {
 
     getSkillImgs() {
         return this.skillImgs
+    }
+
+    setIsDead(value: boolean) {
+        this.isDead = value
+    }
+
+    getIsDead() {
+        return this.isDead
     }
 
     dealDamage(dmgToCharacter: Character) {
