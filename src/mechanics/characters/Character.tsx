@@ -1,3 +1,10 @@
+import { equal } from 'assert'
+import {Armor, initArmor} from '../../mechanics/items/Armor'
+
+interface IEequipment {
+    armor: Armor
+}
+
 export interface ICharacterStats {
     initHp: number,
     initAttack: number,
@@ -32,6 +39,7 @@ export default class Character {
     protected damage: number
     protected gold: number
     protected skillsCooldown: number[]
+    protected equipment: IEequipment
 
     constructor(characterStats: ICharacterStats) {
         this.constitution = characterStats.initConstitution
@@ -50,6 +58,7 @@ export default class Character {
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
         this.skillsCooldown = [0,0,0,0]
+        this.equipment = {armor: new Armor(initArmor)}
         this.isDead = false
     }
 
@@ -70,7 +79,7 @@ export default class Character {
     }
 
     getArmor() {
-        return this.armor
+        return this.armor + this.equipment.armor.definitionArmorValue()
     }
 
     getImgSmall() { return this.imgSmall }
@@ -111,6 +120,9 @@ export default class Character {
     getSkillImgs() {
         return this.skillImgs
     }
+
+    getDamage() {
+        // return this.equipment.weapon ? this.equipment.weapon.getDamage() : this.damage
 
     setIsDead(value: boolean) {
         this.isDead = value
@@ -161,5 +173,13 @@ export default class Character {
 
     calcMod(ability: number) {
         return ability % 2 == 0 ? (ability - 10) / 2 : (ability - 11) / 2
+    }
+
+    addEquippedArmor(item: Armor) {
+        this.equipment.armor = item
+    }
+
+    getEquipment() {
+        return this.equipment
     }
 }
