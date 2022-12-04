@@ -84,7 +84,8 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     }, [currentTurn])
 
     function npcTurn() {
-        if (enemyArr[currentTurn - 1].getHp() <= 0 && !deadEnemies[currentTurn - 1]) {
+        if (enemyArr[currentTurn - 1].getHp() <= 0 && !enemyArr[currentTurn - 1].getIsDead()) {
+            enemyArr[currentTurn - 1].setIsDead(true)
             dispatch(pushToDeadEnemies(true))
         }
         if (enemyArr[currentTurn - 1].getHp() >= 0)
