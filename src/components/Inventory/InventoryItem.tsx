@@ -1,6 +1,7 @@
 import React from 'react';
 import { Item } from '../../mechanics/items/Item';
-import { useAppSelector } from '../../store/store';
+import { userSlice } from '../../store/reducers/userReducer';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 
 interface IInventoryItemProps {
     item: Item
@@ -12,21 +13,19 @@ interface IInventoryItemProps {
 const InventoryItem = ({ item, index, setPlayerHp, setInventoryLength }: IInventoryItemProps) => {
     const mainCharacter = useAppSelector(state => state.userReducer.character)
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
+    const { setPlayerInventory } = userSlice.actions
+    const dispatch = useAppDispatch()
     const [itemCount, setItemCount] = React.useState(item.getCount())
 
     const handleClick = () => {
-        if (itemCount > 1) {
-            item.useItem(mainCharacter)
-            setItemCount(item.getCount())
-            setPlayerHp(mainCharacter.getHp())
-            setInventoryLength(characterInventory.getInventory().length)
-        } else {
-            item.useItem(mainCharacter)
-            setItemCount(item.getCount())
-            setPlayerHp(mainCharacter.getHp())
+        item.useItem(mainCharacter)
+        setItemCount(item.getCount())
+        setPlayerHp(mainCharacter.getHp())
+        if (itemCount === 1) 
             characterInventory.deleteFromInventory(index)
-            setInventoryLength(characterInventory.getInventory().length)
-        }
+
+        setInventoryLength(characterInventory.getItems().length)
+        dispatch(setPlayerInventory(characterInventory))
     }
 
     const bodyItem = React.useMemo(() => {
