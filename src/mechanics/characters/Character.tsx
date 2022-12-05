@@ -1,5 +1,5 @@
 import { equal } from 'assert'
-import {Armor, initArmor} from '../../mechanics/items/Armor'
+import { Armor, initArmor } from '../../mechanics/items/Armor'
 
 interface IEequipment {
     armor: Armor
@@ -32,7 +32,7 @@ export default class Character {
     private imgBig: string
     private skillImgs: string[]
     private constitution: number
-    private dexterety : number
+    private dexterety: number
     private intelligent: number
     protected isDead: boolean
     protected strength: number
@@ -57,8 +57,8 @@ export default class Character {
         this.damage = 8
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
-        this.skillsCooldown = [0,0,0,0]
-        this.equipment = {armor: new Armor(initArmor)}
+        this.skillsCooldown = [0, 0, 0, 0]
+        this.equipment = { armor: new Armor(initArmor) }
         this.isDead = false
     }
 
@@ -89,8 +89,8 @@ export default class Character {
     getName() {
         return this.name
     }
-    
-    getMaxHp() {return this.maxHp}
+
+    getMaxHp() { return this.maxHp }
 
     selfHeal(value: number) {
         if (this.hp + value > this.maxHp) {
@@ -102,7 +102,7 @@ export default class Character {
     }
 
     getIsNpc() {
-        return this.isNpc 
+        return this.isNpc
     }
 
     getGold() {
@@ -123,6 +123,7 @@ export default class Character {
 
     getDamage() {
         // return this.equipment.weapon ? this.equipment.weapon.getDamage() : this.damage
+    }
 
     setIsDead(value: boolean) {
         this.isDead = value
@@ -135,28 +136,28 @@ export default class Character {
     dealDamage(dmgToCharacter: Character) {
         this.decSkillsCooldown()
         const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
-        if(this.getAttack() > dmgToCharacter.getArmor())
+        if (this.getAttack() > dmgToCharacter.getArmor())
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
-        else (console.log(this.name + " is missed with "+ dmg + "against: "+ dmgToCharacter.getArmor()))
+        else (console.log(this.name + " is missed with " + dmg + "against: " + dmgToCharacter.getArmor()))
     }
 
-    firstSkill(dmgToCharacter: Character) {}
+    firstSkill(dmgToCharacter: Character) { }
 
-    secondSkill(dmgToCharacter: Character) {}
+    secondSkill(dmgToCharacter: Character) { }
 
-    thirdSkill(dmgToCharacter: Character) {}
+    thirdSkill(dmgToCharacter: Character) { }
 
-    getskillsCooldown () {
+    getskillsCooldown() {
         return this.skillsCooldown
     }
 
     resetSkillsCooldowm() {
-        this.skillsCooldown = [0,0,0,0]
+        this.skillsCooldown = [0, 0, 0, 0]
     }
 
     decSkillsCooldown() {
-        for(let i = 0; i < this.skillsCooldown.length; i++) {
-            if(this.skillsCooldown[i] > 0)
+        for (let i = 0; i < this.skillsCooldown.length; i++) {
+            if (this.skillsCooldown[i] > 0)
                 this.skillsCooldown[i]--
         }
     }
