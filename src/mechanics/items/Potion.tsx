@@ -7,7 +7,8 @@ export const initPotion: IItem = {
     initCount: 1,
     initCost: 50,
     initImg: healingPotion,
-    initArmorType: null
+    initArmorType: null,
+    initWeaponType: null
 } 
 
 export class Potion extends Item {

@@ -1,7 +1,8 @@
 import Character from "../characters/Character"
 import { TArmor } from "./Armor"
+import { TWeapon } from "./Weapon"
 
-export type TItem = 'potion' | 'armor' | null 
+export type TItem = 'potion' | 'armor' | 'weapon' |null 
 
 export interface IItem {
     initType: TItem
@@ -9,7 +10,7 @@ export interface IItem {
     initCost: number
     initImg: string
     initArmorType: TArmor
-    initArmorValue?: number
+    initWeaponType: TWeapon
 }
 
 export const initItem = {
@@ -18,6 +19,7 @@ export const initItem = {
     initCost: 0,
     initImg: '',
     initArmorType: null,
+    initWeaponType: null
 }
 
 export class Item {

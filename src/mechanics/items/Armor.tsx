@@ -8,22 +8,21 @@ export const initArmor: IItem = {
     initCount: 1,
     initCost: 0,
     initImg: '',
-    initArmorType: null
+    initArmorType: null,
+    initWeaponType: null
 }
 
 export class Armor extends Item{
     armorType: TArmor
-    // armorValue: number
 
     constructor(armor: IItem) {
         super(armor)
         this.armorType = armor.initArmorType
-        // this.armorValue = armor.initArmorValue
     }
 
     useItem(character: Character) {
         if (this.getCount() <= 0) return
-        character.addEquippedArmor(this)
+        character.wearingArmor(this)
         this.setCount(this.getCount() - 1)
     }
 

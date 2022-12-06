@@ -1,8 +1,10 @@
 import { equal } from 'assert'
 import { Armor, initArmor } from '../../mechanics/items/Armor'
+import { initWeapon, Weapon } from '../items/Weapon'
 
 interface IEequipment {
     armor: Armor
+    weapon: Weapon
 }
 
 export interface ICharacterStats {
@@ -58,7 +60,7 @@ export default class Character {
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
         this.skillsCooldown = [0, 0, 0, 0]
-        this.equipment = { armor: new Armor(initArmor) }
+        this.equipment = { armor: new Armor(initArmor), weapon: new Weapon(initWeapon) }
         this.isDead = false
     }
 
@@ -122,7 +124,9 @@ export default class Character {
     }
 
     getDamage() {
-        // return this.equipment.weapon ? this.equipment.weapon.getDamage() : this.damage
+        console.log("damage:", this.damage, "weapon damage:", this.equipment.weapon.definitionWeaponDamage(), 'sum damage: ', this.damage + this.equipment.weapon.definitionWeaponDamage());
+
+        return this.equipment.weapon.weaponType ? this.damage + this.equipment.weapon.definitionWeaponDamage() : this.damage
     }
 
     setIsDead(value: boolean) {
@@ -135,7 +139,7 @@ export default class Character {
 
     dealDamage(dmgToCharacter: Character) {
         this.decSkillsCooldown()
-        const dmg = Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)
+        const dmg = Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1) + this.calcMod(this.strength)
         if (this.getAttack() > dmgToCharacter.getArmor())
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
         else (console.log(this.name + " is missed with " + dmg + "against: " + dmgToCharacter.getArmor()))
@@ -176,8 +180,12 @@ export default class Character {
         return ability % 2 == 0 ? (ability - 10) / 2 : (ability - 11) / 2
     }
 
-    addEquippedArmor(item: Armor) {
+    wearingArmor(item: Armor) {
         this.equipment.armor = item
+    }
+
+    wearingWeapon(item: Weapon) {
+        this.equipment.weapon = item
     }
 
     getEquipment() {
