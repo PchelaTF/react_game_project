@@ -17,13 +17,15 @@ export default function ExplorationScene() {
     const maxLocationLevels = locations[currentLocation].maxLocationLevels
 
     const getRandomScene = () => {
-        const rndScene = Math.random() > 0.7 ? 1 : 0
+        const rndScene = Math.floor(Math.random() * (2 - 0 + 1) + 0)
 
         switch (rndScene) {
             case 0:
                 return dispatch(setScene("fight"))
             case 1:
                 return dispatch(setScene("chest"))
+            case 2:
+                return dispatch(setScene("dialog"))
             default:
                 return dispatch(setScene("fight"))
         }
