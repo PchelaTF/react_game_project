@@ -22,7 +22,7 @@ export default class Inventory {
         this.items = newItems
     }
 
-    getInventory() {
+    getItems() {
         return this.items
     }
 

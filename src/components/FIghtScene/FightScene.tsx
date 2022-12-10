@@ -183,12 +183,12 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
         </ul>
     }, [currentTurn])
 
-    const getInventory = React.useMemo(() => {
+    const getItems = React.useMemo(() => {
         return isInventoryOpen ? <Inventory closeInventory={handleOpenCloseInventory} setPlayerHp={setPlayerHp} classIfCharWindowOpen={isCharacterWindowOpen ? '_character-window-open' : ''} /> : ''
     }, [isInventoryOpen, isCharacterWindowOpen])
 
     const getCharWin = React.useMemo(() => {
-        return isCharacterWindowOpen ? <CharacterWindow mainCharacter={mainCharacter} closeCharacterWindow={handleOpenCloseCharacterWindow} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
+        return isCharacterWindowOpen ? <CharacterWindow closeCharacterWindow={handleOpenCloseCharacterWindow} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
     }, [isCharacterWindowOpen, isInventoryOpen])
 
     return (
@@ -211,7 +211,7 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
                     </div>
                 </div>
             </div>
-            {getInventory}
+            {getItems}
             {getCharWin}
             {playerHp <= 0 ? <FightScenIsDead /> : ''}
             {isWon && <FightScenIsWin />}

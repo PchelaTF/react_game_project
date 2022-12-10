@@ -20,6 +20,10 @@ export class Armor extends Item{
         this.armorType = armor.initArmorType
     }
 
+    getArmorType() {
+        return this.armorType
+    }
+
     useItem(character: Character) {
         if (this.getCount() <= 0) return
         character.wearingArmor(this)
