@@ -12,8 +12,12 @@ import { skillsImgArr } from './Images';
 import Inventory from '../../mechanics/inventory/Inventory';
 import { buttonClick } from '../../mechanics/sounds/sound';
 import { Armor, initArmor } from '../../mechanics/items/Armor';
+import { initWeapon, Weapon } from '../../mechanics/items/Weapon';
+
 import mediumArmor from '../../assets/img/armor/3.png'
-import { IItem } from '../../mechanics/items/Item';
+import dagger from '../../assets/img/weapon/dagger.png'
+import sword from '../../assets/img/weapon/sword.png'
+import staff from '../../assets/img/weapon/staff.png'
 
 const CreateCharacter = () => {
     const dispath = useAppDispatch()
@@ -52,6 +56,14 @@ const CreateCharacter = () => {
         // * временно. Выдача брони в рюкзак
         const startArmor = new Armor({ ...initArmor, initImg: mediumArmor, initArmorType: 'medium' })
         playerInventory.pushInInventory(startArmor)
+
+        // * временно. Выдача оружия в рюкзак
+        const startDagegr = new Weapon({ ...initWeapon, initImg: dagger, initWeaponType: 'dagger' })
+        const startSword = new Weapon({ ...initWeapon, initImg: sword, initWeaponType: 'sword' })
+        const startStaff = new Weapon({ ...initWeapon, initImg: staff, initWeaponType: 'staff' })
+        playerInventory.pushInInventory(startDagegr)
+        playerInventory.pushInInventory(startSword)
+        playerInventory.pushInInventory(startStaff)
 
         dispath(setPlayerInventory(playerInventory))
         dispath(setScene("main"))

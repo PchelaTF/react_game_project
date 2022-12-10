@@ -9,6 +9,7 @@ import Locations from './components/locations/Locations';
 import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
 import ChestScene from './components/locations/ChestScene';
+import DialogScene from './components/locations/DialogScene';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
@@ -18,7 +19,7 @@ function App() {
     mainCharacter.resetSkillsCooldowm()
   }, [scene])
 
-  const getScene = React.useMemo (() => {
+  const getScene = React.useMemo(() => {
     switch (scene) {
       case "create":
         return <CreateCharacter />
@@ -34,6 +35,8 @@ function App() {
         return <ExplorationScene />
       case "chest":
         return <ChestScene />
+      case "dialog":
+        return <DialogScene />
       default:
         return <MainScene />
     }
