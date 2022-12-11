@@ -4,6 +4,7 @@ import InventoryItem from './InventoryItem';
 import { useAppSelector } from '../../store/store';
 import { initItem, Item } from '../../mechanics/items/Item';
 import { v4 as uuidv4 } from 'uuid';
+import { userSlice } from '../../store/reducers/userReducer';
 
 interface IInventoryProps {
     closeInventory: () => void
@@ -14,12 +15,12 @@ interface IInventoryProps {
 const Inventory = ({ closeInventory, setPlayerHp, classIfCharWindowOpen }: IInventoryProps) => {
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const mainCharacter = useAppSelector(state => state.userReducer.character)
-    const [inventoryLength, setInventoryLength] = React.useState(characterInventory.getInventory().length)
+    const [inventoryLength, setInventoryLength] = React.useState(characterInventory.getItems().length)
 
     const emptyItem = new Item(initItem)
 
     const emptyInventorySquares = Array(25 - inventoryLength).fill(emptyItem)
-    const currentInventory: Item[] = [...characterInventory.getInventory(), ...emptyInventorySquares]
+    const currentInventory: Item[] = [...characterInventory.getItems(), ...emptyInventorySquares]
 
     const inventoryBody = React.useMemo(() => {
         return (

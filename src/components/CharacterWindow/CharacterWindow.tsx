@@ -15,15 +15,43 @@ import ringSlots from '../../assets/img/item_slots/Ring.png'
 
 import WeaponSlots from '../../assets/img/item_slots/Weapon.png'
 import shieldSlots from '../../assets/img/item_slots/Shield.png'
+import { useAppSelector } from '../../store/store';
 
 interface ICharacterWindowProps {
-    mainCharacter: Character
     classIfInventoryOpen: string
     closeCharacterWindow: () => void
 }
 
-const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
-    console.log(mainCharacter.getEquipment().armor.armorType);
+const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
+    // console.log(mainCharacter.getEquipment().armor.armorType);
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
+
+    const equipment = React.useMemo(() => {
+        return <ul className="equipment__slots">
+            <li className="equipment__slot">
+                <img src={headSlots} alt="img" />
+            </li>
+            <li className="equipment__slot">
+                {
+                    mainCharacter.getEquipment().armor.getArmorType() ? 
+                    <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped'/> : 
+                    <img src={chestSlots} alt="img" />
+                }
+            </li>
+            <li className="equipment__slot">
+                <img src={beltSlots} alt="img" />
+            </li>
+            <li className="equipment__slot">
+                <img src={legsSlots} alt="img" />
+            </li>
+            <li className="equipment__slot">
+                <img src={feetSlots} alt="img" />
+            </li>
+            <li className="equipment__slot">
+                <img src={feetSlots} alt="img" />
+            </li>
+        </ul>
+    }, [])
 
     return (
         <div className={`character-window ${classIfInventoryOpen}`}>
@@ -37,26 +65,7 @@ const CharacterWindow = ({ mainCharacter, classIfInventoryOpen, closeCharacterWi
                             {mainCharacter.getName() ? mainCharacter.getName() : 'Character name'}
                         </h3>
                         <div className="body__column-equipment equipment">
-                            <ul className="equipment__slots">
-                                <li className="equipment__slot">
-                                    <img src={headSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    {mainCharacter.getEquipment().armor.armorType ? <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped'/> : <img src={chestSlots} alt="img" />}
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={beltSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={legsSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={feetSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={feetSlots} alt="img" />
-                                </li>
-                            </ul>
+                            {equipment}
                             <div className="equipment__character-img">
                                 <img src={mainCharacter.getImgBig()} alt="img" />
                             </div>
