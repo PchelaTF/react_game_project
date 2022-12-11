@@ -5,10 +5,15 @@ export class Mage extends Character {
         super(characterStats)
     }
 
+    dealDamage(dmgToCharacter: Character): void {
+        this.decSkillsCooldown()
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1)))
+    }
+
     firstSkill(dmgToCharacter: Character) {
         this.decSkillsCooldown()
         this.setSkillCooldown(1, 2)
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.calcMod(this.getInt()) - 1 + 1) + 1)))
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (6 - 1 + 1) + 1) + this.calcMod(this.getInt())))
     }
 
     secondSkill(dmgToCharacter: Character): void {
