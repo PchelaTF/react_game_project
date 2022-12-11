@@ -10,8 +10,13 @@ export default function Locations() {
     const { setScene, setCurrentLocation } = sceneSlice.actions
     const { clearDeadEnemies, setBackground, setDifficalty } = fightSlice.actions
     const levels = useAppSelector(state => state.SceneReducer.locations)
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
 
     const mainClass = "Locations"
+
+    React.useEffect(() => {
+        mainCharacter.setHp(mainCharacter.getMaxHp())
+    })
 
     const handleClick = (index: number) => {
         dispatch(clearDeadEnemies())
