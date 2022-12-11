@@ -7,7 +7,7 @@ export interface IinitialState {
     scene: TScene,
     locations: ILocations[],
     currentLocation: number,
-    passsedLocationLevels: number
+    passsedLocationLevels: number,
 }
 
 const initialState: IinitialState = {

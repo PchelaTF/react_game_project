@@ -50,7 +50,7 @@ const returnRaceMod = (race: TRace) => {
 }
 
 const warriorStats: ICharacterStats = {
-    initHp: 10,
+    initHp: 12,
     initAttack: 1,
     initIsNpc: false,
     initName: '',
@@ -67,7 +67,7 @@ const warriorStats: ICharacterStats = {
 }
 
 const mageStats: ICharacterStats = {
-    initHp: 6,
+    initHp: 8,
     initAttack: 0,
     initIsNpc: false,
     initName: '',
@@ -84,7 +84,7 @@ const mageStats: ICharacterStats = {
 }
 
 const rogueStats: ICharacterStats = {
-    initHp: 8,
+    initHp: 10,
     initAttack: 0,
     initIsNpc: false,
     initName: '',
@@ -101,7 +101,7 @@ const rogueStats: ICharacterStats = {
 }
 
 const defaultStats: ICharacterStats = {
-    initHp: 10,
+    initHp: 12,
     initAttack: 0,
     initIsNpc: false,
     initName: '',

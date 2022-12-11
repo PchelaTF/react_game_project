@@ -8,7 +8,7 @@ import "./Locations.scss"
 export default function Locations() {
     const dispatch = useAppDispatch()
     const { setScene, setCurrentLocation } = sceneSlice.actions
-    const { clearDeadEnemies, setBackground } = fightSlice.actions
+    const { clearDeadEnemies, setBackground, setDifficalty } = fightSlice.actions
     const levels = useAppSelector(state => state.SceneReducer.locations)
 
     const mainClass = "Locations"
@@ -18,6 +18,7 @@ export default function Locations() {
         dispatch(setCurrentLocation(index))
         dispatch(setBackground(levels[index].background))
         dispatch(setScene("explore"))
+        dispatch(setDifficalty(levels[index].difficulty))
     }
 
     const backClick = () => {
