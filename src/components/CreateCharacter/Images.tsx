@@ -29,6 +29,8 @@ import iconDemon1 from "../../assets/img/characters_icons/demons/Character2_face
 import iconDemon2 from "../../assets/img/characters_icons/demons/Character3_face1.png"
 import iconDemon3 from "../../assets/img/characters_icons/demons/Character4_face1.png"
 
+import firstBoss from "../../assets/img/characters_img/demons/Character5_face1.png"
+
 import atk from '../../assets/img/skills/atk.png'
 import atk2 from '../../assets/img/skills/Icon10.png'
 import atk3 from '../../assets/img/skills/Icon11.png'
@@ -48,6 +50,7 @@ import background from "../../assets/img/main_bg.png"
 import desert from "../../assets/img/desert.png"
 import dungeon from "../../assets/img/dungeon.jpg"
 
+export const bossArr = [firstBoss]
 export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
 export const skillsImgArr = [
     [atk, atk2, atk3, atk4], 

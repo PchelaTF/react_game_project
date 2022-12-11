@@ -4,7 +4,6 @@ import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 import FightScene from './components/FIghtScene/FightScene';
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
-import { createEnemy } from './mechanics/CreatingMechanic';
 import Locations from './components/locations/Locations';
 import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
@@ -13,11 +12,6 @@ import DialogScene from './components/locations/DialogScene';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
-  const mainCharacter = useAppSelector(state => state.userReducer.character)
-
-  React.useEffect(() => {
-    mainCharacter.resetSkillsCooldowm()
-  }, [scene])
 
   const getScene = React.useMemo(() => {
     switch (scene) {

@@ -2,7 +2,7 @@ import Character, { ICharacterStats } from "./characters/Character";
 import { Mage } from "./characters/Mage";
 import { Rogue } from "./characters/Rogue";
 import { Warrior } from "./characters/Warrior";
-import { raceFullArr } from '../components/CreateCharacter/Images';
+import { bossArr, raceFullArr } from '../components/CreateCharacter/Images';
 
 const WARRIOR_CLASS: TClasses = "warrior"
 const MAGE_CLASS: TClasses = "mage"
@@ -117,9 +117,26 @@ const defaultStats: ICharacterStats = {
     initSkillImgs: []
 }
 
+const bossStats: ICharacterStats = {
+    initHp: 50,
+    initAttack: 1,
+    initIsNpc: false,
+    initName: '',
+    initImgSmall: 'string',
+    initImgBig: bossArr[0],
+    initConstitution: 10,
+    initDexterety: 10,
+    initStrength: 10,
+    initCharm: 10,
+    initIntelligent: 10,
+    initWisdom: 10,
+    initGold: 175,
+    initSkillImgs: []
+}
+
 export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats] 
 
-export function objSum(first: ICharacterStats, second: object) {
+function objSum(first: ICharacterStats, second: object) {
     const newSecond = {...first, ...second}
     return {...first, 
         initConstitution: first.initConstitution + newSecond.initConstitution,
@@ -148,7 +165,7 @@ export function createNewCharacter(name: string, characterClass: string, activeR
     }
 }
 
-export function createEnemy() {
+function createEnemy() {
     switch(Math.floor(Math.random() * (2 - 0 + 1) + 0)) {
         case 0:
             return new Warrior({...warriorStats, initName: "", initIsNpc: true})
@@ -161,6 +178,10 @@ export function createEnemy() {
     }
 }
 
+function createBoss() {
+    return new Warrior({...bossStats, initName: "BOSS", initIsNpc: true})
+}
+
 export function createEnemyArr(difficulty: TEnemydifficulty = "easy") {
     switch(difficulty) {
         case "medium":
@@ -168,7 +189,7 @@ export function createEnemyArr(difficulty: TEnemydifficulty = "easy") {
         case "high":
             return [createEnemy(), createEnemy(), createEnemy()]
         case "boss":
-            return [createEnemy()] // TODO createBoss
+            return [createBoss()]
         case "easy":
         default:
             return [createEnemy()]
