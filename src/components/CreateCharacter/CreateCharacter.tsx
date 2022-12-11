@@ -3,7 +3,7 @@ import './CreateCharacter.scss'
 import { raceArr, classArr, descrArr } from './Images';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
-import { characterClasses, createNewCharacter } from '../../mechanics/CreatingMechanic';
+import { characterClasses, characterRace, createNewCharacter, returnRaceMod } from '../../mechanics/CreatingMechanic';
 import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
@@ -30,6 +30,17 @@ const CreateCharacter = () => {
     const [activeRace, setActiveRace] = React.useState(0)
     const [activeIndex, setActiveIndex] = React.useState(0)
     const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
+    const [raceStats, setRaceStats] = React.useState<any>(returnRaceMod(characterRace[activeRace]))
+
+    React.useEffect(() => {
+        setRaceStats(returnRaceMod(characterRace[activeRace]))
+    }, [activeRace])
+
+    function getRaceMods(value: number) {
+        if(value == 0) return ""
+        if(value > 0) return `+${value}`
+        return value
+    }
 
     function switchRace(key: any) {
         setActiveRace(key)
@@ -99,12 +110,15 @@ const CreateCharacter = () => {
                 <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
                 {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
                     <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
-                <li className="stats__elem">INT - 15</li>
-                <li className="stats__elem">MEN - 15</li>
-                <li className="stats__elem">WIT - 15</li>
+                <li className="stats__elem">CON - 10 {getRaceMods(raceStats.initConstitution)}</li>
+                <li className="stats__elem">DEX - 10 {getRaceMods(raceStats.initDexterety)}</li>
+                <li className="stats__elem">STR - 10 {getRaceMods(raceStats.initStrength)}</li>
+                <li className="stats__elem">CHR - 10 {getRaceMods(raceStats.initCharisma)}</li>
+                <li className="stats__elem">WIS - 10 {getRaceMods(raceStats.initWisdom)}</li>
+                <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li>
             </ul>
         </div>
-    }, [viewCharacterStats, activeIndex])
+    }, [viewCharacterStats, activeIndex, raceStats])
 
     const getSkills = React.useMemo(() => {
         return <div className="create-character__info-skills skills">

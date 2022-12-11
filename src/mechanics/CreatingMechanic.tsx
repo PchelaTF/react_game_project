@@ -15,7 +15,7 @@ export type TEnemydifficulty = "easy" | "medium" | "high" | "boss"
 export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLASS]
 export const characterRace: TRace[] = ["elf", "halfling", "demon"]
 
-const returnRaceMod = (race: TRace) => {
+export const returnRaceMod = (race: TRace) => {
     switch(race) {
         case "elf":     
             return {
@@ -24,7 +24,7 @@ const returnRaceMod = (race: TRace) => {
                 initStrength: 0,
                 initCharisma: 0,
                 initWisdom: 0,
-                initIntilegent: 2
+                initIntelligent: 2
             }
         case "demon":
             return {
@@ -33,7 +33,7 @@ const returnRaceMod = (race: TRace) => {
                 initStrength: 0,
                 initCharisma: -2,
                 initWisdom: 0,
-                initIntilegent: 2
+                initIntelligent: 2
             }
         case "halfling":
             return {
@@ -42,7 +42,7 @@ const returnRaceMod = (race: TRace) => {
                 initStrength: -2,
                 initCharisma: 2,
                 initWisdom: 0,
-                initIntilegent: 0
+                initIntelligent: 0
             }
         default: 
             return {}
