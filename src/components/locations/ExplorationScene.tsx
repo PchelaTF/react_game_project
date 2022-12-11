@@ -9,7 +9,7 @@ import ExplorationSceneIsComplete from './ExplorationSceneIsComplete'
 export default function ExplorationScene() {
     const background = useAppSelector(state => state.FightReducer.background)
     const dispatch = useAppDispatch()
-    const { clearDeadEnemies } = fightSlice.actions
+    const { clearDeadEnemies, setDifficalty } = fightSlice.actions
     const { setScene, changeCurrentLocation, setPasssedLocationLevels, resetPassedLocationLevels } = sceneSlice.actions
     const currentLocation = useAppSelector(state => state.SceneReducer.currentLocation)
     const locations = useAppSelector(state => state.SceneReducer.locations)
@@ -18,6 +18,12 @@ export default function ExplorationScene() {
 
     const getRandomScene = () => {
         const rndScene = Math.floor(Math.random() * (2 - 0 + 1) + 0)
+
+        if(passedLocationLevels == maxLocationLevels - 1) {
+            dispatch(setDifficalty("boss"))
+            dispatch(setScene("fight"))
+            return
+        }
 
         switch (rndScene) {
             case 0:
@@ -51,7 +57,8 @@ export default function ExplorationScene() {
                 <img src={background} alt="img" />
             </div>
             <div className="exploration-scene__wrapper">
-                {passedLocationLevels === maxLocationLevels ?
+                {
+                    passedLocationLevels === maxLocationLevels ?
                     <ExplorationSceneIsComplete exitExploration={exitExploration} />
                     :
                     <ExplorationSceneDirections handleClick={handleClick} />
