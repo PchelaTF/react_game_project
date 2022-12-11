@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import Character from "../../mechanics/characters/Character"
+import { TEnemydifficulty } from "../../mechanics/CreatingMechanic"
 
 export interface IinitialState {
     currentTurn: number,
@@ -8,7 +9,8 @@ export interface IinitialState {
     ischoiceActive: boolean,
     deadEnemies: boolean[],
     enemies: Character[],
-    background: string
+    background: string,
+    difficalty: TEnemydifficulty
 }
 
 const initialState: IinitialState = {
@@ -18,7 +20,8 @@ const initialState: IinitialState = {
     ischoiceActive: false,
     deadEnemies: [],
     enemies: [],
-    background: ""
+    background: "",
+    difficalty: "easy"
 }
 
 export const NEXT_TURN = "NEXT_TURN"
@@ -50,6 +53,9 @@ export const fightSlice = createSlice({
         },
         setBackground(state, action: PayloadAction<string>) {
             state.background = action.payload
+        },
+        setDifficalty(state, action: PayloadAction<TEnemydifficulty>) {
+            state.difficalty = action.payload
         }
     }
 })

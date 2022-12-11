@@ -11,19 +11,13 @@ import inventory from "../../assets/img/chest.png"
 import Inventory from '../Inventory/Inventory';
 import { playSound } from '../../mechanics/sounds/sound';
 import CharacterWindow from '../CharacterWindow/CharacterWindow';
+import { createEnemyArr, TEnemydifficulty } from '../../mechanics/CreatingMechanic';
 
 interface IFightSceneProps {
-    allyArr: Character[]
-    enemyArr: Character[]
+    allyArr: Character[],
 }
 
-const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
-    //useState const
-    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
-    const [isWon, setIsWon] = React.useState(false)
-    const [initial, setInitial] = React.useState(true)
-    const [enemiesHp, setEnemiesHp] = React.useState<number[]>([])
-    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
+const FightScene = ({ allyArr }: IFightSceneProps) => {
     //Redux const
     const dispatch = useAppDispatch()
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
@@ -32,7 +26,15 @@ const FightScene = ({ allyArr, enemyArr }: IFightSceneProps) => {
     const deadEnemies = useAppSelector(state => state.FightReducer.deadEnemies)
     const skillIndex = useAppSelector(state => state.FightReducer.skillIndex)
     const background = useAppSelector(state => state.FightReducer.background)
+    const difficulty = useAppSelector(state => state.FightReducer.difficalty)
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex, pushToDeadEnemies } = fightSlice.actions
+    //useState const
+    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
+    const [isWon, setIsWon] = React.useState(false)
+    const [initial, setInitial] = React.useState(true)
+    const [enemiesHp, setEnemiesHp] = React.useState<number[]>([])
+    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
+    const [enemyArr, setEnemyArr] = React.useState(createEnemyArr(difficulty))
     //other const
     const fightOrder = allyArr.concat(enemyArr)
 

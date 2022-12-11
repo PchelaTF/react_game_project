@@ -10,6 +10,7 @@ const ROGUE_CLASS: TClasses = "rogue"
 
 export type TRace = "elf" | "halfling" | "demon"
 export type TClasses = "warrior" | "mage" | "rogue"
+export type TEnemydifficulty = "easy" | "medium" | "high" | "boss"
 
 export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLASS]
 export const characterRace: TRace[] = ["elf", "halfling", "demon"]
@@ -157,5 +158,19 @@ export function createEnemy() {
             return new Mage({...mageStats, initName: "", initIsNpc: true})
         default:
             return new Character({...warriorStats, initName: "", initIsNpc: true})
+    }
+}
+
+export function createEnemyArr(difficulty: TEnemydifficulty = "easy") {
+    switch(difficulty) {
+        case "medium":
+            return [createEnemy(), createEnemy()]
+        case "high":
+            return [createEnemy(), createEnemy(), createEnemy()]
+        case "boss":
+            return [createEnemy()] // TODO createBoss
+        case "easy":
+        default:
+            return [createEnemy()]
     }
 }
