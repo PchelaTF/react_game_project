@@ -14,10 +14,9 @@ import CharacterWindow from '../CharacterWindow/CharacterWindow';
 import { createEnemyArr, TEnemydifficulty } from '../../mechanics/CreatingMechanic';
 
 interface IFightSceneProps {
-    allyArr: Character[],
 }
 
-const FightScene = ({ allyArr }: IFightSceneProps) => {
+const FightScene = () => {
     //Redux const
     const dispatch = useAppDispatch()
     const currentTurn = useAppSelector(state => state.FightReducer.currentTurn)
@@ -27,20 +26,19 @@ const FightScene = ({ allyArr }: IFightSceneProps) => {
     const skillIndex = useAppSelector(state => state.FightReducer.skillIndex)
     const background = useAppSelector(state => state.FightReducer.background)
     const difficulty = useAppSelector(state => state.FightReducer.difficalty)
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex, pushToDeadEnemies } = fightSlice.actions
     //useState const
-    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
     const [isWon, setIsWon] = React.useState(false)
     const [initial, setInitial] = React.useState(true)
     const [enemiesHp, setEnemiesHp] = React.useState<number[]>([])
     const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
     const [enemyArr, setEnemyArr] = React.useState(createEnemyArr(difficulty))
+    const [allyArr, setAllyArr] = React.useState([mainCharacter])
+    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
+    const [isCharacterWindowOpen, setIsCharacterWindowOpen] = React.useState(false)
     //other const
     const fightOrder = allyArr.concat(enemyArr)
-
-    const mainCharacter = useAppSelector(state => state.userReducer.character)
-    const [isCharacterWindowOpen, setIsCharacterWindowOpen] = React.useState(false)
-
 
     React.useEffect(() => {
         if (fightOrder[currentTurn].getIsNpc()) {

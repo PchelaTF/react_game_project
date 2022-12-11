@@ -26,7 +26,7 @@ function App() {
       case "main":
         return <MainScene />
       case "fight":
-        return <FightScene allyArr={[mainCharacter]} />
+        return <FightScene />
       case "Locations":
         return <Locations />
       case "shop":
