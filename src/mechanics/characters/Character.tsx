@@ -56,7 +56,7 @@ export default class Character {
         this.name = characterStats.initName
         this.imgSmall = characterStats.initImgSmall
         this.imgBig = characterStats.initImgBig
-        this.damage = 8
+        this.damage = 4
         this.gold = characterStats.initGold
         this.skillImgs = characterStats.initSkillImgs
         this.skillsCooldown = [0, 0, 0, 0]
