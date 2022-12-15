@@ -1,11 +1,10 @@
 import React from 'react'
 import { buttonClick } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
-import { sceneSlice } from '../../store/reducers/SceneReducer'
+import { sceneSlice, TScene } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import "./MainScene.scss"
-import potion from '../../assets/img/potions/potion.png'
-import { IInventoryItem } from '../../mechanics/inventory/Inventory'
+import BaseButton from '../ui/BaseButton'
 
 export default function MainScene() {
     const dispatch = useAppDispatch()
@@ -14,10 +13,10 @@ export default function MainScene() {
 
     const mainClass = "Main-scene"
 
-    const handleClick = (e: any) => {
-        if(e.target.value == "Locations")
+    const handleClick = (value: TScene) => {
+        if(value == "Locations")
             dispatch(clearDeadEnemies())
-        dispatch(setScene(e.target.value))
+        dispatch(setScene(value))
         buttonClick()
     }
 
@@ -26,13 +25,15 @@ export default function MainScene() {
             <div className={`${mainClass}__modal`}>
                 <ul className={`${mainClass}__list`}>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button value={"Locations"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button>
+                        <BaseButton name="To battle" onClick={() => handleClick("Locations")} />
+                        {/* <button value={"Locations"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button> */}
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
                         {/* <button className={`item__list-button btn`} onClick={handleClick}>To hab</button> */}
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button value={"shop"} className={`item__list-button btn`} onClick={handleClick}>Shop</button>
+                        <BaseButton name="Shop" onClick={() => handleClick("shop")} />
+                        {/* <button value={"shop"} className={`item__list-button btn`} onClick={handleClick}>Shop</button> */}
                     </li>
                 </ul>
             </div>
