@@ -1,6 +1,6 @@
 import React from 'react';
 import './CreateCharacter.scss'
-import { raceArr, classArr, descrArr } from './Images';
+import { raceArr, classArr, descrArr, skillImgs, statsDescription } from './Images';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
 import { characterClasses, characterRace, createNewCharacter, returnRaceMod } from '../../mechanics/CreatingMechanic';
@@ -18,11 +18,15 @@ import mediumArmor from '../../assets/img/armor/3.png'
 import dagger from '../../assets/img/weapon/dagger.png'
 import sword from '../../assets/img/weapon/sword.png'
 import staff from '../../assets/img/weapon/staff.png'
+import CreateCharacterSkill from './CreateCharacterSkill';
+import CreateCharacterStat from './CreateCharacterStat';
 
 const CreateCharacter = () => {
+    // redux const
     const dispath = useAppDispatch()
     const { setPlayerCharacter, setPlayerInventory } = userSlice.actions
     const { setScene } = sceneSlice.actions
+    // useState const
     const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
     const [description, setDescription] = React.useState(descrArr[0])
     const [reduxClass, setReduxClass] = React.useState(characterClasses[0])
@@ -30,18 +34,23 @@ const CreateCharacter = () => {
     const [activeRace, setActiveRace] = React.useState(0)
     const [activeIndex, setActiveIndex] = React.useState(0)
     const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
-    const [raceStats, setRaceStats] = React.useState<any>(returnRaceMod(characterRace[activeRace]))
+    const [raceStats, setRaceStats] = React.useState(returnRaceMod(characterRace[activeRace]))
+    const [statsMod, setStatsMod] = React.useState<number[]>([1])
 
     React.useEffect(() => {
         setRaceStats(returnRaceMod(characterRace[activeRace]))
     }, [activeRace])
 
-    function getRaceMods(value: number) {
-        if(value == 0) return ""
-        if(value > 0) return `+${value}`
-        return value
-    }
-
+    React.useEffect(() => {
+        const newStatsMod: number[] = []
+        newStatsMod.push(viewCharacterStats.initHp)
+        newStatsMod.push(viewCharacterStats.initAttack)
+        Object.values(raceStats).map((item, key) => {
+            newStatsMod.push(item)
+        })
+        setStatsMod(newStatsMod)
+    }, [viewCharacterStats, raceStats])
+    
     function switchRace(key: any) {
         setActiveRace(key)
         setFullImg(classArr[key][activeIndex].fullImg)
@@ -60,7 +69,7 @@ const CreateCharacter = () => {
     }
 
     const setReduxNewCharacter = (name: string, reduxClass: string) => {
-        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg, skillsImgArr[activeIndex])
+        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg, skillImgs[activeIndex])
         const playerCharacter = setPlayerCharacter(newCharacter)
         dispath(playerCharacter)
         const playerInventory = new Inventory([])
@@ -86,7 +95,13 @@ const CreateCharacter = () => {
             <p className='create-character__select-title'>race</p>
             <div className="create-character__race">
                 {raceArr.map((item, i) => {
-                    return <CreateCharacterRace key={i} CharacterRace={item} switchRace={() => switchRace(i)} activeClassName={(activeRace == i ? "_active" : "")} />
+                    return <CreateCharacterRace 
+                        tip={item.tip || "elf"} 
+                        key={i} 
+                        CharacterRace={item.iconImg} 
+                        switchRace={() => switchRace(i)} 
+                        activeClassName={(activeRace == i ? "_active" : "")} 
+                    />
                 })}
             </div>
         </div>
@@ -97,7 +112,13 @@ const CreateCharacter = () => {
             <p className='create-character__select-title'>class</p>
             <div className="create-character__class">
                 {classArr[activeRace].map((item, i) => {
-                    return <CreateCharacterClass key={i} CharacterClass={item.iconImg} switchClass={() => switchClass(i)} activeClassName={activeIndex == i ? "_active" : ""} />
+                    return <CreateCharacterClass 
+                        classTip={item.class || "warrior"} 
+                        key={i} 
+                        CharacterClass={item.iconImg} 
+                        switchClass={() => switchClass(i)} 
+                        activeClassName={activeIndex == i ? "_active" : ""} 
+                    />
                 })}
             </div>
         </div>
@@ -107,15 +128,19 @@ const CreateCharacter = () => {
         return <div className="create-character__info-stats stats">
             <p className="stats__title">Stats</p>
             <ul className="stats__lists">
-                <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
-                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
+                {
+                    statsDescription.map((item, key) => {
+                        return <CreateCharacterStat raceMod={statsMod[key]} stat={item} index={key}/>
+                    })
+                }
+                {/* <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
+                <li className="stats__elem">attack - {viewCharacterStats.initAttack}</li>
                 <li className="stats__elem">CON - 10 {getRaceMods(raceStats.initConstitution)}</li>
                 <li className="stats__elem">DEX - 10 {getRaceMods(raceStats.initDexterety)}</li>
                 <li className="stats__elem">STR - 10 {getRaceMods(raceStats.initStrength)}</li>
                 <li className="stats__elem">CHR - 10 {getRaceMods(raceStats.initCharisma)}</li>
                 <li className="stats__elem">WIS - 10 {getRaceMods(raceStats.initWisdom)}</li>
-                <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li>
+                <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li> */}
             </ul>
         </div>
     }, [viewCharacterStats, activeIndex, raceStats])
@@ -125,7 +150,7 @@ const CreateCharacter = () => {
             <p className="skills__title">Skills</p>
             <ul className="skills__lists">
                 {skillsImgArr[activeIndex].map((item, i) => {
-                    return <li className="skills__elem" key={i}><img src={item} alt="img" /></li>
+                    return <CreateCharacterSkill characterSkill={item.img} tip={item.dis}/>
                 })}
             </ul>
         </div>

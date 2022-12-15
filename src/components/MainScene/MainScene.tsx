@@ -29,7 +29,7 @@ export default function MainScene() {
                         <button value={"Locations"} className={`item__list-button btn`} onClick={(e) => handleClick(e)}>To battle</button>
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
-                        <button className={`item__list-button btn`} onClick={handleClick}>To hab</button>
+                        {/* <button className={`item__list-button btn`} onClick={handleClick}>To hab</button> */}
                     </li>
                     <li className={`${mainClass}__list-item item__list`}>
                         <button value={"shop"} className={`item__list-button btn`} onClick={handleClick}>Shop</button>

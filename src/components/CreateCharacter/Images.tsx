@@ -52,34 +52,52 @@ import dungeon from "../../assets/img/dungeon.jpg"
 
 export const bossArr = [firstBoss]
 export const raceFullArr = [fullFace4, fullFace2, fullFace3, fullFace1]
-export const skillsImgArr = [
-    [atk, atk2, atk3, atk4], 
+export const skillImgs: string[][] = [
+    [atk, atk2, atk3, atk4],
     [mageSkill, mageSkillTwo, mageSkillThree, mageSkillFour],
-    [warriorSkill, warriorSkillTwo, warriorSkillThree, warriorSkillFour] 
+    [warriorSkill, warriorSkillTwo, warriorSkillThree, warriorSkillFour]
+]
+export const skillsImgArr: ISkill[][] = [
+    [{img: atk, dis: "deal damage"}, {img: atk2, dis: "deal more damage"}, {img: atk3, dis: "that's a lot of damage"}, {img: atk4, dis: ""}], 
+    [{img: mageSkill, dis: "deal damage ignore armor"}, {img: mageSkillTwo, dis: "deal more damage ignor armor"}, {img: mageSkillThree, dis: "that's a lot of damage ignore armor"}, {img: mageSkillFour, dis: ""}],
+    [{img: warriorSkill, dis: "deal damage"}, {img: warriorSkillTwo, dis: "deal more damage"}, {img: warriorSkillThree, dis: "that's a lot of damage"}, {img: warriorSkillFour, dis: ""}] 
 ]
 export const backgrounds = [background, desert, dungeon]
 interface IImages {
     fullImg: string,
-    iconImg: string
+    iconImg: string,
+    tip?: string,
+    class?: string
+}
+
+interface ISkill {
+    img: string,
+    dis: string
+}
+
+export interface IStat {
+    desc: string,
+    name: string,
+    basic: number
 }
 
 export const halflingsImgs: IImages[] = [ 
-    { fullImg: fullHalffling3, iconImg: iconHalfling3 }, 
-    { fullImg: fullHalffling2, iconImg: iconHalfling2 },
-    { fullImg: fullHalffling1, iconImg: iconHalfling1 },
+    { fullImg: fullHalffling3, iconImg: iconHalfling3, tip: "hulfling", class: "rogue" }, 
+    { fullImg: fullHalffling2, iconImg: iconHalfling2, class: "mage"  },
+    { fullImg: fullHalffling1, iconImg: iconHalfling1, class: "warrior" },
 ]
 export const demonsImgs: IImages[] = [ 
-    { fullImg: fullDemons3, iconImg: iconDemon3 }, 
-    { fullImg: fullDemons2, iconImg: iconDemon2 },
-    { fullImg: fullDemons1, iconImg: iconDemon1 },
+    { fullImg: fullDemons3, iconImg: iconDemon3, tip: "demon", class: "rogue" }, 
+    { fullImg: fullDemons2, iconImg: iconDemon2, class: "mage" },
+    { fullImg: fullDemons1, iconImg: iconDemon1, class: "warrior" },
 ]
 export const elfsImgs: IImages[] = [ 
-    { fullImg: fullFace3, iconImg: face3 }, 
-    { fullImg: fullFace2, iconImg: face2 },
-    { fullImg: fullFace1, iconImg: face1 },
+    { fullImg: fullFace3, iconImg: face3, tip: "elf", class: "rogue" }, 
+    { fullImg: fullFace2, iconImg: face2, class: "mage" },
+    { fullImg: fullFace1, iconImg: face1, class: "warrior" },
 ]
 
-export const raceArr = [elfsImgs[0].iconImg, halflingsImgs[0].iconImg, demonsImgs[0].iconImg]
+export const raceArr = [elfsImgs[0], halflingsImgs[0], demonsImgs[0]]
 export const classArr = [elfsImgs, halflingsImgs, demonsImgs]
 
 export const descrArr = [
@@ -87,4 +105,15 @@ export const descrArr = [
     'Featuring powerful magical abilities, but physically weak.',
     'Focused on combat abilities, but almost entirely lacking in magical abilities',
     'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam, nam dicta! Tenetur rem aliquid, doloribus magnam temporibus corrupti provident doloremque!'
+]
+
+export const statsDescription: IStat[] = [
+    {name: "HP", basic: 0, desc: "Your character basic hit points"},
+    {name: "Attack", basic: 0, desc: "How good your character hit enemy"},
+    {name: "CON", basic: 10, desc: "How many hit points your character get"},
+    {name: "DEX", basic: 10, desc: "Your character additional armor"},
+    {name: "STR", basic: 10, desc: "Your character physical damage"},
+    {name: "CHR", basic: 10, desc: "How good your character speaks"},
+    {name: "WIS", basic: 10, desc: "Your character magic ressist"},
+    {name: "INT", basic: 10, desc: "Your character magic damage"}
 ]
