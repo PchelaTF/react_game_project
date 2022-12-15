@@ -23,8 +23,10 @@ interface ICharacterWindowProps {
 }
 
 const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
-    // console.log(mainCharacter.getEquipment().armor.armorType);
+    
     const mainCharacter = useAppSelector(state => state.userReducer.character)
+
+    const inventoryLength = useAppSelector(state => state.userReducer.inventoryLength)
 
     const equipment = React.useMemo(() => {
         return <ul className="equipment__slots">
@@ -33,9 +35,9 @@ const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharac
             </li>
             <li className="equipment__slot">
                 {
-                    mainCharacter.getEquipment().armor.getArmorType() ? 
-                    <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped'/> : 
-                    <img src={chestSlots} alt="img" />
+                    mainCharacter.getEquipment().armor.getArmorType() ?
+                        <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped' /> :
+                        <img src={chestSlots} alt="img" />
                 }
             </li>
             <li className="equipment__slot">
@@ -51,7 +53,7 @@ const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharac
                 <img src={feetSlots} alt="img" />
             </li>
         </ul>
-    }, [])
+    }, [inventoryLength])
 
     return (
         <div className={`character-window ${classIfInventoryOpen}`}>

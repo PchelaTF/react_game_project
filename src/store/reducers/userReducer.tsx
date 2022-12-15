@@ -6,6 +6,7 @@ import Inventory from "../../mechanics/inventory/Inventory"
 export interface IinitialState {
     character: Character
     inventory: Inventory
+    inventoryLength: number
 }
 
 const initialState: IinitialState = {
@@ -25,7 +26,8 @@ const initialState: IinitialState = {
         initGold: 300,
         initSkillImgs: []
     }),
-    inventory: new Inventory([])
+    inventory: new Inventory([]),
+    inventoryLength: 0
 }
 
 export const SET_ENEMY_TEXT = "SET_USER_CHARACTER"
@@ -39,6 +41,9 @@ export const userSlice = createSlice({
         },
         setPlayerInventory(state, action: PayloadAction<Inventory>) {
             state.inventory = action.payload
+        },
+        setInventoryLength(state) {
+            state.inventoryLength = state.inventory.getItems().length
         }
     }
 })

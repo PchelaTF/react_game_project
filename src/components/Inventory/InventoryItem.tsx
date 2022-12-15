@@ -7,13 +7,12 @@ interface IInventoryItemProps {
     item: Item
     index: number
     setPlayerHp: React.Dispatch<React.SetStateAction<number>>
-    setInventoryLength: React.Dispatch<React.SetStateAction<number>>
 }
 
-const InventoryItem = ({ item, index, setPlayerHp, setInventoryLength }: IInventoryItemProps) => {
+const InventoryItem = ({ item, index, setPlayerHp, }: IInventoryItemProps) => {
     const mainCharacter = useAppSelector(state => state.userReducer.character)
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
-    const { setPlayerInventory } = userSlice.actions
+    const { setPlayerInventory, setInventoryLength } = userSlice.actions
     const dispatch = useAppDispatch()
     const [itemCount, setItemCount] = React.useState(item.getCount())
 
@@ -21,10 +20,10 @@ const InventoryItem = ({ item, index, setPlayerHp, setInventoryLength }: IInvent
         item.useItem(mainCharacter)
         setItemCount(item.getCount())
         setPlayerHp(mainCharacter.getHp())
-        if (itemCount === 1) 
+        if (itemCount === 1)
             characterInventory.deleteFromInventory(index)
 
-        setInventoryLength(characterInventory.getItems().length)
+        dispatch(setInventoryLength())
         dispatch(setPlayerInventory(characterInventory))
     }
 
