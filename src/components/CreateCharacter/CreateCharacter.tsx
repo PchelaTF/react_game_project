@@ -43,9 +43,8 @@ const CreateCharacter = () => {
 
     React.useEffect(() => {
         const newStatsMod: number[] = []
-        newStatsMod.push(viewCharacterStats.initHp)
+        newStatsMod.push(viewCharacterStats.initHp + countStatMod(10 + raceStats.initConstitution))
         newStatsMod.push(viewCharacterStats.initAttack)
-        console.log(raceStats)
         Object.values(raceStats).map((item, key) => {
             newStatsMod.push(item)
         })
