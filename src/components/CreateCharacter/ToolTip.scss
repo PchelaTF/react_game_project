@@ -1,6 +1,7 @@
 @import "../../variables.scss";
 
 .tool-tip {
+    z-index: 100;
     position: absolute;
     color: $mainTextColor;
     padding: 15px 10px 0;

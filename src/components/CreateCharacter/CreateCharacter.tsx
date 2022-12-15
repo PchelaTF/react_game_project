@@ -3,7 +3,7 @@ import './CreateCharacter.scss'
 import { raceArr, classArr, descrArr, skillImgs, statsDescription } from './Images';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
-import { characterClasses, characterRace, createNewCharacter, returnRaceMod } from '../../mechanics/CreatingMechanic';
+import { characterClasses, characterRace, countStatMod, createNewCharacter, returnRaceMod } from '../../mechanics/CreatingMechanic';
 import { useAppDispatch } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
@@ -45,12 +45,13 @@ const CreateCharacter = () => {
         const newStatsMod: number[] = []
         newStatsMod.push(viewCharacterStats.initHp)
         newStatsMod.push(viewCharacterStats.initAttack)
+        console.log(raceStats)
         Object.values(raceStats).map((item, key) => {
             newStatsMod.push(item)
         })
         setStatsMod(newStatsMod)
-    }, [viewCharacterStats, raceStats])
-    
+    }, [raceStats, viewCharacterStats])
+
     function switchRace(key: any) {
         setActiveRace(key)
         setFullImg(classArr[key][activeIndex].fullImg)
@@ -130,7 +131,7 @@ const CreateCharacter = () => {
             <ul className="stats__lists">
                 {
                     statsDescription.map((item, key) => {
-                        return <CreateCharacterStat raceMod={statsMod[key]} stat={item} index={key}/>
+                        return <CreateCharacterStat raceMod={statsMod[key]} stat={item}/>
                     })
                 }
                 {/* <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
@@ -143,7 +144,7 @@ const CreateCharacter = () => {
                 <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li> */}
             </ul>
         </div>
-    }, [viewCharacterStats, activeIndex, raceStats])
+    }, [viewCharacterStats, activeIndex, raceStats, statsMod, activeRace])
 
     const getSkills = React.useMemo(() => {
         return <div className="create-character__info-skills skills">

@@ -117,3 +117,4 @@ export const statsDescription: IStat[] = [
     {name: "WIS", basic: 10, desc: "Your character magic ressist"},
     {name: "INT", basic: 10, desc: "Your character magic damage"}
 ]
+

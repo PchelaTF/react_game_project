@@ -45,7 +45,14 @@ export const returnRaceMod = (race: TRace) => {
                 initIntelligent: 0
             }
         default: 
-            return {}
+            return {
+                initConstitution: 0,
+                initDexterety: 0,
+                initStrength: 0,
+                initCharisma: 0,
+                initWisdom: 0,
+                initIntelligent: 0
+            }
     }
 }
 
@@ -194,4 +201,8 @@ export function createEnemyArr(difficulty: TEnemydifficulty = "easy") {
         default:
             return [createEnemy()]
     }
+}
+
+export function countStatMod(stat: number) {
+    return stat % 2 == 0 ? (stat - 10) / 2 : (stat - 11) / 2
 }
