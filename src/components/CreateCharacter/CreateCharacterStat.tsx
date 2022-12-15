@@ -6,7 +6,6 @@ import { IStat, statsDescription } from "./Images"
 import { characterRace, characterStatsArr, returnRaceMod } from '../../mechanics/CreatingMechanic';
 
 interface ICharacterRaceProps {
-    index: number,
     stat: IStat,
     raceMod: number
 }
@@ -15,13 +14,6 @@ const CreateCharacterStats = ({ raceMod, stat }: ICharacterRaceProps) => {
     const dispatch = useAppDispatch()
     const {setToolTipContent} = sceneSlice.actions
     const [toolTip, setToolTip] = React.useState(false)
-    const [raceStats, setRaceStats] = React.useState<any>(returnRaceMod(characterRace[0]))
-    const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
-
-    function getRaceMods(value: number) {
-        if(value == 0) return 0
-        return value
-    }
 
     function callToolTip(tipType: string) {
         setToolTip(true)
