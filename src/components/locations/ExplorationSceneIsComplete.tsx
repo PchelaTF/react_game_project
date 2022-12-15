@@ -5,6 +5,7 @@ interface IExplorationSceneIsCompleteProps {
 }
 
 const ExplorationSceneIsComplete = ({ exitExploration }: IExplorationSceneIsCompleteProps) => {
+
     return (
         <div className='exploretion-is-complite' onClick={exitExploration}>
             <p>location is complite</p>

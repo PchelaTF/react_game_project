@@ -9,9 +9,14 @@ import ExplorationScene from './components/locations/ExplorationScene';
 import Shop from './components/shop/Shop';
 import ChestScene from './components/locations/ChestScene';
 import DialogScene from './components/locations/DialogScene';
+import { mainMusic } from './mechanics/sounds/sound';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
+
+  React.useEffect(() => {
+    mainMusic()
+  },[])
 
   const getScene = React.useMemo(() => {
     switch (scene) {

@@ -1,8 +1,21 @@
 import React from 'react'
 import { buttonClick } from '../../mechanics/sounds/sound'
 
-export default function BaseButton() {
+interface IButtonProps {
+  onClick: (e?: any) => void
+  name: string
+}
+
+const BaseButton = ( { onClick, name }: IButtonProps) => {
+
+  const handleClick = () => {
+    onClick()
+    buttonClick()
+  }
+
   return (
-    <button className={`item__list-button btn`} onClick={buttonClick}>Shop</button>
+    <button className={`item__list-button btn`} onClick={handleClick}>{name}</button>
   )
 }
+
+export default BaseButton

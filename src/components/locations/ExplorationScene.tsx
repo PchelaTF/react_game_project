@@ -1,4 +1,5 @@
 import React from 'react'
+import { locationMusic, mainMusic } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -44,6 +45,8 @@ export default function ExplorationScene() {
     }
 
     function exitExploration() {
+        mainMusic()
+        locationMusic(true)
         const newCurrentLocation = { ...locations[currentLocation] }
         newCurrentLocation.isCompleted = true
         dispatch(changeCurrentLocation(newCurrentLocation))

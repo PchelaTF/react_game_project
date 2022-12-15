@@ -20,6 +20,7 @@ import sword from '../../assets/img/weapon/sword.png'
 import staff from '../../assets/img/weapon/staff.png'
 import CreateCharacterSkill from './CreateCharacterSkill';
 import CreateCharacterStat from './CreateCharacterStat';
+import BaseButton from '../ui/BaseButton';
 
 const CreateCharacter = () => {
     // redux const
@@ -191,7 +192,8 @@ const CreateCharacter = () => {
                         onChange={(e) => onHandleNameChange(e)} />
                 </div>
                 <div className="create-character__button">
-                    <button className='btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button>
+                    <BaseButton name="Create" onClick={() => setReduxNewCharacter(name, reduxClass)} />
+                    {/* <button className='btn' onClick={() => setReduxNewCharacter(name, reduxClass)}>Create</button> */}
                 </div>
             </div>
         </div>
