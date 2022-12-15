@@ -1,5 +1,5 @@
 import React from 'react'
-import { buttonClick } from '../../mechanics/sounds/sound'
+import { buttonClick, locationMusic, mainMusic } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -20,6 +20,8 @@ export default function Locations() {
     })
 
     const handleClick = (index: number) => {
+        mainMusic(true)
+        locationMusic()
         dispatch(clearDeadEnemies())
         dispatch(setCurrentLocation(index))
         dispatch(setBackground(levels[index].background))
