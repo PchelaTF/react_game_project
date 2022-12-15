@@ -25,7 +25,9 @@ export class Mage extends Character {
     thirdSkill(dmgToCharacter: Character): void {
         this.decSkillsCooldown()
         this.setSkillCooldown(3, 4)
-        dmgToCharacter.setHp(dmgToCharacter.getHp() + 3)
+        const dmg = (Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1))
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
+        this.setHp(this.getHp() + dmg)
     }
 
 }

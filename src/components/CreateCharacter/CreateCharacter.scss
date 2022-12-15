@@ -114,6 +114,8 @@
         }
 
         .stats {
+            cursor: pointer;
+
             &__title {
                 font-size: 16px;
                 line-height: 120%;
@@ -121,11 +123,13 @@
             }
 
             &__elem {
+                position: relative;
                 text-align: left;
             }
         }
 
         .skills {
+
             &__title {
                 font-size: 16px;
                 line-height: 120%;
@@ -140,9 +144,11 @@
             }
 
             &__elem {
+                cursor: pointer;
                 list-style: none;
                 border: 2px solid $mainBorderColor;
                 display: flex;
+                position: relative;
 
                 & img {
                     width: 64px;

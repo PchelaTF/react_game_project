@@ -1,0 +1,18 @@
+@import "../../variables.scss";
+
+.tool-tip {
+    position: absolute;
+    color: $mainTextColor;
+    padding: 15px 10px 0;
+    background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
+    border-radius: 5px 5px 0 0;
+
+    &-bottom {
+        top: 110%;
+    }
+
+    &-right {
+        top: 0;
+        left: 40%
+    }
+}
