@@ -58,9 +58,9 @@ export const skillImgs: string[][] = [
     [warriorSkill, warriorSkillTwo, warriorSkillThree, warriorSkillFour]
 ]
 export const skillsImgArr: ISkill[][] = [
-    [{img: atk, dis: "deal damage"}, {img: atk2, dis: "deal more damage"}, {img: atk3, dis: "that's a lot of damage"}, {img: atk4, dis: ""}], 
-    [{img: mageSkill, dis: "deal damage ignore armor"}, {img: mageSkillTwo, dis: "deal more damage ignor armor"}, {img: mageSkillThree, dis: "that's a lot of damage ignore armor"}, {img: mageSkillFour, dis: ""}],
-    [{img: warriorSkill, dis: "deal damage"}, {img: warriorSkillTwo, dis: "deal more damage"}, {img: warriorSkillThree, dis: "that's a lot of damage"}, {img: warriorSkillFour, dis: ""}] 
+    [{img: atk, dis: "deal damage uses his dex"}, {img: atk2, dis: "deal more damage uses his dex"}, {img: atk3, dis: "that's a lot of damage uses his dex"}, {img: atk4, dis: "deal damage uses his dex ignore armor"}], 
+    [{img: mageSkill, dis: "deal damage uses his int ignore armor"}, {img: mageSkillTwo, dis: "deal more damage uses his int ignor armor"}, {img: mageSkillThree, dis: "that's a lot of damage uses his int ignore armor"}, {img: mageSkillFour, dis: "steal some hp uses his int"}],
+    [{img: warriorSkill, dis: "deal damage uses his str"}, {img: warriorSkillTwo, dis: "deal more damage uses his str"}, {img: warriorSkillThree, dis: "that's a lot of damage uses his str"}, {img: warriorSkillFour, dis: "deal damage uses his str ignore armor"}] 
 ]
 export const backgrounds = [background, desert, dungeon]
 interface IImages {
