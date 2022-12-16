@@ -133,7 +133,7 @@ const CreateCharacter = () => {
                 <ul className="stats__lists">
                     {
                         statsDescription.map((item, key) => {
-                            return <CreateCharacterStat raceMod={statsMod[key]} stat={item} />
+                            return <CreateCharacterStat raceMod={statsMod[key]} stat={item} key={key} />
                         })
                     }
                     {/* <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
@@ -155,7 +155,7 @@ const CreateCharacter = () => {
                 <p className="skills__title">Skills</p>
                 <ul className="skills__lists">
                     {skillsImgArr[activeIndex].map((item, i) => {
-                        return <CreateCharacterSkill characterSkill={item.img} tip={item.dis} />
+                        return <CreateCharacterSkill characterSkill={item.img} tip={item.dis} key={i} />
                     })}
                 </ul>
             </div>
