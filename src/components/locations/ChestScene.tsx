@@ -13,13 +13,25 @@ const ChestScene = () => {
     const {setScene} = sceneSlice.actions
     const [isLootGetted, setIsLootGetted] = React.useState(false)
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
 
     const healingPotion = new Potion(initPotion)
+    const rndLoot = Math.floor(Math.random() * (1 - 0 + 1) + 0)
+    const rndGold = Math.floor(Math.random() * (100 - 50 + 1) + 50)
 
     const getLoot = () => {
         chestSound()
         setIsLootGetted(true)
-        characterInventory.pushInInventory(healingPotion)
+
+        switch (rndLoot) {
+            case 0:
+                mainCharacter.addGold(rndGold)
+                break;
+            case 1:
+            default:
+                characterInventory.pushInInventory(healingPotion)
+                break;
+        } 
     }
 
     const nextLocation = () => {
@@ -38,9 +50,12 @@ const ChestScene = () => {
                     </div>}
                     {isLootGetted && <div className="chest-scene__loot" onClick={nextLocation}>
                         <p>Yors loot is:</p>
-                        <div className="chest-scene__loot-content">
-                            <img src={potion} alt="img" />
-                        </div>
+                        {
+                            rndLoot > 0 ? <div className="chest-scene__loot-content">
+                                <img src={potion} alt="img" />
+                            </div> :
+                            <span>{rndGold}g</span>
+                        }
                         <p>Click to go</p>
                     </div>}
                 </div>

@@ -222,4 +222,10 @@ export default class Character {
     getEquipment() {
         return this.equipment
     }
+
+    addGold(value: number) {
+        console.log(this.gold)
+        this.gold = this.gold + value
+        console.log(this.gold)
+    }
 }

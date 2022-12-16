@@ -11,7 +11,7 @@ export class Rogue extends Character {
         this.setSkillCooldown(1, 2)
         const atk = this.getAttack() + 3
         if(atk > dmgToCharacter.getArmor()) {
-            dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1) + this.calcMod(this.strength) + 3))
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - (this.getDamage() + this.calcMod(this.getDex())))
             playDamageDealSound()
         } else playSound()
     }
@@ -20,13 +20,13 @@ export class Rogue extends Character {
         this.decSkillsCooldown()
         this.setSkillCooldown(2, 3)  
         playDamageDealSound()
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1))
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - 2*(this.getDamage() + this.calcMod(this.getDex())))
     }
 
     thirdSkill(dmgToCharacter: Character): void {
         this.decSkillsCooldown()
         this.setSkillCooldown(3, 4)
-        dmgToCharacter.setHp(dmgToCharacter.getHp() - 2* Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1))
+        dmgToCharacter.setHp(dmgToCharacter.getHp() - 3*(this.getDamage() + this.calcMod(this.getDex())))
         playDamageDealSound()
     }
 
