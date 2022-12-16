@@ -11,6 +11,7 @@ const FightScenIsDead = () => {
 
     React.useEffect(() => {
         playDeathSound()
+        locationMusic(true)
         playBossMusic(true)
     },[])
 
@@ -19,7 +20,6 @@ const FightScenIsDead = () => {
         dispatch(resetPassedLocationLevels(0))
         dispatch(setScene("create"))
         mainMusic()
-        playBossMusic(true)
     }
 
     return (
