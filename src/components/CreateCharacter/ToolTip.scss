@@ -3,17 +3,21 @@
 .tool-tip {
     z-index: 100;
     position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     color: $mainTextColor;
-    padding: 15px 10px 0;
     background: $bacgroundColorGradient;
     border-radius: 5px 5px 0 0;
 
     &-bottom {
         top: 110%;
+        margin-top: 10px;
     }
 
     &-right {
-        top: 0;
-        left: 40%;
+        top: -50%;
+        left: 33%;
+        width: auto;
     }
 }

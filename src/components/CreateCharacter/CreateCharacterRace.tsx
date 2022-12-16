@@ -12,9 +12,9 @@ interface ICharacterRaceProps {
 
 const CreateCharacterRace = ({ CharacterRace, switchRace, activeClassName, tip }: ICharacterRaceProps) => {
     const dispatch = useAppDispatch()
-    const {setToolTipContent} = sceneSlice.actions
+    const { setToolTipContent } = sceneSlice.actions
     const [toolTip, setToolTip] = React.useState(false)
-    
+
     const className = `create-character__race-variable ${activeClassName}`
 
     function callToolTip(tipType: string) {
@@ -23,9 +23,9 @@ const CreateCharacterRace = ({ CharacterRace, switchRace, activeClassName, tip }
     }
 
     return (
-        <div className={className} onClick={switchRace}  onMouseEnter={() => callToolTip(tip)} onMouseLeave={() => setToolTip(false)}>
+        <div className={className} onClick={switchRace} onMouseEnter={() => callToolTip(tip)} onMouseLeave={() => setToolTip(false)}>
             <img src={CharacterRace} alt="img" title='Some descr of img' />
-            {toolTip ? <ToolTip position='bottom' text={tip}/> : null}
+            {toolTip ? <ToolTip position='bottom' text={tip} /> : null}
         </div>
     );
 };

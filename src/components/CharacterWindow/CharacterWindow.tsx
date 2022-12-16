@@ -23,36 +23,78 @@ interface ICharacterWindowProps {
 }
 
 const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharacterWindowProps) => {
-    
-    const mainCharacter = useAppSelector(state => state.userReducer.character)
 
+    const mainCharacter = useAppSelector(state => state.userReducer.character)
     const inventoryLength = useAppSelector(state => state.userReducer.inventoryLength)
 
-    const equipment = React.useMemo(() => {
-        return <ul className="equipment__slots">
-            <li className="equipment__slot">
-                <img src={headSlots} alt="img" />
-            </li>
-            <li className="equipment__slot">
-                {
-                    mainCharacter.getEquipment().armor.getArmorType() ?
-                        <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped' /> :
-                        <img src={chestSlots} alt="img" />
-                }
-            </li>
-            <li className="equipment__slot">
-                <img src={beltSlots} alt="img" />
-            </li>
-            <li className="equipment__slot">
-                <img src={legsSlots} alt="img" />
-            </li>
-            <li className="equipment__slot">
-                <img src={feetSlots} alt="img" />
-            </li>
-            <li className="equipment__slot">
-                <img src={feetSlots} alt="img" />
-            </li>
-        </ul>
+    const equipmentLeftSide = React.useMemo(() => {
+        return (
+            <>
+                <li className="equipment__slot">
+                    <img src={headSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    {
+                        mainCharacter.getEquipment().armor.getArmorType() ?
+                            <img src={mainCharacter.getEquipment().armor.getImg()} alt="img" className='_isEquipped' /> :
+                            <img src={chestSlots} alt="img" />
+                    }
+                </li>
+                <li className="equipment__slot">
+                    <img src={beltSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={legsSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={feetSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={feetSlots} alt="img" />
+                </li>
+            </>
+        )
+
+    }, [inventoryLength])
+
+    const equipmentRigthSide = React.useMemo(() => {
+        return (
+            <>
+                <li className="equipment__slot">
+                    <img src={earLeftSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={earRightSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={neckSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={ringSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={feetSlots} alt="img" />
+                </li>
+                <li className="equipment__slot">
+                    <img src={feetSlots} alt="img" />
+                </li></>
+        )
+    }, [])
+
+    const equipmentWeapon = React.useMemo(() => {
+        return (
+            <>
+                <li className="equipment__slot weapon">
+                    {mainCharacter.getEquipment().weapon.getImg() ?
+                        <img src={mainCharacter.getEquipment().weapon.getImg()} alt="img" className='_isEquipped' /> :
+                        <img src={WeaponSlots} alt="" />
+                    }
+                </li>
+                <li className="equipment__slot weapon">
+                    <img src={shieldSlots} alt="" />
+                </li>
+            </>
+        )
     }, [inventoryLength])
 
     return (
@@ -60,58 +102,39 @@ const CharacterWindow = ({ classIfInventoryOpen, closeCharacterWindow }: ICharac
             <div className="character-window__wrapper">
                 <h1 className="character-window__title">Character</h1>
                 <span className='character-window__close' onClick={closeCharacterWindow}></span>
-                {/* <h2 className="delete-after-finish">delete-after-finish</h2> */}
                 <div className="character-window__body">
                     <div className="body__column">
                         <h3 className="body__column-name">
                             {mainCharacter.getName() ? mainCharacter.getName() : 'Character name'}
                         </h3>
                         <div className="body__column-equipment equipment">
-                            {equipment}
+                            <ul className="equipment__slots">
+                                {equipmentLeftSide}
+                            </ul>
                             <div className="equipment__character-img">
                                 <img src={mainCharacter.getImgBig()} alt="img" />
                             </div>
                             <ul className="equipment__slots">
-                                <li className="equipment__slot">
-                                    <img src={earLeftSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={earRightSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={neckSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={ringSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={feetSlots} alt="img" />
-                                </li>
-                                <li className="equipment__slot">
-                                    <img src={feetSlots} alt="img" />
-                                </li>
+                                {equipmentRigthSide}
                             </ul>
                         </div>
                         <div className="body__column-weapon">
                             <ul className="equipment__slots weapon">
-                                <li className="equipment__slot weapon">
-                                    <img src={WeaponSlots} alt="" />
-                                </li>
-                                <li className="equipment__slot weapon">
-                                    <img src={shieldSlots} alt="" />
-                                </li>
+                                {equipmentWeapon}
                             </ul>
                         </div>
                     </div>
                     <div className="body__column stats">
                         <ul className="stats__lists">
-                            <li className="stats__elem">HP - </li>
-                            {/* <li className="stats__elem">attak - ({viewCharacterStats.initAttack.min} - {viewCharacterStats.initAttack.max})</li>
-                    <li className="stats__elem">armor - {viewCharacterStats.initArmor}</li> */}
-                            <li className="stats__elem">INT - 15</li>
-                            <li className="stats__elem">MEN - 15</li>
-                            <li className="stats__elem">WIT - 15</li>
+                            <li className="stats__elem">HP - {mainCharacter.getMaxHp()}</li>
+                            <li className="stats__elem">attak - {mainCharacter.getDamage()}</li>
                             <li className="stats__elem">armor - {mainCharacter.getArmor()}</li>
+                            <li className="stats__elem">CON - {mainCharacter.getCon()}</li>
+                            <li className="stats__elem">DEX - {mainCharacter.getDex()}</li>
+                            <li className="stats__elem">STR - {mainCharacter.getStr()}</li>
+                            <li className="stats__elem">CHR - {mainCharacter.getChr()}</li>
+                            <li className="stats__elem">WIS - {mainCharacter.getWis()}</li>
+                            <li className="stats__elem">INT - {mainCharacter.getInt()}</li>
                         </ul>
                     </div>
                 </div>

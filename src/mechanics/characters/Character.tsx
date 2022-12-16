@@ -36,6 +36,8 @@ export default class Character {
     private constitution: number
     private dexterety: number
     private intelligent: number
+    private charm: number
+    private wisdom: number
     protected isDead: boolean
     protected strength: number
     protected damage: number
@@ -50,6 +52,8 @@ export default class Character {
         this.armor = this.calcMod(this.dexterety) + 10
         this.strength = characterStats.initStrength
         this.intelligent = characterStats.initIntelligent
+        this.charm = characterStats.initCharm
+        this.wisdom = characterStats.initWisdom
         this.attack = characterStats.initAttack
         this.maxHp = this.hp
         this.isNpc = characterStats.initIsNpc
@@ -117,6 +121,26 @@ export default class Character {
 
     getInt() {
         return this.intelligent
+    }
+
+    getCon() {
+        return this.constitution
+    }
+
+    getDex() {
+        return this.dexterety
+    }
+
+    getStr() {
+        return this.strength
+    }
+
+    getChr() {
+        return this.charm
+    }
+
+    getWis() {
+        return this.wisdom
     }
 
     getSkillImgs() {
