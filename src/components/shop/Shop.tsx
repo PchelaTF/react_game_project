@@ -6,6 +6,7 @@ import "./Shop.scss"
 import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
 import { initPotion, Potion } from '../../mechanics/items/Potion'
 import { Item } from '../../mechanics/items/Item'
+import BaseButton from '../ui/BaseButton'
 
 export default function Shop() {
     const dispatch = useAppDispatch()
@@ -48,7 +49,8 @@ export default function Shop() {
                     <span className="shop__modal-gold">your gold: {playerGold}</span>
                 </div>
             </div>
-            <button className={`shop__btn btn`} onClick={backClick}>Back</button>
+            <BaseButton name="Back" onClick={backClick} />
+            {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
         </div>
     );
 }

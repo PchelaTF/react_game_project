@@ -1,8 +1,9 @@
 import React from 'react'
-import { buttonClick } from '../../mechanics/sounds/sound'
+import { buttonClick, locationMusic, mainMusic } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
+import BaseButton from '../ui/BaseButton'
 import "./Locations.scss"
 
 export default function Locations() {
@@ -19,6 +20,8 @@ export default function Locations() {
     })
 
     const handleClick = (index: number) => {
+        mainMusic(true)
+        locationMusic()
         dispatch(clearDeadEnemies())
         dispatch(setCurrentLocation(index))
         dispatch(setBackground(levels[index].background))
@@ -42,7 +45,8 @@ export default function Locations() {
                     </div>
                 })}
             </div>
-            <button className={`item__list-button btn`} onClick={backClick}>Back</button>
+            <BaseButton name="Back" onClick={backClick} />
+            {/* <button className={`item__list-button btn`} onClick={backClick}>Back</button> */}
         </div>
     )
 }
