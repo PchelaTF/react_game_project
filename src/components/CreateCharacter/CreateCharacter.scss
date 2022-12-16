@@ -122,9 +122,17 @@
                 font-weight: 700;
             }
 
+            &__lists {
+                padding: 0 0 0 35px;
+            }
+
             &__elem {
                 position: relative;
                 text-align: left;
+
+                &:not(:last-child) {
+                    margin-bottom: 3px;
+                }
             }
         }
 

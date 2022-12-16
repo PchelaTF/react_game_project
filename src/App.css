@@ -30,7 +30,9 @@
   display: none;
   position: absolute;
   top: -75px;
-  left: 30%;
+  /* left: 30%; */
+  left: 50%;
+  transform: translateX(-30px);
   margin: 30px;
 }
 
