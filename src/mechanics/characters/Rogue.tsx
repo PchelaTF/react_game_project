@@ -1,3 +1,4 @@
+import { playDamageDealSound, playSound } from "../sounds/sound";
 import Character, { ICharacterStats } from "./Character";
 
 export class Rogue extends Character {
@@ -9,13 +10,16 @@ export class Rogue extends Character {
         this.decSkillsCooldown()
         this.setSkillCooldown(1, 2)
         const atk = this.getAttack() + 3
-        if(atk > dmgToCharacter.getArmor())
+        if(atk > dmgToCharacter.getArmor()) {
             dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength) + 3))
+            playDamageDealSound()
+        } else playSound()
     }
 
     secondSkill(dmgToCharacter: Character): void {
         this.decSkillsCooldown()
-        this.setSkillCooldown(2, 3)
+        this.setSkillCooldown(2, 3)  
+        playDamageDealSound()
         dmgToCharacter.setHp(dmgToCharacter.getHp() - Math.floor(Math.random() * (this.damage - 1 + 1) + 1))
     }
 
@@ -23,6 +27,7 @@ export class Rogue extends Character {
         this.decSkillsCooldown()
         this.setSkillCooldown(3, 4)
         dmgToCharacter.setHp(dmgToCharacter.getHp() + 3)
+        playDamageDealSound()
     }
 
 }

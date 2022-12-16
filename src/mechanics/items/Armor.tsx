@@ -1,5 +1,6 @@
 import { IItem, Item } from "./Item";
 import Character from '../characters/Character'
+import { getArmorSound } from "../sounds/sound";
 
 export type TArmor = 'light' | 'medium' | 'heavy ' | null
 
@@ -28,6 +29,7 @@ export class Armor extends Item{
         if (this.getCount() <= 0) return
         character.wearingArmor(this)
         this.setCount(this.getCount() - 1)
+        getArmorSound()
     }
 
     definitionArmorValue() {

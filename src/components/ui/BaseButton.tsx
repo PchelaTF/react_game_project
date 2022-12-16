@@ -4,9 +4,10 @@ import { buttonClick } from '../../mechanics/sounds/sound'
 interface IButtonProps {
   onClick: (e?: any) => void
   name: string
+  className?: string
 }
 
-const BaseButton = ( { onClick, name }: IButtonProps) => {
+const BaseButton = ( { onClick, name, className }: IButtonProps) => {
 
   const handleClick = () => {
     onClick()
@@ -14,7 +15,7 @@ const BaseButton = ( { onClick, name }: IButtonProps) => {
   }
 
   return (
-    <button className={`item__list-button btn`} onClick={handleClick}>{name}</button>
+    <button className={`${className} item__list-button btn`} onClick={handleClick}>{name}</button>
   )
 }
 

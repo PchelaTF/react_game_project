@@ -1,4 +1,5 @@
 import Character from "../characters/Character";
+import { getWeaponSound } from "../sounds/sound";
 import { IItem, Item } from "./Item";
 
 export type TWeapon = "dagger" | "sword" | "staff" | null
@@ -24,6 +25,7 @@ export class Weapon extends Item {
         if (this.getCount() <= 0) return
         character.wearingWeapon(this)
         this.setCount(this.getCount() - 1)
+        getWeaponSound()
     }
 
     definitionWeaponDamage() {

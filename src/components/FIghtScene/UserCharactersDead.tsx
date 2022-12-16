@@ -7,6 +7,9 @@ interface IUserCharactersDeadProps {
 }
 
 const UserCharactersDead = ({ img, maxHp }: IUserCharactersDeadProps) => {
+
+    
+
     return (
         <>
             <img className="player__content-img isDead" src={bones} alt="img" />

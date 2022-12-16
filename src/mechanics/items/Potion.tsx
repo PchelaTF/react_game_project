@@ -1,6 +1,7 @@
 import Character from "../characters/Character";
 import { IItem, Item } from "./Item";
 import  healingPotion from '../../assets/img/potions/potion.png'
+import { getPotionSound } from "../sounds/sound";
 
 export const initPotion: IItem = {
     initType: 'potion',
@@ -24,6 +25,7 @@ export class Potion extends Item {
             character.setHp(character.getHp() + 5)
         }
         this.setCount(this.getCount() - 1)
+        getPotionSound()
 
         // * бесконечніе зелья восстанавливающие свіше макс ХП
         // this.setCount(this.getCount() - 1)
