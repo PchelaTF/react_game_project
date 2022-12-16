@@ -172,8 +172,12 @@
 
     .stats {
         &__lists {
-            margin: 0%;
-            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 15px;
+            margin: 0;
+            padding: 35px 15px;
         }
 
         &__elem {

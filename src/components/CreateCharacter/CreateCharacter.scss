@@ -122,14 +122,21 @@
                 font-weight: 700;
             }
 
+            &__lists {
+                padding: 0 0 0 35px;
+            }
+
             &__elem {
                 position: relative;
                 text-align: left;
+
+                &:not(:last-child) {
+                    margin-bottom: 3px;
+                }
             }
         }
 
         .skills {
-
             &__title {
                 font-size: 16px;
                 line-height: 120%;
@@ -158,8 +165,14 @@
         }
     }
 
-    &__name {
-        margin: 50px 0;
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 50px;
+
         & input {
             width: 30%;
             padding: 10px 0;

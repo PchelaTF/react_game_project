@@ -9,13 +9,15 @@ interface IButtonProps {
 
 const BaseButton = ( { onClick, name, className }: IButtonProps) => {
 
+  const createCharBtnClass = name === 'Create' ? 'create-character__button' : null
+
   const handleClick = () => {
     onClick()
     buttonClick()
   }
 
   return (
-    <button className={`${className} item__list-button btn`} onClick={handleClick}>{name}</button>
+    <button className={`${className} item__list-button btn ${createCharBtnClass}`} onClick={handleClick}>{name}</button>
   )
 }
 
