@@ -10,7 +10,7 @@ export class Warrior extends Character {
         this.decSkillsCooldown()
         this.setSkillCooldown(1, 2)
         const atk = this.getAttack() + 3
-        if(atk > dmgToCharacter.getArmor()) {
+        if(atk >= dmgToCharacter.getArmor()) {
             dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength) + 3))
             playDamageDealSound()
         } else playSound()
@@ -20,7 +20,7 @@ export class Warrior extends Character {
         this.decSkillsCooldown()
         this.setSkillCooldown(2, 3)
         const atk = this.getAttack() + 5
-        if(atk > dmgToCharacter.getArmor()) {
+        if(atk >= dmgToCharacter.getArmor()) {
             dmgToCharacter.setHp(dmgToCharacter.getHp() - 3*(Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength)))
             playDamageDealSound()
         }
@@ -29,8 +29,11 @@ export class Warrior extends Character {
     thirdSkill(dmgToCharacter: Character): void {
         this.decSkillsCooldown()
         this.setSkillCooldown(3, 4)
-        dmgToCharacter.setHp(dmgToCharacter.getHp() + 3)
-        playDamageDealSound()
+        const atk = this.getAttack()
+        if(atk >= dmgToCharacter.getArmor()) {
+            dmgToCharacter.setHp(dmgToCharacter.getHp() - (Math.floor(Math.random() * (this.damage - 1 + 1) + 1) + this.calcMod(this.strength) + 3))
+            playDamageDealSound()
+        } else playSound()
     }
 
 }

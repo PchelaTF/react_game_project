@@ -35,7 +35,7 @@ const FightScene = () => {
     const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
     const [enemyArr, setEnemyArr] = React.useState(createEnemyArr(difficulty))
     const [allyArr, setAllyArr] = React.useState([mainCharacter])
-    const [playerHp, setPlayerHp] = React.useState(allyArr[0].getHp())
+    const [playerHp, setPlayerHp] = React.useState(mainCharacter.getHp())
     const [isCharacterWindowOpen, setIsCharacterWindowOpen] = React.useState(false)
     //other const
     const fightOrder = allyArr.concat(enemyArr)
@@ -74,6 +74,7 @@ const FightScene = () => {
                     doDamage()
                     break;
             }
+            setPlayerHp(allyArr[0].getHp())
         }
         setInitial(false)
     }, [enemyIndex])
@@ -132,7 +133,7 @@ const FightScene = () => {
     }
 
     const doThirdSkill = () => {
-        allyArr[0].thirdSkill(allyArr[0])
+        allyArr[0].thirdSkill(enemyArr[enemyIndex])
         passTurn()
     }
 
@@ -174,7 +175,7 @@ const FightScene = () => {
                 <img src={allyArr[0].getSkillImgs()[2]} alt="img" style={allyArr[0].getskillsCooldown()[2] !== 0 ? { filter: "grayscale(1)" } : {}} />
                 <span>{allyArr[0].getskillsCooldown()[2] !== 0 ? allyArr[0].getskillsCooldown()[2] : null}</span>
             </li>
-            <li className="skills__item" onClick={() => handleSkillClick(0)}>
+            <li className="skills__item" onClick={() => handleSkillClick(3)}>
                 <img src={allyArr[0].getSkillImgs()[3]} alt="img" style={allyArr[0].getskillsCooldown()[3] !== 0 ? { filter: "grayscale(1)" } : {}} />
                 <span>{allyArr[0].getskillsCooldown()[3] !== 0 ? allyArr[0].getskillsCooldown()[3] : null}</span>
             </li>

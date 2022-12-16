@@ -32,7 +32,7 @@ export class Mage extends Character {
         this.setSkillCooldown(3, 4)
         const dmg = (Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1))
         dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
-        this.setHp(this.getHp() + dmg)
+        this.selfHeal(dmg)
     }
 
 }

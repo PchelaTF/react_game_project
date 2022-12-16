@@ -100,6 +100,7 @@ export default class Character {
     getMaxHp() { return this.maxHp }
 
     selfHeal(value: number) {
+        console.log("called selfheal")
         if (this.hp + value > this.maxHp) {
             this.hp = this.maxHp
         }
@@ -165,7 +166,7 @@ export default class Character {
     dealDamage(dmgToCharacter: Character) {
         this.decSkillsCooldown()
         const dmg = Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1) + this.calcMod(this.strength)
-        if (this.getAttack() > dmgToCharacter.getArmor()) {
+        if (this.getAttack() >= dmgToCharacter.getArmor()) {
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
             playDamageDealSound()
         }
