@@ -1,5 +1,5 @@
 import React from 'react'
-import { buttonClick } from '../../mechanics/sounds/sound'
+import { buttonClick, getCoinSound } from '../../mechanics/sounds/sound'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import "./Shop.scss"
@@ -29,6 +29,7 @@ export default function Shop() {
             characterInventory.pushInInventory(shopItems[index])
             mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].getCost())
             setPlayerGold(mainCharacter.getGold())
+            getCoinSound()
         }
     }
 
@@ -49,7 +50,7 @@ export default function Shop() {
                     <span className="shop__modal-gold">your gold: {playerGold}</span>
                 </div>
             </div>
-            <BaseButton name="Back" onClick={backClick} />
+            <BaseButton className="shop__btn" name="Back" onClick={backClick} />
             {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
         </div>
     );

@@ -53,11 +53,13 @@ const CreateCharacter = () => {
     }, [raceStats, viewCharacterStats])
 
     function switchRace(key: any) {
+        buttonClick()
         setActiveRace(key)
         setFullImg(classArr[key][activeIndex].fullImg)
     }
 
     function switchClass(key: any) {
+        buttonClick()
         setActiveIndex(key)
         setFullImg(classArr[activeRace][key].fullImg)
         setDescription(descrArr[key])

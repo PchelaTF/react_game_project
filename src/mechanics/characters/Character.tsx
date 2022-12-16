@@ -1,6 +1,7 @@
 import { equal } from 'assert'
 import { Armor, initArmor } from '../../mechanics/items/Armor'
 import { initWeapon, Weapon } from '../items/Weapon'
+import { playDamageDealSound, playSound } from '../sounds/sound'
 
 interface IEequipment {
     armor: Armor
@@ -164,9 +165,14 @@ export default class Character {
     dealDamage(dmgToCharacter: Character) {
         this.decSkillsCooldown()
         const dmg = Math.floor(Math.random() * (this.getDamage() - 1 + 1) + 1) + this.calcMod(this.strength)
-        if (this.getAttack() > dmgToCharacter.getArmor())
+        if (this.getAttack() > dmgToCharacter.getArmor()) {
             dmgToCharacter.setHp(dmgToCharacter.getHp() - dmg)
-        else (console.log(this.name + " is missed with " + dmg + "against: " + dmgToCharacter.getArmor()))
+            playDamageDealSound()
+        }
+        else {
+            playSound()
+            console.log(this.name + " is missed with " + dmg + "against: " + dmgToCharacter.getArmor())
+        } 
     }
 
     firstSkill(dmgToCharacter: Character) { }

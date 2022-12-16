@@ -3,11 +3,16 @@ import { useAppDispatch, useAppSelector } from '../../store/store';
 import './DialogScene.scss'
 import dialogNpc from '../../assets/img/characters_img/npc/dialog_main_npc.png'
 import { sceneSlice } from '../../store/reducers/SceneReducer';
+import { playgreetingSound } from '../../mechanics/sounds/sound';
 
 const DialogScene = () => {
     const dispath = useAppDispatch()
     const {setScene} = sceneSlice.actions
     const background = useAppSelector(state => state.FightReducer.background)
+
+    React.useEffect(() => {
+        playgreetingSound()
+    })
 
     const nextLocation = () => {
         dispath(setScene("explore"))

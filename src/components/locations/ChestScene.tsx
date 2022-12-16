@@ -5,6 +5,7 @@ import { sceneSlice } from '../../store/reducers/SceneReducer';
 import chest from '../../assets/img/chest.png'
 import potion from '../../assets/img/potions/potion.png'
 import { initPotion, Potion } from '../../mechanics/items/Potion';
+import { chestSound } from '../../mechanics/sounds/sound';
 
 const ChestScene = () => {
     const dispath = useAppDispatch()
@@ -16,6 +17,7 @@ const ChestScene = () => {
     const healingPotion = new Potion(initPotion)
 
     const getLoot = () => {
+        chestSound()
         setIsLootGetted(true)
         characterInventory.pushInInventory(healingPotion)
     }

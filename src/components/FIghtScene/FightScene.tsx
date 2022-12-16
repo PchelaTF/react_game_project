@@ -74,7 +74,6 @@ const FightScene = () => {
                     doDamage()
                     break;
             }
-            playSound()
         }
         setInitial(false)
     }, [enemyIndex])
@@ -91,7 +90,6 @@ const FightScene = () => {
         if (enemyArr[currentTurn - 1].getHp() >= 0)
             setTimeout(() => {
                 fightOrder[currentTurn].doNpcLogic(allyArr[0])
-                playSound()
                 setPlayerHp(allyArr[0].getHp())
                 passTurn()
             }, 1000)

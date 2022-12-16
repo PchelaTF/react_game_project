@@ -1,5 +1,5 @@
 import React from 'react'
-import { locationMusic, mainMusic } from '../../mechanics/sounds/sound'
+import { locationMusic, mainMusic, playBossMusic } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
@@ -23,6 +23,8 @@ export default function ExplorationScene() {
         if(passedLocationLevels == maxLocationLevels - 1) {
             dispatch(setDifficalty("boss"))
             dispatch(setScene("fight"))
+            playBossMusic()
+            locationMusic(true)
             return
         }
 
@@ -47,6 +49,7 @@ export default function ExplorationScene() {
     function exitExploration() {
         mainMusic()
         locationMusic(true)
+        playBossMusic(true)
         const newCurrentLocation = { ...locations[currentLocation] }
         newCurrentLocation.isCompleted = true
         dispatch(changeCurrentLocation(newCurrentLocation))
