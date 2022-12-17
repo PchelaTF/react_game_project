@@ -3,16 +3,18 @@
 ## Next versions will be developt in privet repositories
 
 **Character creation**
-![Character_creation] (/src/assets/img/presentation/characterCreation.png)
+![Character_creation] (./src/assets/img/presentation/characterCreation.png)
 
 **Shop**
-![Shop] (/src/assets/img/presentation/shop.png)
+![Shop] (./src/assets/img/presentation/shop.png)
 
 **Locations**
-![Locations] (/src/assets/img/presentation/selectLocations.png)
+![Locations] (./src/assets/img/presentation/selectLocations.png)
 
 **Fight scene**
-![Fight_scene] (/src/assets/img/presentation/fight.png)
+![Fight_scene] (./src/assets/img/presentation/fight.png)
 
 **Character window and inventory**
-![Character_window_and_inventory] (/src/assets/img/presentation/windowAndInventory.png)
+![Character_window_and_inventory] (./src/assets/img/presentation/windowAndInventory.png)
+
+<h3><img align="center" src="/src/assets/img/presentation/characterCreation.png"> TECHNOLOGIES</h3>
