@@ -3,16 +3,16 @@
 ## Next versions will be developt in privet repositories
 
 **Character creation**
-![This is an image] (/src/assets/img/presentation/characterCreation.png)
+![Character_creation] (/src/assets/img/presentation/characterCreation.png)
 
 **Shop**
-![This is an image] (/src/assets/img/presentation/shop.png)
+![Shop] (/src/assets/img/presentation/shop.png)
 
 **Locations**
-![This is an image] (/src/assets/img/presentation/selectLocations.png)
+![Locations] (/src/assets/img/presentation/selectLocations.png)
 
 **Fight scene**
-![This is an image] (/src/assets/img/presentation/fight.png)
+![Fight_scene] (/src/assets/img/presentation/fight.png)
 
 **Character window and inventory**
-![This is an image] (/src/assets/img/presentation/windowAndInventory.png)
+![Character_window_and_inventory] (/src/assets/img/presentation/windowAndInventory.png)
