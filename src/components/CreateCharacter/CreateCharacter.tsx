@@ -38,6 +38,13 @@ const CreateCharacter = () => {
     const [raceStats, setRaceStats] = React.useState(returnRaceMod(characterRace[activeRace]))
     const [statsMod, setStatsMod] = React.useState<number[]>([1])
 
+    const [isSpoilerOpen, setIsSpoilerOpen] = React.useState(false)
+    const [isSpoilerStatsOpen, setIsSpoilerStatsOpen] = React.useState(true)
+
+    const adaptiveHeight = window.matchMedia('(max-height: 919.9px)').matches
+    const spoileDescrOpen = isSpoilerOpen ? '_desc-spoiler-open' : ''
+    const spoilerStatsClass = isSpoilerStatsOpen ? '_stats-spoiler-open' : '_stats-spoiler-close'
+
     React.useEffect(() => {
         setRaceStats(returnRaceMod(characterRace[activeRace]))
     }, [activeRace])
@@ -131,39 +138,32 @@ const CreateCharacter = () => {
 
     const getStats = React.useMemo(() => {
         return (
-            <div className="create-character__info-stats stats">
-                <p className="stats__title">Stats</p>
-                <ul className="stats__lists">
-                    {
-                        statsDescription.map((item, key) => {
-                            return <CreateCharacterStat raceMod={statsMod[key]} stat={item} key={key} />
-                        })
-                    }
-                    {/* <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                <li className="stats__elem">attack - {viewCharacterStats.initAttack}</li>
-                <li className="stats__elem">CON - 10 {getRaceMods(raceStats.initConstitution)}</li>
-                <li className="stats__elem">DEX - 10 {getRaceMods(raceStats.initDexterety)}</li>
-                <li className="stats__elem">STR - 10 {getRaceMods(raceStats.initStrength)}</li>
-                <li className="stats__elem">CHR - 10 {getRaceMods(raceStats.initCharisma)}</li>
-                <li className="stats__elem">WIS - 10 {getRaceMods(raceStats.initWisdom)}</li>
-                <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li> */}
-                </ul>
-            </div>
+            <ul className="stats__lists">
+                {
+                    statsDescription.map((item, key) => {
+                        return <CreateCharacterStat raceMod={statsMod[key]} stat={item} key={key} />
+                    })
+                }
+            </ul>
         )
     }, [viewCharacterStats, activeIndex, raceStats, statsMod, activeRace])
 
     const getSkills = React.useMemo(() => {
         return (
-            <div className="create-character__info-skills skills">
-                <p className="skills__title">Skills</p>
-                <ul className="skills__lists">
-                    {skillsImgArr[activeIndex].map((item, i) => {
-                        return <CreateCharacterSkill characterSkill={item.img} tip={item.dis} key={i} />
-                    })}
-                </ul>
-            </div>
+            <ul className="skills__lists">
+                {skillsImgArr[activeIndex].map((item, i) => {
+                    return <CreateCharacterSkill characterSkill={item.img} tip={item.dis} key={i} />
+                })}
+            </ul>
         )
     }, [skillsImgArr, activeIndex])
+
+    const hendleSpoilerClick = () => {
+        if (adaptiveHeight) {
+            setIsSpoilerOpen(!isSpoilerOpen)
+            setIsSpoilerStatsOpen(!isSpoilerStatsOpen)
+        }
+    }
 
     return (
         <div className='create-character'>
@@ -181,12 +181,18 @@ const CreateCharacter = () => {
                     </div>
                     <div className="create-character__info">
                         <p className="create-character__info-title">Information</p>
-                        <div className="create-character__info-descr">
-                            <p>Description</p>
-                            {description}
+                        <div className="create-character__info-wrapper">
+                            <div className={`create-character__info-descr descr ${spoileDescrOpen}`}>
+                                <p className='descr__title' onClick={hendleSpoilerClick}> Description <i className='arrow down'></i></p>
+                                <p className='descr__text'>{description}</p>
+                            </div>
+                            <div className={`create-character__info-stats stats ${spoilerStatsClass}`}>
+                                <p className="stats__title" onClick={hendleSpoilerClick}>Stats <i className='arrow up'></i></p>
+                                {getStats}
+                            </div>
                         </div>
-                        <div className="create-character__info-content">
-                            {getStats}
+                        <div className="create-character__info-skills skills">
+                            <p className="skills__title">Skills</p>
                             {getSkills}
                         </div>
                     </div>

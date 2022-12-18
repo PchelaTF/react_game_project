@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .shop {
     align-items: center;
     width: 100%;
@@ -6,6 +8,11 @@
     justify-content: center;
     flex-direction: column;
     backdrop-filter: blur(10px);
+
+    &__title {
+        color: $mainTextColor;
+        margin: 0 0 50px 0;
+    }
 
     &__modal {
         width: 800px;
@@ -24,7 +31,6 @@
             color: white;
             font-size: 21px;
             line-height: 120%;
-
         }
 
         & img {
@@ -76,7 +82,7 @@
         }
     }
 
-    &__btn{
-        margin-top: 60px;
+    &__btn {
+        margin-top: 50px;
     }
 }
