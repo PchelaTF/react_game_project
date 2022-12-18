@@ -35,8 +35,8 @@ export default function Shop() {
 
     return (
         <div className='shop'>
+            <h1 className='shop__title'>Shop</h1>
             <div className="shop__modal">
-                <p className=''>Shop</p>
                 <img className="shop__img" src={shopkeeper} />
                 <div>
                     <div className='shop__modal-items'>
@@ -51,7 +51,6 @@ export default function Shop() {
                 </div>
             </div>
             <BaseButton className="shop__btn" name="Back" onClick={backClick} />
-            {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
         </div>
     );
 }
