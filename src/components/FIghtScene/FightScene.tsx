@@ -1,20 +1,16 @@
-import React from 'react';
-import "./FightScene.scss"
-import Enemys from './Enemys';
-import Character from '../../mechanics/characters/Character';
+import { useState, useEffect, useMemo } from 'react';
+import Enemies from './FIghtSceneEnemies/Enemies';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import { fightSlice } from '../../store/reducers/FightReducer';
-import UserCharacters from './UserCharacters';
-import FightScenIsDead from './FightScenIsDead';
-import FightScenIsWin from './FightScenIsWin';
-import inventory from "../../assets/img/chest.png"
+import UserCharacters from './FightnSceneCharacter/UserCharacters';
+import FightScenIsDead from './FightSceneExodus/FightScenIsDead';
+import FightScenIsWin from './FightSceneExodus/FightScenIsWin';
 import Inventory from '../Inventory/Inventory';
-import { playSound } from '../../mechanics/sounds/sound';
 import CharacterWindow from '../CharacterWindow/CharacterWindow';
-import { createEnemyArr, TEnemydifficulty } from '../../mechanics/CreatingMechanic';
-
-interface IFightSceneProps {
-}
+import { createEnemyArr } from '../../mechanics/CreatingMechanic';
+import UserCharactersSkills from './FightnSceneCharacter/UserCharactersSkills';
+import "./FightScene.scss"
+import FightSceneHeaderPanel from './FightSceneHeaderPanel/FightSceneHeaderPanel';
 
 const FightScene = () => {
     //Redux const
@@ -29,24 +25,23 @@ const FightScene = () => {
     const mainCharacter = useAppSelector(state => state.userReducer.character)
     const { setTurn, setChoiceActive, setEnemyIndex, setSkillIndex, pushToDeadEnemies } = fightSlice.actions
     //useState const
-    const [isWon, setIsWon] = React.useState(false)
-    const [initial, setInitial] = React.useState(true)
-    const [enemiesHp, setEnemiesHp] = React.useState<number[]>([])
-    const [isInventoryOpen, setIsInventoryOpen] = React.useState(false)
-    const [enemyArr, setEnemyArr] = React.useState(createEnemyArr(difficulty))
-    const [allyArr, setAllyArr] = React.useState([mainCharacter])
-    const [playerHp, setPlayerHp] = React.useState(mainCharacter.getHp())
-    const [isCharacterWindowOpen, setIsCharacterWindowOpen] = React.useState(false)
+    const [isWon, setIsWon] = useState(false)
+    const [initial, setInitial] = useState(true)
+    const [enemiesHp, setEnemiesHp] = useState<number[]>([])
+    const [isInventoryOpen, setIsInventoryOpen] = useState(false)
+    const [enemyArr, setEnemyArr] = useState(createEnemyArr(difficulty))
+    const [playerHp, setPlayerHp] = useState(mainCharacter.getHp())
+    const [isCharacterWindowOpen, setIsCharacterWindowOpen] = useState(false)
     //other const
-    const fightOrder = allyArr.concat(enemyArr)
+    const fightOrder = [mainCharacter].concat(enemyArr)
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (fightOrder[currentTurn].getIsNpc()) {
             npcTurn()
         }
     }, [currentTurn])
 
-    React.useEffect(() => {
+    useEffect(() => {
         const newHp: number[] = []
 
         for (let i = 0; i < enemyArr.length; i++) {
@@ -57,7 +52,7 @@ const FightScene = () => {
     }, [currentTurn])
 
     // вызывается при смене индекса по нажатию на противника
-    React.useEffect(() => {
+    useEffect(() => {
         if (!isСhoiceActive && !initial) {
             switch (skillIndex) {
                 case 1:
@@ -74,12 +69,12 @@ const FightScene = () => {
                     doDamage()
                     break;
             }
-            setPlayerHp(allyArr[0].getHp())
+            setPlayerHp(mainCharacter.getHp())
         }
         setInitial(false)
     }, [enemyIndex])
 
-    React.useEffect(() => {
+    useEffect(() => {
         setIsWon(deadEnemies.length == enemyArr.length)
     }, [currentTurn])
 
@@ -90,8 +85,8 @@ const FightScene = () => {
         }
         if (enemyArr[currentTurn - 1].getHp() >= 0)
             setTimeout(() => {
-                fightOrder[currentTurn].doNpcLogic(allyArr[0])
-                setPlayerHp(allyArr[0].getHp())
+                fightOrder[currentTurn].doNpcLogic(mainCharacter)
+                setPlayerHp(mainCharacter.getHp())
                 passTurn()
             }, 1000)
         else
@@ -110,7 +105,7 @@ const FightScene = () => {
     }
 
     const handleSkillClick = (index: number) => {
-        if (allyArr[0].getskillsCooldown()[index] > 0)
+        if (mainCharacter.getskillsCooldown()[index] > 0)
             return
         dispatch(setChoiceActive(true))
         dispatch(setSkillIndex(index))
@@ -118,22 +113,22 @@ const FightScene = () => {
     }
 
     const doDamage = () => {
-        allyArr[0].dealDamage(enemyArr[enemyIndex])
+        mainCharacter.dealDamage(enemyArr[enemyIndex])
         passTurn()
     }
 
     const doFirstSkill = () => {
-        allyArr[0].firstSkill(enemyArr[enemyIndex])
+        mainCharacter.firstSkill(enemyArr[enemyIndex])
         passTurn()
     }
 
     const doSecondSkill = () => {
-        allyArr[0].secondSkill(enemyArr[enemyIndex])
+        mainCharacter.secondSkill(enemyArr[enemyIndex])
         passTurn()
     }
 
     const doThirdSkill = () => {
-        allyArr[0].thirdSkill(enemyArr[enemyIndex])
+        mainCharacter.thirdSkill(enemyArr[enemyIndex])
         passTurn()
     }
 
@@ -145,48 +140,11 @@ const FightScene = () => {
         setIsCharacterWindowOpen(!isCharacterWindowOpen)
     }
 
-    const getCharacter = React.useMemo(() => {
-        return <div className="player">
-            {allyArr.map((item, i) => {
-                return <UserCharacters img={item.getImgBig()} playerHp={playerHp} maxHp={item.getMaxHp()} key={i} />
-            })}
-        </div>
-    }, [playerHp])
-
-    const getEnemies = React.useMemo(() => {
-        return <div className="enemys">
-            {enemyArr.map((item, i) => {
-                return <Enemys enemyImg={item.getImgBig()} enemyHp={enemiesHp[i]} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
-            })}
-        </div>
-    }, [enemiesHp])
-
-    const getSkills = React.useMemo(() => {
-        return <ul className="fight-scene__skills-panel" style={fightOrder[currentTurn].getIsNpc() ? { filter: "grayscale(1)" } : {}}>
-            <li className="skills__item" onClick={() => handleSkillClick(0)}>
-                <img src={allyArr[0].getSkillImgs()[0]} alt="img" style={allyArr[0].getskillsCooldown()[0] !== 0 ? { filter: "grayscale(1)" } : {}} />
-                <span>{allyArr[0].getskillsCooldown()[0] !== 0 ? allyArr[0].getskillsCooldown()[0] : null}</span>
-            </li>
-            <li className="skills__item" onClick={() => handleSkillClick(1)}>
-                <img src={allyArr[0].getSkillImgs()[1]} alt="img" style={allyArr[0].getskillsCooldown()[1] !== 0 ? { filter: "grayscale(1)" } : {}} />
-                <span>{allyArr[0].getskillsCooldown()[1] !== 0 ? allyArr[0].getskillsCooldown()[1] : null}</span>
-            </li>
-            <li className="skills__item" onClick={() => handleSkillClick(2)}>
-                <img src={allyArr[0].getSkillImgs()[2]} alt="img" style={allyArr[0].getskillsCooldown()[2] !== 0 ? { filter: "grayscale(1)" } : {}} />
-                <span>{allyArr[0].getskillsCooldown()[2] !== 0 ? allyArr[0].getskillsCooldown()[2] : null}</span>
-            </li>
-            <li className="skills__item" onClick={() => handleSkillClick(3)}>
-                <img src={allyArr[0].getSkillImgs()[3]} alt="img" style={allyArr[0].getskillsCooldown()[3] !== 0 ? { filter: "grayscale(1)" } : {}} />
-                <span>{allyArr[0].getskillsCooldown()[3] !== 0 ? allyArr[0].getskillsCooldown()[3] : null}</span>
-            </li>
-        </ul>
-    }, [currentTurn])
-
-    const getItems = React.useMemo(() => {
+    const getItems = useMemo(() => {
         return isInventoryOpen ? <Inventory closeInventory={handleOpenCloseInventory} setPlayerHp={setPlayerHp} classIfCharWindowOpen={isCharacterWindowOpen ? '_character-window-open' : ''} /> : ''
     }, [isInventoryOpen, isCharacterWindowOpen])
 
-    const getCharWin = React.useMemo(() => {
+    const getCharacterWindow = useMemo(() => {
         return isCharacterWindowOpen ? <CharacterWindow closeCharacterWindow={handleOpenCloseCharacterWindow} classIfInventoryOpen={isInventoryOpen ? '_inventory-open' : ''} /> : ''
     }, [isCharacterWindowOpen, isInventoryOpen])
 
@@ -197,22 +155,19 @@ const FightScene = () => {
                     <img src={background} alt="img" />
                 </div>
                 <div className="fight-scene__main-characters">
-                    {getCharacter}
-                    {getEnemies}
-                </div>
-                {getSkills}
-                <div className="fight-scene__header-panel">
-                    <div className="header-panel__character" onClick={handleOpenCloseCharacterWindow}>
-                        <img src={mainCharacter.getImgSmall()} alt="" />
-                    </div>
-                    <div className="header-panel__inventory" onClick={handleOpenCloseInventory}>
-                        <img src={inventory} alt="" />
+                    <UserCharacters playerHp={playerHp} />
+                    <div className="enemies">
+                        {enemyArr.map((item, i) => {
+                            return <Enemies enemyImg={item.getImgBig()} enemyHp={enemiesHp[i]} maxEnemyHp={item.getMaxHp()} enemyIndex={i} key={i} />
+                        })}
                     </div>
                 </div>
+                <UserCharactersSkills fightOrder={fightOrder} handleSkillClick={handleSkillClick} />
+                <FightSceneHeaderPanel handleOpenCloseCharacterWindow={handleOpenCloseCharacterWindow} handleOpenCloseInventory={handleOpenCloseInventory} />
             </div>
             {getItems}
-            {getCharWin}
-            {playerHp <= 0 ? <FightScenIsDead /> : ''}
+            {getCharacterWindow}
+            {playerHp <= 0 ? <FightScenIsDead /> : null}
             {isWon && <FightScenIsWin />}
         </div>
     );

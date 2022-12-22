@@ -24,13 +24,11 @@ const initialState: IinitialState = {
         initIntelligent: 10,
         initWisdom: 10,
         initGold: 300,
-        initSkillImgs: []
+        initSkills: []
     }),
     inventory: new Inventory([]),
     inventoryLength: 0
 }
-
-export const SET_ENEMY_TEXT = "SET_USER_CHARACTER"
 
 export const userSlice = createSlice({
     name: "user",

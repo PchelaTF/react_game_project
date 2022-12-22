@@ -1,0 +1,31 @@
+@import "../../variables.scss";
+
+.tool-tip {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: $mainTextColor;
+    background: $bacgroundColorGradient;
+    border-radius: 5px 5px 0 0;
+
+    &-bottom {
+        top: 110%;
+        margin-top: 10px;
+    }
+
+    &-right {
+        top: -50%;
+        left: 40%;
+        width: auto;
+    }
+
+    &-top {
+        top: -50%;
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 18px;
+    }
+}

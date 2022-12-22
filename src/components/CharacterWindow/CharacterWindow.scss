@@ -4,7 +4,6 @@
     box-sizing: border-box;
     height: 100%;
     color: $mainTextColor;
-    // backdrop-filter: $backdropFilter;
     background-color: rgba(0, 0, 0, 0.8);
 
     // * default
@@ -48,18 +47,16 @@
         top: 0;
         width: 20px;
         height: 20px;
-        // font-size: 20px;
-        // line-height: 120%;
         border: 2px solid $mainBorderColor;
         cursor: pointer;
         transition: all 0.1s ease;
 
         &:before,
         &::after {
+            content: " ";
             position: absolute;
             top: 2px;
             left: 9px;
-            content: " ";
             height: 16px;
             width: 2px;
             background-color: $mainTextColor;
@@ -85,7 +82,6 @@
     }
 
     &__body {
-        // height: 610px;
         padding: 15px 15px 40px;
         display: grid;
         grid-template-columns: 70% 30%;
@@ -97,7 +93,6 @@
         }
 
         &-name {
-            // margin: 0 0 23px 0;
             margin: 0 0 10px 0;
         }
 
@@ -108,10 +103,8 @@
 
             &__slots {
                 margin: 0;
-                // padding: 0;
                 display: flex;
                 flex-direction: column;
-                // justify-content: space-between;
                 align-items: center;
                 gap: 6px;
                 padding: 6px 0;
@@ -128,8 +121,6 @@
             &__slot {
                 list-style: none;
                 position: relative;
-                // flex: 0 1 11.8%;
-                // width: 35px;
                 width: 48px;
                 height: 48px;
                 border: 2px solid $mainBorderColor;
@@ -149,7 +140,6 @@
                 }
 
                 &.weapon {
-                    // padding-bottom: 11.8%;
                     width: 64px;
                     height: 64px;
                 }
@@ -184,9 +174,4 @@
             list-style: none;
         }
     }
-}
-
-.delete-after-finish {
-    margin: 4px;
-    line-height: 120%;
 }

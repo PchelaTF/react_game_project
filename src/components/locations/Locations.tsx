@@ -1,12 +1,13 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { buttonClick, locationMusic, mainMusic } from '../../mechanics/sounds/sound'
 import { fightSlice } from '../../store/reducers/FightReducer'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
 import BaseButton from '../ui/BaseButton'
 import "./Locations.scss"
+import LocationsItem from './LocationsItem'
 
-export default function Locations() {
+const Locations = () => {
     const dispatch = useAppDispatch()
     const { setScene, setCurrentLocation } = sceneSlice.actions
     const { clearDeadEnemies, setBackground, setDifficalty } = fightSlice.actions
@@ -15,7 +16,7 @@ export default function Locations() {
 
     const mainClass = "Locations"
 
-    React.useEffect(() => {
+    useEffect(() => {
         mainCharacter.setHp(mainCharacter.getMaxHp())
     })
 
@@ -38,15 +39,15 @@ export default function Locations() {
         <div className={mainClass}>
             <h1 className={`${mainClass}__title`}>Game locations</h1>
             <div className={`${mainClass}__modal`}>
-                {levels.map((item, key) => {
-                    return <div className={`${mainClass}__modal-item`} onClick={() => handleClick(key)} key={key}>
-                        <img src={item.background} style={!item.isCompleted ? { filter: "grayscale(1)" } : {}}></img>
-                        <span>{item.name}</span>
-                    </div>
+                {levels.map((item, i) => {
+                    return (
+                        <LocationsItem key={i} mainClass={mainClass} handleClick={() => handleClick(i)} location={item} />
+                    )
                 })}
             </div>
             <BaseButton name="Back" onClick={backClick} />
-            {/* <button className={`item__list-button btn`} onClick={backClick}>Back</button> */}
         </div>
     )
 }
+
+export default Locations;

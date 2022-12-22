@@ -1,8 +1,8 @@
-import Character, { ICharacterStats } from "./characters/Character";
+import Character, { ICharacterStats, ISkill } from "./characters/Character";
 import { Mage } from "./characters/Mage";
 import { Rogue } from "./characters/Rogue";
 import { Warrior } from "./characters/Warrior";
-import { bossArr, raceFullArr } from '../components/CreateCharacter/Images';
+import { bossArr, raceFullArr } from '../tempDB';
 
 const WARRIOR_CLASS: TClasses = "warrior"
 const MAGE_CLASS: TClasses = "mage"
@@ -16,13 +16,13 @@ export const characterClasses: string[] = [ROGUE_CLASS, MAGE_CLASS, WARRIOR_CLAS
 export const characterRace: TRace[] = ["elf", "halfling", "demon"]
 
 export const returnRaceMod = (race: TRace) => {
-    switch(race) {
-        case "elf":     
+    switch (race) {
+        case "elf":
             return {
                 initConstitution: -2,
                 initDexterety: 2,
                 initStrength: 0,
-                initCharisma: 0,
+                initCharm: 0,
                 initWisdom: 0,
                 initIntelligent: 2
             }
@@ -31,7 +31,7 @@ export const returnRaceMod = (race: TRace) => {
                 initConstitution: 0,
                 initDexterety: 2,
                 initStrength: 0,
-                initCharisma: -2,
+                initCharm: -2,
                 initWisdom: 0,
                 initIntelligent: 2
             }
@@ -40,16 +40,16 @@ export const returnRaceMod = (race: TRace) => {
                 initConstitution: 0,
                 initDexterety: 2,
                 initStrength: -2,
-                initCharisma: 2,
+                initCharm: 2,
                 initWisdom: 0,
                 initIntelligent: 0
             }
-        default: 
+        default:
             return {
                 initConstitution: 0,
                 initDexterety: 0,
                 initStrength: 0,
-                initCharisma: 0,
+                initCharm: 0,
                 initWisdom: 0,
                 initIntelligent: 0
             }
@@ -70,7 +70,7 @@ const warriorStats: ICharacterStats = {
     initIntelligent: 10,
     initWisdom: 10,
     initGold: 175,
-    initSkillImgs: []
+    initSkills: []
 }
 
 const mageStats: ICharacterStats = {
@@ -87,7 +87,7 @@ const mageStats: ICharacterStats = {
     initIntelligent: 10,
     initWisdom: 10,
     initGold: 300,
-    initSkillImgs: []
+    initSkills: []
 }
 
 const rogueStats: ICharacterStats = {
@@ -104,7 +104,7 @@ const rogueStats: ICharacterStats = {
     initIntelligent: 10,
     initWisdom: 10,
     initGold: 140,
-    initSkillImgs: []
+    initSkills: []
 }
 
 const defaultStats: ICharacterStats = {
@@ -121,7 +121,7 @@ const defaultStats: ICharacterStats = {
     initIntelligent: 10,
     initWisdom: 10,
     initGold: 70,
-    initSkillImgs: []
+    initSkills: []
 }
 
 const bossStats: ICharacterStats = {
@@ -138,59 +138,68 @@ const bossStats: ICharacterStats = {
     initIntelligent: 10,
     initWisdom: 10,
     initGold: 175,
-    initSkillImgs: []
+    initSkills: []
 }
 
-export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats] 
+export const characterStatsArr = [rogueStats, mageStats, warriorStats, defaultStats]
 
-function objSum(first: ICharacterStats, second: object) {
-    const newSecond = {...first, ...second}
-    return {...first, 
-        initConstitution: first.initConstitution + newSecond.initConstitution,
-        initDexterety: first.initDexterety + newSecond.initDexterety,
-        initStrength: first.initStrength + newSecond.initStrength,
-        initCharm: first.initCharm + newSecond.initCharm,
-        initIntelligent: first.initIntelligent + newSecond.initIntelligent,
-        initWisdom: first.initWisdom + newSecond.initWisdom
+function statCalc(charStats: ICharacterStats, raceStats: object) {
+    const statsWithMod = { ...charStats, ...raceStats }
+
+    const newStats = {
+        ...charStats,
+        initConstitution: charStats.initConstitution + statsWithMod.initConstitution,
+        initDexterety: charStats.initDexterety + statsWithMod.initDexterety,
+        initStrength: charStats.initStrength + statsWithMod.initStrength,
+        initCharm: charStats.initCharm + statsWithMod.initCharm,
+        initIntelligent: charStats.initIntelligent + statsWithMod.initIntelligent,
+        initWisdom: charStats.initWisdom + statsWithMod.initWisdom
     }
+
+    return newStats
 }
 
-export function createNewCharacter(name: string, characterClass: string, activeRace: number, img: string, icon: string, skillImgs: string[]) {
-    switch (characterClass) {
+export interface ICreationParams {
+    name: string
+    characterClass: string
+    activeRace: number
+    img: string
+    icon: string
+    skills: ISkill[]
+}
+
+export function createNewCharacter(creationParams: ICreationParams) {
+    switch (creationParams.characterClass) {
         case WARRIOR_CLASS:
-            // return new Warrior(25, 10, { min: 10, max: 25 }, name, false, 2)
-            return new Warrior({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
+            return new Warrior({ ...statCalc(warriorStats, returnRaceMod(characterRace[creationParams.activeRace])), initName: creationParams.name, initImgBig: creationParams.img, initImgSmall: creationParams.icon, initSkills: creationParams.skills })
         case MAGE_CLASS:
-            // return new Mage(10, 8, { min: 5, max: 15 }, name, false, 2)
-            return new Mage({...objSum(mageStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
+            return new Mage({ ...statCalc(mageStats, returnRaceMod(characterRace[creationParams.activeRace])), initName: creationParams.name, initImgBig: creationParams.img, initImgSmall: creationParams.icon, initSkills: creationParams.skills })
         case ROGUE_CLASS:
-            // return new Rogue(12, 10, { min: 10, max: 30 }, name, false, 2)
-            return new Rogue({...objSum(rogueStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
+            return new Rogue({ ...statCalc(rogueStats, returnRaceMod(characterRace[creationParams.activeRace])), initName: creationParams.name, initImgBig: creationParams.img, initImgSmall: creationParams.icon, initSkills: creationParams.skills })
         default:
-            // return new Character(10, 10, { min: 10, max: 10 }, false, 2, name)
-            return new Character({...objSum(warriorStats, returnRaceMod(characterRace[activeRace])), initName: name, initImgBig: img, initImgSmall: icon, initSkillImgs: skillImgs})
+            return new Character({ ...statCalc(warriorStats, returnRaceMod(characterRace[creationParams.activeRace])), initName: creationParams.name, initImgBig: creationParams.img, initImgSmall: creationParams.icon, initSkills: creationParams.skills })
     }
 }
 
 function createEnemy() {
-    switch(Math.floor(Math.random() * (2 - 0 + 1) + 0)) {
+    switch (Math.floor(Math.random() * (2 - 0 + 1) + 0)) {
         case 0:
-            return new Warrior({...warriorStats, initName: "", initIsNpc: true})
+            return new Warrior({ ...warriorStats, initName: "", initIsNpc: true })
         case 1:
-            return new Rogue({...rogueStats, initName: "", initIsNpc: true})
+            return new Rogue({ ...rogueStats, initName: "", initIsNpc: true })
         case 2:
-            return new Mage({...mageStats, initName: "", initIsNpc: true})
+            return new Mage({ ...mageStats, initName: "", initIsNpc: true })
         default:
-            return new Character({...warriorStats, initName: "", initIsNpc: true})
+            return new Character({ ...warriorStats, initName: "", initIsNpc: true })
     }
 }
 
 function createBoss() {
-    return new Warrior({...bossStats, initName: "BOSS", initIsNpc: true})
+    return new Warrior({ ...bossStats, initName: "BOSS", initIsNpc: true })
 }
 
 export function createEnemyArr(difficulty: TEnemydifficulty = "easy") {
-    switch(difficulty) {
+    switch (difficulty) {
         case "medium":
             return [createEnemy(), createEnemy()]
         case "high":

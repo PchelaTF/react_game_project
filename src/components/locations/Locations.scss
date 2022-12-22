@@ -6,11 +6,11 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    backdrop-filter: blur(10px);
+    backdrop-filter: $backdropFilter;
 
     &__title {
-        color: $mainTextColor;
         margin: 0 0 50px 0;
+        color: $mainTextColor;
     }
 
     &__modal {

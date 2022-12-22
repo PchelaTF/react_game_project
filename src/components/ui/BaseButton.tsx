@@ -1,23 +1,24 @@
-import React from 'react'
 import { buttonClick } from '../../mechanics/sounds/sound'
 
 interface IButtonProps {
   onClick: (e?: any) => void
   name: string
   className?: string
+  type?: "submit"
 }
 
-const BaseButton = ( { onClick, name, className }: IButtonProps) => {
+const BaseButton = ({ onClick, name, className, type }: IButtonProps) => {
 
   const createCharBtnClass = name === 'Create' ? 'create-character__button' : null
 
-  const handleClick = () => {
+  const handleClick = (e?: any) => {
+    e.preventDefault()
     onClick()
     buttonClick()
   }
 
   return (
-    <button className={`${className} item__list-button btn ${createCharBtnClass}`} onClick={handleClick}>{name}</button>
+    <button type={type} className={`${className} item__list-button btn ${createCharBtnClass}`} onClick={(e) => handleClick(e)}>{name}</button>
   )
 }
 

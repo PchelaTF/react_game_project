@@ -1,79 +1,79 @@
-import React from 'react';
-import './CreateCharacter.scss'
-import { raceArr, classArr, descrArr, skillImgs, statsDescription } from './Images';
+import { useEffect, useState } from 'react';
+import { classArr, skillsImgArr } from '../../tempDB';
 import CreateCharacterRace from './CreateCharacterRace';
 import CreateCharacterClass from './CreateCharacterClass';
-import { characterClasses, characterRace, countStatMod, createNewCharacter, returnRaceMod } from '../../mechanics/CreatingMechanic';
-import { useAppDispatch } from '../../store/store';
+import { createNewCharacter, ICreationParams } from '../../mechanics/CreatingMechanic';
+import { useAppDispatch, useAppSelector } from '../../store/store';
 import { userSlice } from '../../store/reducers/userReducer';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
-import { characterStatsArr } from '../../mechanics/CreatingMechanic';
-import { skillsImgArr } from './Images';
 import Inventory from '../../mechanics/inventory/Inventory';
+import BaseButton from '../ui/BaseButton';
 import { buttonClick } from '../../mechanics/sounds/sound';
+import CreateCharacterInfo from './CreateCharacterInfo/CreateCharacterInfo';
+import './CreateCharacter.scss'
+
 import { Armor, initArmor } from '../../mechanics/items/Armor';
 import { initWeapon, Weapon } from '../../mechanics/items/Weapon';
-
 import mediumArmor from '../../assets/img/armor/3.png'
 import dagger from '../../assets/img/weapon/dagger.png'
 import sword from '../../assets/img/weapon/sword.png'
 import staff from '../../assets/img/weapon/staff.png'
-import CreateCharacterSkill from './CreateCharacterSkill';
-import CreateCharacterStat from './CreateCharacterStat';
-import BaseButton from '../ui/BaseButton';
 
 const CreateCharacter = () => {
     // redux const
     const dispath = useAppDispatch()
     const { setPlayerCharacter, setPlayerInventory } = userSlice.actions
     const { setScene } = sceneSlice.actions
+    const activeRace = useAppSelector(state => state.createCharacterSlice.activeRace)
+    const activeClass = useAppSelector(state => state.createCharacterSlice.activeClass)
+    const reduxClass = useAppSelector(state => state.createCharacterSlice.reduxClass)
+    const fullImg = useAppSelector(state => state.createCharacterSlice.fullImg)
     // useState const
-    const [fullImg, setFullImg] = React.useState(classArr[0][0].fullImg)
-    const [description, setDescription] = React.useState(descrArr[0])
-    const [reduxClass, setReduxClass] = React.useState(characterClasses[0])
-    const [name, setName] = React.useState('')
-    const [activeRace, setActiveRace] = React.useState(0)
-    const [activeIndex, setActiveIndex] = React.useState(0)
-    const [viewCharacterStats, setViewCharacterStats] = React.useState(characterStatsArr[0])
-    const [raceStats, setRaceStats] = React.useState(returnRaceMod(characterRace[activeRace]))
-    const [statsMod, setStatsMod] = React.useState<number[]>([1])
+    const [name, setName] = useState('')
+    const [formError, setFormError] = useState('')
+    const [isNameValid, setIsNameValid] = useState(false)
 
-    React.useEffect(() => {
-        setRaceStats(returnRaceMod(characterRace[activeRace]))
-    }, [activeRace])
+    function validateName(name: string): string {
+        let error = ''
 
-    React.useEffect(() => {
-        const newStatsMod: number[] = []
-        newStatsMod.push(viewCharacterStats.initHp + countStatMod(10 + raceStats.initConstitution))
-        newStatsMod.push(viewCharacterStats.initAttack)
-        Object.values(raceStats).map((item, key) => {
-            newStatsMod.push(item)
-        })
-        setStatsMod(newStatsMod)
-    }, [raceStats, viewCharacterStats])
+        if (!name) {
+            error = 'Name is required!'
+        } else if (name.length < 3) {
+            error = 'Name must be more then 3 characters!'
+        } else if (/\s/g.test(name)) {
+            error = 'Should be no spaces in the name!'
+        } else {
+            error = ''
+            setIsNameValid(true)
+        }
 
-    function switchRace(key: any) {
-        buttonClick()
-        setActiveRace(key)
-        setFullImg(classArr[key][activeIndex].fullImg)
+        return error
     }
 
-    function switchClass(key: any) {
-        buttonClick()
-        setActiveIndex(key)
-        setFullImg(classArr[activeRace][key].fullImg)
-        setDescription(descrArr[key])
-        setReduxClass(characterClasses[key])
-        setViewCharacterStats(characterStatsArr[key])
+    function handleSubmit() {
+        setFormError(validateName(name))
     }
 
-    const setReduxNewCharacter = (name: string, reduxClass: string) => {
-        if (!name) return
+    useEffect(() => {
+        if (!formError && isNameValid) {
+            setReduxNewCharacter()
+        }
+    }, [isNameValid, formError])
 
-        const newCharacter = createNewCharacter(name, reduxClass, activeRace, fullImg, classArr[activeRace][activeIndex].iconImg, skillImgs[activeIndex])
-        const playerCharacter = setPlayerCharacter(newCharacter)
-        dispath(playerCharacter)
+    const setReduxNewCharacter = () => {
+        const creationParams: ICreationParams = {
+            name,
+            characterClass: reduxClass,
+            activeRace,
+            img: fullImg,
+            icon: classArr[activeRace][activeClass].iconImg,
+            skills: skillsImgArr[activeClass]
+        }
+
+        dispath(setPlayerCharacter(createNewCharacter(creationParams)))
+
         const playerInventory = new Inventory([])
+
         // * временно. Выдача брони в рюкзак
         const startArmor = new Armor({ ...initArmor, initImg: mediumArmor, initArmorType: 'medium' })
         playerInventory.pushInInventory(startArmor)
@@ -91,80 +91,6 @@ const CreateCharacter = () => {
         buttonClick()
     }
 
-    const getCharacterRace = React.useMemo(() => {
-        return (
-            <div className="create-character__select-item">
-                <p className='create-character__select-title'>race</p>
-                <div className="create-character__race">
-                    {raceArr.map((item, i) => {
-                        return <CreateCharacterRace
-                            tip={item.tip || "elf"}
-                            key={i}
-                            CharacterRace={item.iconImg}
-                            switchRace={() => switchRace(i)}
-                            activeClassName={(activeRace == i ? "_active" : "")}
-                        />
-                    })}
-                </div>
-            </div>
-        )
-    }, [activeRace, switchRace])
-
-    const getCharacterClass = React.useMemo(() => {
-        return (
-            <div className="create-character__select-item">
-                <p className='create-character__select-title'>class</p>
-                <div className="create-character__class">
-                    {classArr[activeRace].map((item, i) => {
-                        return <CreateCharacterClass
-                            classTip={item.class || "warrior"}
-                            key={i}
-                            CharacterClass={item.iconImg}
-                            switchClass={() => switchClass(i)}
-                            activeClassName={activeIndex == i ? "_active" : ""}
-                        />
-                    })}
-                </div>
-            </div>
-        )
-    }, [activeIndex, activeRace, switchClass])
-
-    const getStats = React.useMemo(() => {
-        return (
-            <div className="create-character__info-stats stats">
-                <p className="stats__title">Stats</p>
-                <ul className="stats__lists">
-                    {
-                        statsDescription.map((item, key) => {
-                            return <CreateCharacterStat raceMod={statsMod[key]} stat={item} key={key} />
-                        })
-                    }
-                    {/* <li className="stats__elem">HP - {viewCharacterStats.initHp}</li>
-                <li className="stats__elem">attack - {viewCharacterStats.initAttack}</li>
-                <li className="stats__elem">CON - 10 {getRaceMods(raceStats.initConstitution)}</li>
-                <li className="stats__elem">DEX - 10 {getRaceMods(raceStats.initDexterety)}</li>
-                <li className="stats__elem">STR - 10 {getRaceMods(raceStats.initStrength)}</li>
-                <li className="stats__elem">CHR - 10 {getRaceMods(raceStats.initCharisma)}</li>
-                <li className="stats__elem">WIS - 10 {getRaceMods(raceStats.initWisdom)}</li>
-                <li className="stats__elem">INT - 10 {getRaceMods(raceStats.initIntelligent)}</li> */}
-                </ul>
-            </div>
-        )
-    }, [viewCharacterStats, activeIndex, raceStats, statsMod, activeRace])
-
-    const getSkills = React.useMemo(() => {
-        return (
-            <div className="create-character__info-skills skills">
-                <p className="skills__title">Skills</p>
-                <ul className="skills__lists">
-                    {skillsImgArr[activeIndex].map((item, i) => {
-                        return <CreateCharacterSkill characterSkill={item.img} tip={item.dis} key={i} />
-                    })}
-                </ul>
-            </div>
-        )
-    }, [skillsImgArr, activeIndex])
-
     return (
         <div className='create-character'>
             <div className="create-character__wrapper">
@@ -173,25 +99,16 @@ const CreateCharacter = () => {
                 </h1>
                 <div className="create-character__content">
                     <div className="create-character__select">
-                        {getCharacterRace}
-                        {getCharacterClass}
+                        <CreateCharacterRace />
+                        <CreateCharacterClass />
                     </div>
                     <div className="create-character__bigimg">
                         <img src={fullImg} alt="img" />
                     </div>
-                    <div className="create-character__info">
-                        <p className="create-character__info-title">Information</p>
-                        <div className="create-character__info-descr">
-                            <p>Description</p>
-                            {description}
-                        </div>
-                        <div className="create-character__info-content">
-                            {getStats}
-                            {getSkills}
-                        </div>
-                    </div>
+                    <CreateCharacterInfo />
                 </div>
                 <form className="create-character__form">
+                    {formError ? (<div className='create-character__form-error'>{formError}</div>) : null}
                     <input
                         type="text"
                         name='name'
@@ -199,7 +116,7 @@ const CreateCharacter = () => {
                         placeholder='CHARACTER NAME'
                         required
                         onChange={(e) => setName(e.target.value)} />
-                    <BaseButton name="Create" onClick={() => setReduxNewCharacter(name, reduxClass)} />
+                    <BaseButton type='submit' name="Create" onClick={handleSubmit} />
                 </form>
             </div>
         </div>

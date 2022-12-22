@@ -7,9 +7,6 @@
     right: 0;
     left: 0;
     height: 100%;
-    // backdrop-filter: blur(10px);
-    // backdrop-filter: blur(3px);
-    // background-color: rgba(0, 0, 0, 0.6);
     background-color: rgba(0, 0, 0, 0.8);
     box-sizing: border-box;
 
@@ -32,34 +29,20 @@
     }
 
     &__container {
-        // width: 317px;
+        position: relative;
         width: 320px;
-        // height: 384px;
         height: 390px;
         background: $bacgroundColorGradient;
         border-radius: $borderRadius;
         color: $mainTextColor;
-
-        // ?
-        // width: 500px;
-        // height: 500px;
-        // background-color: #fff;
-        position: relative;
     }
 
     &__header {
-        // margin: 0;
         line-height: 120%;
         text-transform: uppercase;
-        // padding: 2px 0;
         padding: 5px 0;
         margin: 0 10px;
         border-bottom: $borderBottom;
-
-        // ?
-        // margin: 20px 0 0;
-        // font-size: 21px;
-        // line-height: 120%;
     }
 
     &__close {
@@ -68,8 +51,6 @@
         top: 0;
         width: 20px;
         height: 20px;
-        // font-size: 20px;
-        // line-height: 120%;
         border: 2px solid $mainBorderColor;
         cursor: pointer;
         transition: all 0.1s ease;
@@ -107,45 +88,23 @@
     &__body {
         padding: 15px 20px;
 
-        // ?
-        // padding: 15px;
-
         &-items {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3px;
             margin: 0;
             padding: 0;
-            grid-template-columns: repeat(5, 1fr);
-            // grid-template-rows: repeat(5, 1fr);
-            gap: 3px;
-
-            // ?
-            // max-height: 390px;
-            // margin: 0;
-            // padding: 0;
-            display: grid;
-            // grid-template-columns: repeat(6, 1fr);
-            // grid-template-rows: repeat(5, 1fr);
-            // justify-items: center;
-            // row-gap: 10px;
-            // overflow: auto;
         }
 
         &-item {
+            position: relative;
+            display: flex;
+            align-items: center;
             width: 48px;
             height: 48px;
             border: 2px solid $mainBorderColor;
             background: $bacgroundColorGradient;
-
-            // ?
-            display: flex;
-            align-items: center;
-            // width: 67px;
-            // height: 67px;
             list-style: none;
-            // background-color: rgba(128, 128, 128, 0.555);
-            // border: 1px solid #000;
-            // border-radius: 5px;
-
-            position: relative;
             cursor: pointer;
             scrollbar-width: none;
             transition: all 0.1s linear;

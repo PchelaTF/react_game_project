@@ -1,31 +1,39 @@
-import React from 'react';
-import { sceneSlice } from '../../store/reducers/SceneReducer';
+import { memo } from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import ToolTip from './ToolTip';
+import { classArr } from '../../tempDB';
+import { createCharacterSlice } from '../../store/reducers/createCharacterReducer';
+import { buttonClick } from '../../mechanics/sounds/sound';
+import CreateCharacterClassItem from './CreateCharacterClassItem';
 
-interface ICharacterRaceProps {
-    CharacterClass: string,
-    switchClass: () => void,
-    activeClassName: string,
-    classTip: string
-}
-
-const CreateCharacterClass = ({ CharacterClass, switchClass, activeClassName, classTip }: ICharacterRaceProps) => {
+const CreateCharacterClass = () => {
     const dispatch = useAppDispatch()
-    const {setToolTipContent} = sceneSlice.actions
-    const [toolTip, setToolTip] = React.useState(false)
+    const activeRace = useAppSelector(state => state.createCharacterSlice.activeRace)
+    const activeClass = useAppSelector(state => state.createCharacterSlice.activeClass)
+    const { setActiveClass, setFullImg, setReduxClass } = createCharacterSlice.actions
 
-    function callToolTip(tipType: string) {
-        setToolTip(true)
-        dispatch(setToolTipContent(tipType))
+    function switchClass(key: any) {
+        buttonClick()
+        dispatch(setActiveClass(key))
+        dispatch(setFullImg())
+        dispatch(setReduxClass(key))
     }
 
     return (
-        <div className={`create-character__class-variable ${activeClassName}`} onClick={switchClass} onMouseEnter={() => callToolTip(classTip)} onMouseLeave={() => setToolTip(false)}>
-            <img src={CharacterClass} alt="img" />
-            {toolTip ? <ToolTip position='bottom' text={classTip}/> : null}
+        <div className="create-character__select-item">
+            <p className='create-character__select-title'>class</p>
+            <div className="create-character__class">
+                {classArr[activeRace].map((item, i) => {
+                    return <CreateCharacterClassItem
+                        classTip={item.class || "warrior"}
+                        key={i}
+                        CharacterClass={item.iconImg}
+                        switchClass={() => switchClass(i)}
+                        activeClassName={activeClass === i ? "_active" : ""}
+                    />
+                })}
+            </div>
         </div>
     );
 };
 
-export default CreateCharacterClass;
+export default memo(CreateCharacterClass);

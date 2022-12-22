@@ -1,24 +1,24 @@
-import React from 'react';
+import { useEffect, useMemo } from 'react';
 import './App.css';
 import CreateCharacter from './components/CreateCharacter/CreateCharacter';
 import FightScene from './components/FIghtScene/FightScene';
 import MainScene from './components/MainScene/MainScene';
 import { useAppSelector } from './store/store';
 import Locations from './components/locations/Locations';
-import ExplorationScene from './components/locations/ExplorationScene';
+import ExplorationScene from './components/locations/ExplorationScene/ExplorationScene';
 import Shop from './components/shop/Shop';
-import ChestScene from './components/locations/ChestScene';
-import DialogScene from './components/locations/DialogScene';
+import ChestScene from './components/locations/ChestScene/ChestScene';
+import DialogScene from './components/locations/DialogScene/DialogScene';
 import { mainMusic } from './mechanics/sounds/sound';
 
 function App() {
   const scene = useAppSelector(state => state.SceneReducer.scene)
 
-  React.useEffect(() => {
+  useEffect(() => {
     mainMusic()
-  },[])
+  }, [])
 
-  const getScene = React.useMemo(() => {
+  const getScene = useMemo(() => {
     switch (scene) {
       case "create":
         return <CreateCharacter />

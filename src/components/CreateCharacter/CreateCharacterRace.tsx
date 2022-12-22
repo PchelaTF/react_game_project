@@ -1,33 +1,38 @@
-import React, { FunctionComponent } from 'react';
-import { sceneSlice } from '../../store/reducers/SceneReducer';
-import { useAppDispatch } from '../../store/store';
-import ToolTip from './ToolTip';
+import { memo } from 'react';
+import { buttonClick } from '../../mechanics/sounds/sound';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import { raceArr } from '../../tempDB';
+import CreateCharacterRaceItem from './CreateCharacterRaceItem';
+import { createCharacterSlice } from '../../store/reducers/createCharacterReducer';
 
-interface ICharacterRaceProps {
-    CharacterRace: string
-    switchRace: (key: any) => void
-    activeClassName: string,
-    tip: string
-}
 
-const CreateCharacterRace = ({ CharacterRace, switchRace, activeClassName, tip }: ICharacterRaceProps) => {
+const CreateCharacterRace = () => {
     const dispatch = useAppDispatch()
-    const { setToolTipContent } = sceneSlice.actions
-    const [toolTip, setToolTip] = React.useState(false)
+    const activeRace = useAppSelector(state => state.createCharacterSlice.activeRace)
+    const { setActiveRace, setFullImg } = createCharacterSlice.actions
 
-    const className = `create-character__race-variable ${activeClassName}`
-
-    function callToolTip(tipType: string) {
-        setToolTip(true)
-        dispatch(setToolTipContent(tipType))
+    function switchRace(key: any) {
+        buttonClick()
+        dispatch(setActiveRace(key))
+        dispatch(setFullImg())
     }
 
     return (
-        <div className={className} onClick={switchRace} onMouseEnter={() => callToolTip(tip)} onMouseLeave={() => setToolTip(false)}>
-            <img src={CharacterRace} alt="img" title='Some descr of img' />
-            {toolTip ? <ToolTip position='bottom' text={tip} /> : null}
+        <div className="create-character__select-item">
+            <p className='create-character__select-title'>race</p>
+            <div className="create-character__race">
+                {raceArr.map((item, i) => {
+                    return <CreateCharacterRaceItem
+                        tip={item.tip || "elf"}
+                        key={i}
+                        CharacterRace={item.iconImg}
+                        switchRace={() => switchRace(i)}
+                        activeClassName={(activeRace === i ? "_active" : "")}
+                    />
+                })}
+            </div>
         </div>
     );
 };
 
-export default CreateCharacterRace;
+export default memo(CreateCharacterRace);

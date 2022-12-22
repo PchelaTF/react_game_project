@@ -1,0 +1,163 @@
+@import "../../../variables.scss";
+
+.create-character {
+    &__info {
+        padding: 15px 10px 0;
+        background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
+        border-radius: 5px 5px 0 0;
+
+        @media (max-height: 919.9px) {
+            height: 458px;
+        }
+
+        &-title {
+            margin: 0 0 30px 0;
+            padding-bottom: 7px;
+            font-size: 21px;
+            line-height: 120%;
+            text-transform: uppercase;
+            border-bottom: thin solid $mainBorderColor;
+        }
+
+        &-wrapper {
+            @media (max-height: 919.9px) {
+                height: 245px;
+            }
+        }
+
+        &-descr {
+            height: 135px;
+
+            & .descr__title {
+                font-size: 16px;
+                line-height: 120%;
+                font-weight: 700;
+            }
+
+            @media (max-height: 919.9px) {
+                height: auto;
+                cursor: pointer;
+
+                & .arrow {
+                    border: solid $mainTextColor;
+                    border-width: 0 3px 3px 0;
+                    display: inline-block;
+                    padding: 3px;
+                    transition: all 0.2s linear;
+
+                    &.down {
+                        transform: rotate(45deg);
+                        -webkit-transform: rotate(45deg);
+                    }
+                }
+
+                & .descr__text {
+                    display: none;
+                }
+
+                &._desc-spoiler-open {
+                    & .descr__text {
+                        display: block;
+                    }
+
+                    & .arrow {
+                        &.down {
+                            transform: rotate(-135deg);
+                            -webkit-transform: rotate(-135deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .stats {
+            &__title {
+                font-size: 16px;
+                line-height: 120%;
+                font-weight: 700;
+            }
+
+            &__lists {
+                padding: 0 0 0 35px;
+            }
+
+            &__elem {
+                position: relative;
+                text-align: left;
+                cursor: pointer;
+
+                &:not(:last-child) {
+                    margin-bottom: 3px;
+                }
+            }
+
+            @media (max-height: 919.9px) {
+                cursor: pointer;
+
+                &__lists {
+                    display: none;
+                }
+
+                &._stats-spoiler-open {
+                    & .stats__lists {
+                        display: block;
+                    }
+                }
+
+                & .arrow {
+                    border: solid $mainTextColor;
+                    border-width: 0 3px 3px 0;
+                    display: inline-block;
+                    padding: 3px;
+                    transition: all 0.2s linear;
+
+                    &.up {
+                        transform: rotate(-135deg);
+                        -webkit-transform: rotate(-135deg);
+                    }
+                }
+
+                &._stats-spoiler-close {
+                    & .arrow {
+                        &.up {
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .skills {
+            &__title {
+                font-size: 16px;
+                line-height: 120%;
+                font-weight: 700;
+            }
+
+            &__lists {
+                padding: 0;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+
+            &__elem {
+                cursor: pointer;
+                list-style: none;
+                border: 2px solid $mainBorderColor;
+                display: flex;
+                position: relative;
+
+                & img {
+                    width: 64px;
+                    height: 64px;
+                }
+
+                &:hover {
+                    border-color: $activedBorderColor;
+                }
+            }
+        }
+    }
+}

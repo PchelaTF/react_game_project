@@ -3,11 +3,15 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import FightReducer from "./reducers/FightReducer";
 import SceneReducer from "./reducers/SceneReducer";
 import userReducer from "./reducers/userReducer";
+import uiReducer from "./reducers/uiReducer";
+import createCharacterSlice from "./reducers/createCharacterReducer";
 
 const mainReducer = combineReducers({
     userReducer,
     FightReducer,
-    SceneReducer
+    SceneReducer,
+    uiReducer,
+    createCharacterSlice
 })
 
 export const setupStore = () => {

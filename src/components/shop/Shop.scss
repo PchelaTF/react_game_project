@@ -1,3 +1,5 @@
+@import "../../variables.scss";
+
 .shop {
     align-items: center;
     width: 100%;
@@ -5,7 +7,12 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    backdrop-filter: blur(10px);
+    backdrop-filter: $backdropFilter;
+
+    &__title {
+        margin: 0 0 50px 0;
+        color: $mainTextColor;
+    }
 
     &__modal {
         width: 800px;
@@ -13,7 +20,8 @@
         display: flex;
         justify-content: space-evenly;
         position: relative;
-        background-color: rgba(0, 0, 0, 0.171);
+        background: $bacgroundColorGradient;
+        border-radius: $borderRadius;
         align-items: center;
 
         & p {
@@ -24,7 +32,6 @@
             color: white;
             font-size: 21px;
             line-height: 120%;
-
         }
 
         & img {
@@ -34,6 +41,9 @@
         &-items {
             display: grid;
             grid-template-columns: repeat(3, 69px);
+            gap: 5px;
+            color: $mainTextColor;
+            margin-bottom: 15px;
         }
 
         &-item {
@@ -45,8 +55,8 @@
             width: 67px;
             height: 67px;
             list-style: none;
-            background-color: rgba(128, 128, 128, 0.555);
-            border: 1px solid #000;
+            background: $bacgroundColorGradient;
+            border: 2px solid $mainBorderColor;
 
             & img {
                 position: absolute;
@@ -62,21 +72,21 @@
                 bottom: 0;
                 font-size: 20px;
                 line-height: 120%;
-                color: #fff;
+                color: inherit;
             }
 
             &:hover {
-                border: 1px solid;
-                border-color: #d6441b;
+                border-color: $activedBorderColor;
             }
         }
 
         &-gold {
-            color: #fff;
+            margin-top: 20px;
+            color: $mainTextColor;
         }
     }
 
-    &__btn{
-        margin-top: 60px;
+    &__btn {
+        margin-top: 50px;
     }
 }

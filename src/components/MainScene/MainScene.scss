@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(10px);
+    backdrop-filter: $backdropFilter;
 
     &__modal {
         max-width: 1440px;
@@ -24,8 +24,8 @@
         padding: 0;
 
         .item__list {
-            margin-bottom: 50px;
             position: relative;
+            margin-bottom: 50px;
 
             &-button {
                 width: 205px;

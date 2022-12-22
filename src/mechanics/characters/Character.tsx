@@ -1,4 +1,3 @@
-import { equal } from 'assert'
 import { Armor, initArmor } from '../../mechanics/items/Armor'
 import { initWeapon, Weapon } from '../items/Weapon'
 import { playDamageDealSound, playSound } from '../sounds/sound'
@@ -6,6 +5,11 @@ import { playDamageDealSound, playSound } from '../sounds/sound'
 interface IEequipment {
     armor: Armor
     weapon: Weapon
+}
+
+export interface ISkill {
+    img: string,
+    dis: string
 }
 
 export interface ICharacterStats {
@@ -22,7 +26,7 @@ export interface ICharacterStats {
     initCharm: number,
     initIntelligent: number,
     initGold: number,
-    initSkillImgs: string[]
+    initSkills: ISkill[]
 }
 export default class Character {
     private hp: number
@@ -33,7 +37,7 @@ export default class Character {
     private name: string
     private imgSmall: string
     private imgBig: string
-    private skillImgs: string[]
+    private skills: ISkill[]
     private constitution: number
     private dexterety: number
     private intelligent: number
@@ -63,7 +67,7 @@ export default class Character {
         this.imgBig = characterStats.initImgBig
         this.damage = 4
         this.gold = characterStats.initGold
-        this.skillImgs = characterStats.initSkillImgs
+        this.skills = characterStats.initSkills
         this.skillsCooldown = [0, 0, 0, 0]
         this.equipment = { armor: new Armor(initArmor), weapon: new Weapon(initWeapon) }
         this.isDead = false
@@ -145,8 +149,8 @@ export default class Character {
         return this.wisdom
     }
 
-    getSkillImgs() {
-        return this.skillImgs
+    getSkills() {
+        return this.skills
     }
 
     getDamage() {
@@ -173,7 +177,7 @@ export default class Character {
         else {
             playSound()
             console.log(this.name + " is missed with " + dmg + "against: " + dmgToCharacter.getArmor())
-        } 
+        }
     }
 
     firstSkill(dmgToCharacter: Character) { }

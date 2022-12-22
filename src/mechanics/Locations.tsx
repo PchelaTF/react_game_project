@@ -1,4 +1,4 @@
-import { backgrounds } from "../components/CreateCharacter/Images"
+import { backgrounds } from "../tempDB"
 import { TEnemydifficulty } from "./CreatingMechanic"
 
 export interface ILocations {

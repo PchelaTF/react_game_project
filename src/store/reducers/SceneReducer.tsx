@@ -8,8 +8,6 @@ export interface IinitialState {
     locations: ILocations[],
     currentLocation: number,
     passsedLocationLevels: number,
-    isToolTip: boolean,
-    toolTipContent: string
 }
 
 const initialState: IinitialState = {
@@ -17,8 +15,6 @@ const initialState: IinitialState = {
     locations: locations,
     currentLocation: 0,
     passsedLocationLevels: 0,
-    isToolTip: false,
-    toolTipContent: "stats"
 }
 
 export const sceneSlice = createSlice({
@@ -42,12 +38,6 @@ export const sceneSlice = createSlice({
         },
         resetPassedLocationLevels(state, action: PayloadAction<number>) {
             state.passsedLocationLevels = action.payload
-        },
-        setIsToolTip(state, action: PayloadAction<boolean>) {
-            state.isToolTip = action.payload
-        },
-        setToolTipContent(state, action: PayloadAction<string>) {
-            state.toolTipContent = action.payload
         }
     }
 })

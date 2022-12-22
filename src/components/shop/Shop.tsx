@@ -1,19 +1,19 @@
-import React from 'react'
+import { useState } from 'react'
 import { buttonClick, getCoinSound } from '../../mechanics/sounds/sound'
 import { sceneSlice } from '../../store/reducers/SceneReducer'
 import { useAppDispatch, useAppSelector } from '../../store/store'
-import "./Shop.scss"
-import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
 import { initPotion, Potion } from '../../mechanics/items/Potion'
 import { Item } from '../../mechanics/items/Item'
 import BaseButton from '../ui/BaseButton'
+import "./Shop.scss"
+import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
 
-export default function Shop() {
+const Shop = () => {
     const dispatch = useAppDispatch()
     const { setScene } = sceneSlice.actions
     const characterInventory = useAppSelector(state => state.userReducer.inventory)
     const mainCharacter = useAppSelector(state => state.userReducer.character)
-    const [playerGold, setPlayerGold] = React.useState(mainCharacter.getGold())
+    const [playerGold, setPlayerGold] = useState(mainCharacter.getGold())
 
     const healingPotion = new Potion(initPotion)
 
@@ -35,23 +35,26 @@ export default function Shop() {
 
     return (
         <div className='shop'>
+            <h1 className='shop__title'>Shop</h1>
             <div className="shop__modal">
-                <p className=''>Shop</p>
                 <img className="shop__img" src={shopkeeper} />
                 <div>
                     <div className='shop__modal-items'>
                         {shopItems.map((item, i) => {
-                            return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
-                                {item.getImg() ? <img src={item.getImg()} alt="" /> : ''}
-                                <span>{item.getCost()}g</span>
-                            </div>
+                            return (
+                                <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
+                                    {item.getImg() ? <img src={item.getImg()} alt="" /> : ''}
+                                    <span>{item.getCost()}g</span>
+                                </div>
+                            )
                         })}
                     </div>
                     <span className="shop__modal-gold">your gold: {playerGold}</span>
                 </div>
             </div>
             <BaseButton className="shop__btn" name="Back" onClick={backClick} />
-            {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
         </div>
     );
 }
+
+export default Shop;
