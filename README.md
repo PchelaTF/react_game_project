@@ -1,7 +1,7 @@
 # Demo version of the game rougelike by @Yevhii Potylchak and @Vlad Karimov
 
-## Next versions will be developt in privet repositories
-<a href="https://roguelike-v0-4-1.netlify.app/">v0.4.1</a>
+## Next versions will be developt in privet repositories 
+- <a href="https://roguelike-v0-4-1.netlify.app/" target="_blank">v0.4.1</a>
 
 <h4>Character creation <img align="center" src="/src/assets/img/presentation/characterCreation.png"></h4>
 <h4>Shop <img align="center" src="/src/assets/img/presentation/shop.png"></h4>
