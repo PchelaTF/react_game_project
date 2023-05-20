@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { usePrevious } from '../../customHooks/usePrevious';
 import { useAppSelector } from '../../store/store';
 import UserCharactersAlive from './UserCharactersAlive';

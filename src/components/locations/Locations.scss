@@ -1,63 +1,63 @@
 @import "../../variables.scss";
 
 .Locations {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  backdrop-filter: blur(10px);
 
-    &__title {
+  &__title {
+    color: $mainTextColor;
+    margin: 0 0 50px 0;
+  }
+
+  &__modal {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 300px);
+    grid-template-rows: repeat(2, 200px);
+    gap: 30px;
+    max-width: 1440px;
+    background: $bacgroundColorGradient;
+    border-radius: $borderRadius;
+    padding: 40px 40px;
+    margin-bottom: 50px;
+
+    &-item {
+      position: relative;
+      display: flex;
+      width: 300px;
+      height: 200px;
+      box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
+      border: 2px solid $mainBorderColor;
+      cursor: pointer;
+
+      &:hover {
+        border: 2px solid $activedBorderColor;
+      }
+
+      & span {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%);
+        width: 100%;
+        font-size: 18px;
+        line-height: 120%;
         color: $mainTextColor;
-        margin: 0 0 50px 0;
-    }
-
-    &__modal {
-        position: relative;
-        display: grid;
-        grid-template-columns: repeat(3, 300px);
-        grid-template-rows: repeat(2, 200px);
-        gap: 30px;
-        max-width: 1440px;
         background: $bacgroundColorGradient;
-        border-radius: $borderRadius;
-        padding: 40px 40px;
-        margin-bottom: 50px;
+      }
 
-        &-item {
-            position: relative;
-            display: flex;
-            width: 300px;
-            height: 200px;
-            box-shadow: -2px 10px 35px 1px rgba(0, 0, 0, 0.5);
-            border: 2px solid $mainBorderColor;
-            cursor: pointer;
-
-            &:hover {
-                border: 2px solid $activedBorderColor;
-            }
-
-            & span {
-                position: absolute;
-                bottom: 0;
-                left: 50%;
-                transform: translate(-50%);
-                width: 100%;
-                font-size: 18px;
-                line-height: 120%;
-                color: $mainTextColor;
-                background: $bacgroundColorGradient;
-            }
-
-            & img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
+      & img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
     }
+  }
 }

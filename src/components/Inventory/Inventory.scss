@@ -1,181 +1,181 @@
 @import "../../variables.scss";
 
 .inventory {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  // backdrop-filter: blur(10px);
+  // backdrop-filter: blur(3px);
+  // background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+
+  // * if character window open
+  &._character-window-open {
+    left: 50%;
+    padding-left: 25px;
+  }
+
+  &__wrapper {
     height: 100%;
-    // backdrop-filter: blur(10px);
-    // backdrop-filter: blur(3px);
-    // background-color: rgba(0, 0, 0, 0.6);
-    background-color: rgba(0, 0, 0, 0.8);
-    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-    // * if character window open
     &._character-window-open {
-        left: 50%;
-        padding-left: 25px;
+      align-items: flex-start;
+    }
+  }
+
+  &__container {
+    // width: 317px;
+    width: 320px;
+    // height: 384px;
+    height: 390px;
+    background: $bacgroundColorGradient;
+    border-radius: $borderRadius;
+    color: $mainTextColor;
+
+    // ?
+    // width: 500px;
+    // height: 500px;
+    // background-color: #fff;
+    position: relative;
+  }
+
+  &__header {
+    // margin: 0;
+    line-height: 120%;
+    text-transform: uppercase;
+    // padding: 2px 0;
+    padding: 5px 0;
+    margin: 0 10px;
+    border-bottom: $borderBottom;
+
+    // ?
+    // margin: 20px 0 0;
+    // font-size: 21px;
+    // line-height: 120%;
+  }
+
+  &__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    // font-size: 20px;
+    // line-height: 120%;
+    border: 2px solid $mainBorderColor;
+    cursor: pointer;
+    transition: all 0.1s ease;
+
+    &:before,
+    &::after {
+      position: absolute;
+      top: 2px;
+      left: 9px;
+      content: " ";
+      height: 16px;
+      width: 2px;
+      background-color: $mainTextColor;
+      transition: all 0.2s ease;
     }
 
-    &__wrapper {
+    &:before {
+      transform: rotate(45deg);
+    }
+
+    &:after {
+      transform: rotate(-45deg);
+    }
+
+    &:hover {
+      border-color: $activedBorderColor;
+
+      &:before,
+      &::after {
+        background-color: $activedBorderColor;
+      }
+    }
+  }
+
+  &__body {
+    padding: 15px 20px;
+
+    // ?
+    // padding: 15px;
+
+    &-items {
+      margin: 0;
+      padding: 0;
+      grid-template-columns: repeat(5, 1fr);
+      // grid-template-rows: repeat(5, 1fr);
+      gap: 3px;
+
+      // ?
+      // max-height: 390px;
+      // margin: 0;
+      // padding: 0;
+      display: grid;
+      // grid-template-columns: repeat(6, 1fr);
+      // grid-template-rows: repeat(5, 1fr);
+      // justify-items: center;
+      // row-gap: 10px;
+      // overflow: auto;
+    }
+
+    &-item {
+      width: 48px;
+      height: 48px;
+      border: 2px solid $mainBorderColor;
+      background: $bacgroundColorGradient;
+
+      // ?
+      display: flex;
+      align-items: center;
+      // width: 67px;
+      // height: 67px;
+      list-style: none;
+      // background-color: rgba(128, 128, 128, 0.555);
+      // border: 1px solid #000;
+      // border-radius: 5px;
+
+      position: relative;
+      cursor: pointer;
+      scrollbar-width: none;
+      transition: all 0.1s linear;
+
+      &:hover {
+        border-color: $activedBorderColor;
+      }
+
+      & img {
+        position: absolute;
+        width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+      }
 
-        &._character-window-open {
-            align-items: flex-start;
-        }
-    }
-
-    &__container {
-        // width: 317px;
-        width: 320px;
-        // height: 384px;
-        height: 390px;
-        background: $bacgroundColorGradient;
-        border-radius: $borderRadius;
-        color: $mainTextColor;
-
-        // ?
-        // width: 500px;
-        // height: 500px;
-        // background-color: #fff;
-        position: relative;
-    }
-
-    &__header {
-        // margin: 0;
-        line-height: 120%;
-        text-transform: uppercase;
-        // padding: 2px 0;
-        padding: 5px 0;
-        margin: 0 10px;
-        border-bottom: $borderBottom;
-
-        // ?
-        // margin: 20px 0 0;
-        // font-size: 21px;
-        // line-height: 120%;
-    }
-
-    &__close {
+      & span {
         position: absolute;
         right: 0;
-        top: 0;
-        width: 20px;
-        height: 20px;
-        // font-size: 20px;
-        // line-height: 120%;
-        border: 2px solid $mainBorderColor;
-        cursor: pointer;
-        transition: all 0.1s ease;
-
-        &:before,
-        &::after {
-            position: absolute;
-            top: 2px;
-            left: 9px;
-            content: " ";
-            height: 16px;
-            width: 2px;
-            background-color: $mainTextColor;
-            transition: all 0.2s ease;
-        }
-
-        &:before {
-            transform: rotate(45deg);
-        }
-
-        &:after {
-            transform: rotate(-45deg);
-        }
-
-        &:hover {
-            border-color: $activedBorderColor;
-
-            &:before,
-            &::after {
-                background-color: $activedBorderColor;
-            }
-        }
+        bottom: 0;
+        font-size: 14px;
+        line-height: 120%;
+      }
     }
+  }
 
-    &__body {
-        padding: 15px 20px;
-
-        // ?
-        // padding: 15px;
-
-        &-items {
-            margin: 0;
-            padding: 0;
-            grid-template-columns: repeat(5, 1fr);
-            // grid-template-rows: repeat(5, 1fr);
-            gap: 3px;
-
-            // ?
-            // max-height: 390px;
-            // margin: 0;
-            // padding: 0;
-            display: grid;
-            // grid-template-columns: repeat(6, 1fr);
-            // grid-template-rows: repeat(5, 1fr);
-            // justify-items: center;
-            // row-gap: 10px;
-            // overflow: auto;
-        }
-
-        &-item {
-            width: 48px;
-            height: 48px;
-            border: 2px solid $mainBorderColor;
-            background: $bacgroundColorGradient;
-
-            // ?
-            display: flex;
-            align-items: center;
-            // width: 67px;
-            // height: 67px;
-            list-style: none;
-            // background-color: rgba(128, 128, 128, 0.555);
-            // border: 1px solid #000;
-            // border-radius: 5px;
-
-            position: relative;
-            cursor: pointer;
-            scrollbar-width: none;
-            transition: all 0.1s linear;
-
-            &:hover {
-                border-color: $activedBorderColor;
-            }
-
-            & img {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                top: 0;
-                left: 0;
-                object-fit: cover;
-            }
-
-            & span {
-                position: absolute;
-                right: 0;
-                bottom: 0;
-                font-size: 14px;
-                line-height: 120%;
-            }
-        }
-    }
-
-    &__footer {
-        border-top: $borderBottom;
-        padding: 5px 0;
-        margin: 0 10px;
-    }
+  &__footer {
+    border-top: $borderBottom;
+    padding: 5px 0;
+    margin: 0 10px;
+  }
 }

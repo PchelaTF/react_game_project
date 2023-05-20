@@ -1,32 +1,32 @@
-import { Item } from "../items/Item"
+import { Item } from '../items/Item';
 
 export interface IInventoryItem {
-    id?: number
-    img: string
-    count: number,
-    cost: number
+  id?: number;
+  img: string;
+  count: number;
+  cost: number;
 }
 
 export default class Inventory {
-    private items: Item[]
+  private items: Item[];
 
-    constructor(initItems: Item[]) {
-        this.items = initItems
-    }
+  constructor(initItems: Item[]) {
+    this.items = initItems;
+  }
 
-    pushInInventory(item: Item) {
-        this.items.push(item)
-    }
+  pushInInventory(item: Item) {
+    this.items.push(item);
+  }
 
-    setInventory(newItems: Item[]) {
-        this.items = newItems
-    }
+  setInventory(newItems: Item[]) {
+    this.items = newItems;
+  }
 
-    getItems() {
-        return this.items
-    }
+  getItems() {
+    return this.items;
+  }
 
-    deleteFromInventory(index: number) {
-        this.items.splice(index, 1)
-    }
+  deleteFromInventory(index: number) {
+    this.items.splice(index, 1);
+  }
 }

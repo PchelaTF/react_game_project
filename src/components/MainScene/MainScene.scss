@@ -1,35 +1,35 @@
 @import "../../variables.scss";
 
 .Main-scene {
-    width: 100vw;
-    height: 100vh;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+
+  &__modal {
+    max-width: 1440px;
+    height: 700px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(10px);
+    background: $bacgroundColorGradient;
+    border-radius: $borderRadius;
+    padding: 0 60px;
+  }
 
-    &__modal {
-        max-width: 1440px;
-        height: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        background: $bacgroundColorGradient;
-        border-radius: $borderRadius;
-        padding: 0 60px;
+  &__list {
+    list-style-type: none;
+    padding: 0;
+
+    .item__list {
+      margin-bottom: 50px;
+      position: relative;
+
+      &-button {
+        width: 205px;
+      }
     }
-
-    &__list {
-        list-style-type: none;
-        padding: 0;
-
-        .item__list {
-            margin-bottom: 50px;
-            position: relative;
-
-            &-button {
-                width: 205px;
-            }
-        }
-    }
+  }
 }

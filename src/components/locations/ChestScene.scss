@@ -1,88 +1,88 @@
 .chest-scene {
+  position: relative;
+
+  &__bimg {
     position: relative;
+    height: 100vh;
 
-    &__bimg {
-        position: relative;
-        height: 100vh;
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
 
-        & img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+  &__wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__content {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
+    border-radius: 5px 5px 0 0;
+  }
+
+  &__cimg {
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    & img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0);
+      width: 150px;
+      height: auto;
+      object-fit: cover;
+      cursor: pointer;
+    }
+  }
+
+  &__loot {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 150px;
+    text-align: center;
+    color: #fff;
+
+    & p {
+      font-size: 21px;
+      line-height: 120%;
     }
 
-    &__wrapper {
+    &-content {
+      position: relative;
+      width: 100%;
+      padding-bottom: 20%;
+
+      & img {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        object-fit: contain;
+      }
     }
-
-    &__content {
-        position: relative;
-        width: 500px;
-        height: 500px;
-        background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
-        border-radius: 5px 5px 0 0;
-    }
-
-    &__cimg {
-        position: relative;
-        width: 100%;
-        height: 100%;
-
-        & img {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate3d(-50%, -50%, 0);
-            width: 150px;
-            height: auto;
-            object-fit: cover;
-            cursor: pointer;
-        }
-    }
-
-    &__loot {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 150px;
-        text-align: center;
-        color: #fff;
-
-        & p {
-            font-size: 21px;
-            line-height: 120%;
-        }
-
-        &-content {
-            position: relative;
-            width: 100%;
-            padding-bottom: 20%;
-
-            & img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                object-fit: contain;
-            }
-        }
-    }
+  }
 }

@@ -1,150 +1,146 @@
-import { Howl, Howler } from "howler"
-const swing = require("../../assets/audio/battle/swing.wav")
-const button = require("../../assets/audio/ui/click5.ogg")
-const mainBg = require("../../assets/audio/music/bgScene.mp3")
-const fightBg = require("../../assets/audio/music/Heresy.mp3")
-const openChest = require("../../assets/audio/battle/door.wav")
-const potion = require("../../assets/audio/battle/bottle.wav")
-const armor = require("../../assets/audio/battle/armor-light.wav")
-const weapon = require("../../assets/audio/battle/sword-unsheathe.wav")
-const coin = require("../../assets/audio/battle/coin.wav")
-const death = require("../../assets/audio/battle/death.wav")
-const boss = require("../../assets/audio/music/bossMusic.mp3")
-const magic = require("../../assets/audio/battle/Magic.mp3")
-const damageDeal = require("../../assets/audio/battle/damage_1_sean.wav")
-const greeting = require("../../assets/audio/character/greeting_1_alex.wav")
-const getDamage = require("../../assets/audio/battle/grunting_1_sean.wav")
+import { Howl } from 'howler';
+const swing = require('../../assets/audio/battle/swing.wav');
+const button = require('../../assets/audio/ui/click5.ogg');
+const mainBg = require('../../assets/audio/music/bgScene.mp3');
+const fightBg = require('../../assets/audio/music/Heresy.mp3');
+const openChest = require('../../assets/audio/battle/door.wav');
+const potion = require('../../assets/audio/battle/bottle.wav');
+const armor = require('../../assets/audio/battle/armor-light.wav');
+const weapon = require('../../assets/audio/battle/sword-unsheathe.wav');
+const coin = require('../../assets/audio/battle/coin.wav');
+const death = require('../../assets/audio/battle/death.wav');
+const boss = require('../../assets/audio/music/bossMusic.mp3');
+const magic = require('../../assets/audio/battle/Magic.mp3');
+const damageDeal = require('../../assets/audio/battle/damage_1_sean.wav');
+const greeting = require('../../assets/audio/character/greeting_1_alex.wav');
+const getDamage = require('../../assets/audio/battle/grunting_1_sean.wav');
 
 const mainBgMusic = new Howl({
-    src: mainBg,
-    loop: true
-})
+  src: mainBg,
+  loop: true,
+});
 
 const fightBgMusic = new Howl({
-    src: fightBg,
-    loop: true
-})
+  src: fightBg,
+  loop: true,
+});
 
 const bossMusic = new Howl({
-    src: boss,
-    loop: true
-})
+  src: boss,
+  loop: true,
+});
 
 const openChestSound = new Howl({
-    src: openChest
-})
+  src: openChest,
+});
 
 const potionSound = new Howl({
-    src: potion
-})
+  src: potion,
+});
 
 const armorSound = new Howl({
-    src: armor
-})
+  src: armor,
+});
 
 const weaponSound = new Howl({
-    src: weapon
-})
+  src: weapon,
+});
 
 const coinSound = new Howl({
-    src: coin
-})
+  src: coin,
+});
 
 const deathSound = new Howl({
-    src: death
-})
+  src: death,
+});
 
 const damageDealSound = new Howl({
-    src: damageDeal
-})
+  src: damageDeal,
+});
 
 const greetingSound = new Howl({
-    src: greeting
-})
+  src: greeting,
+});
 
 const magicSound = new Howl({
-    src: magic,
-    volume: 0.3
-})
+  src: magic,
+  volume: 0.3,
+});
 
 const getDamageSound = new Howl({
-    src: getDamage
-})
+  src: getDamage,
+});
 
-export function playSound():void {
-    var sound = new Howl({
-        src: swing
-    });
+export function playSound(): void {
+  const sound = new Howl({
+    src: swing,
+  });
 
-    sound.play()
-};
-
-export function mainMusic(off: boolean = false): void {
-    if(off) {
-        mainBgMusic.stop()
-    } else mainBgMusic.play()
-
+  sound.play();
 }
 
-export function playBossMusic(off: boolean = false): void {
-    if(off) {
-        bossMusic.stop()
-    } else bossMusic.play()
-
+export function mainMusic(off = false): void {
+  if (off) {
+    mainBgMusic.stop();
+  } else mainBgMusic.play();
 }
 
-export function locationMusic(off: boolean = false): void {
-    if(off)
-        fightBgMusic.stop()
-    else
-        fightBgMusic.play()
+export function playBossMusic(off = false): void {
+  if (off) {
+    bossMusic.stop();
+  } else bossMusic.play();
+}
+
+export function locationMusic(off = false): void {
+  if (off) fightBgMusic.stop();
+  else fightBgMusic.play();
 }
 
 export function chestSound(): void {
-    openChestSound.play()
+  openChestSound.play();
 }
 
 export function getPotionSound(): void {
-    potionSound.play()
+  potionSound.play();
 }
 
 export function getArmorSound(): void {
-    armorSound.play()
+  armorSound.play();
 }
 
 export function getWeaponSound(): void {
-    weaponSound.play()
+  weaponSound.play();
 }
 
 export function getCoinSound(): void {
-    coinSound.play()
+  coinSound.play();
 }
 
 export function playDeathSound(): void {
-    deathSound.play()
+  deathSound.play();
 }
 
 export function playMagicSound(): void {
-    magicSound.play()
+  magicSound.play();
 }
 
 export function playgreetingSound(): void {
-    greetingSound.play()
+  greetingSound.play();
 }
 
 export function playDamageDealSound(): void {
-    damageDealSound.play()
-    playSound()
+  damageDealSound.play();
+  playSound();
 }
 
 export function playGetDamageSound(): void {
-    getDamageSound.play()
+  getDamageSound.play();
 }
 
 export function buttonClick(): void {
-    var sound = new Howl({
-        src: button
-    });
+  const sound = new Howl({
+    src: button,
+  });
 
-    sound.play()
+  sound.play();
 }

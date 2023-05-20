@@ -1,36 +1,36 @@
 @import "../../variables.scss";
 
 .exploration-scene {
+  position: relative;
+  height: 100%;
+
+  &__backimg {
     position: relative;
+    width: 100%;
     height: 100%;
 
-    &__backimg {
-        position: relative;
-        width: 100%;
-        height: 100%;
-
-        & img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    & ul {
-        position: absolute;
-        bottom: 5%;
-        list-style: none;
-        display: flex;
-        width: 100vw;
-        justify-content: space-around;
-        padding: 0;
-        z-index: 1;
+  & ul {
+    position: absolute;
+    bottom: 5%;
+    list-style: none;
+    display: flex;
+    width: 100vw;
+    justify-content: space-around;
+    padding: 0;
+    z-index: 1;
 
-        & li {
-            display: inline;
-        }
+    & li {
+      display: inline;
     }
+  }
 }

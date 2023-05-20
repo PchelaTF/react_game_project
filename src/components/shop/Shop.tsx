@@ -1,57 +1,61 @@
-import React from 'react'
-import { buttonClick, getCoinSound } from '../../mechanics/sounds/sound'
-import { sceneSlice } from '../../store/reducers/SceneReducer'
-import { useAppDispatch, useAppSelector } from '../../store/store'
-import "./Shop.scss"
-import shopkeeper from "../../assets/img/characters_img/npc/Character6_face1.png"
-import { initPotion, Potion } from '../../mechanics/items/Potion'
-import { Item } from '../../mechanics/items/Item'
-import BaseButton from '../ui/BaseButton'
+import React from 'react';
+import { buttonClick, getCoinSound } from '../../mechanics/sounds/sound';
+import { sceneSlice } from '../../store/reducers/SceneReducer';
+import { useAppDispatch, useAppSelector } from '../../store/store';
+import './Shop.scss';
+import shopkeeper from '../../assets/img/characters_img/npc/Character6_face1.png';
+import { initPotion, Potion } from '../../mechanics/items/Potion';
+import { Item } from '../../mechanics/items/Item';
+import BaseButton from '../ui/BaseButton';
 
-export default function Shop() {
-    const dispatch = useAppDispatch()
-    const { setScene } = sceneSlice.actions
-    const characterInventory = useAppSelector(state => state.userReducer.inventory)
-    const mainCharacter = useAppSelector(state => state.userReducer.character)
-    const [playerGold, setPlayerGold] = React.useState(mainCharacter.getGold())
+const Shop: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { setScene } = sceneSlice.actions;
+  const characterInventory = useAppSelector((state) => state.userReducer.inventory);
+  const mainCharacter = useAppSelector((state) => state.userReducer.character);
+  const [playerGold, setPlayerGold] = React.useState(mainCharacter.getGold());
 
-    const healingPotion = new Potion(initPotion)
+  const healingPotion = new Potion(initPotion);
 
-    const shopItems: Item[] = Array(9).fill(healingPotion)
+  const shopItems: Item[] = Array(9).fill(healingPotion);
 
-    const backClick = () => {
-        dispatch(setScene("main"))
-        buttonClick()
+  const backClick = () => {
+    dispatch(setScene('main'));
+    buttonClick();
+  };
+
+  const itemClick = (index: number) => {
+    if (mainCharacter.getGold() >= shopItems[index].getCost()) {
+      characterInventory.pushInInventory(shopItems[index]);
+      mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].getCost());
+      setPlayerGold(mainCharacter.getGold());
+      getCoinSound();
     }
+  };
 
-    const itemClick = (index: number) => {
-        if (mainCharacter.getGold() >= shopItems[index].getCost()) {
-            characterInventory.pushInInventory(shopItems[index])
-            mainCharacter.setGold(mainCharacter.getGold() - shopItems[index].getCost())
-            setPlayerGold(mainCharacter.getGold())
-            getCoinSound()
-        }
-    }
-
-    return (
-        <div className='shop'>
-            <div className="shop__modal">
-                <p className=''>Shop</p>
-                <img className="shop__img" src={shopkeeper} />
-                <div>
-                    <div className='shop__modal-items'>
-                        {shopItems.map((item, i) => {
-                            return <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
-                                {item.getImg() ? <img src={item.getImg()} alt="" /> : ''}
-                                <span>{item.getCost()}g</span>
-                            </div>
-                        })}
-                    </div>
-                    <span className="shop__modal-gold">your gold: {playerGold}</span>
+  return (
+    <div className="shop">
+      <div className="shop__modal">
+        <p className="">Shop</p>
+        <img className="shop__img" src={shopkeeper} />
+        <div>
+          <div className="shop__modal-items">
+            {shopItems.map((item, i) => {
+              return (
+                <div className="shop__modal-item" key={i} onClick={() => itemClick(i)}>
+                  {item.getImg() ? <img src={item.getImg()} alt="" /> : ''}
+                  <span>{item.getCost()}g</span>
                 </div>
-            </div>
-            <BaseButton className="shop__btn" name="Back" onClick={backClick} />
-            {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
+              );
+            })}
+          </div>
+          <span className="shop__modal-gold">your gold: {playerGold}</span>
         </div>
-    );
-}
+      </div>
+      <BaseButton className="shop__btn" name="Back" onClick={backClick} />
+      {/* <button className={`shop__btn btn`} onClick={backClick}>Back</button> */}
+    </div>
+  );
+};
+
+export default React.memo(Shop);

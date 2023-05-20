@@ -1,217 +1,217 @@
 @import "../../variables.scss";
 
 .create-character {
-    box-sizing: border-box;
-    height: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+
+  &__wrapper {
+    width: 1440px;
+    color: $mainTextColor;
+  }
+
+  &__title {
+    margin: 0 0 50px 0;
+    line-height: 120%;
+  }
+
+  &__content {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+    padding: 0 50px;
+  }
+
+  &__select {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    &-item {
+      padding: 15px 10px 100px;
+      background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
+      border-radius: 5px 5px 0 0;
+    }
+
+    &-title {
+      margin: 0 0 15px 0;
+      padding-bottom: 7px;
+      font-size: 21px;
+      line-height: 120%;
+      text-transform: uppercase;
+      border-bottom: thin solid $mainBorderColor;
+    }
+  }
+
+  &__race,
+  &__class {
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(10px);
+    flex-wrap: wrap;
+    gap: 25px;
 
-    &__wrapper {
-        width: 1440px;
-        color: $mainTextColor;
+    &-variable {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      border: 2px solid $mainBorderColor;
+      cursor: pointer;
+
+      & img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &._active {
+        border: 2px solid $activedBorderColor;
+      }
+    }
+  }
+
+  &__bigimg {
+    position: relative;
+
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__info {
+    padding: 15px 10px 0;
+    background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
+    border-radius: 5px 5px 0 0;
+
+    &-title {
+      margin: 0 0 30px 0;
+      padding-bottom: 7px;
+      font-size: 21px;
+      line-height: 120%;
+      text-transform: uppercase;
+      border-bottom: thin solid $mainBorderColor;
     }
 
-    &__title {
-        margin: 0 0 50px 0;
+    &-descr {
+      height: 135px;
+
+      & p {
+        font-size: 16px;
         line-height: 120%;
+        font-weight: 700;
+      }
     }
 
-    &__content {
+    .stats {
+      cursor: pointer;
+
+      &__title {
+        font-size: 16px;
+        line-height: 120%;
+        font-weight: 700;
+      }
+
+      &__lists {
+        padding: 0 0 0 35px;
+      }
+
+      &__elem {
         position: relative;
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 100px;
-        padding: 0 50px;
+        text-align: left;
+
+        &:not(:last-child) {
+          margin-bottom: 3px;
+        }
+      }
     }
 
-    &__select {
+    .skills {
+      &__title {
+        font-size: 16px;
+        line-height: 120%;
+        font-weight: 700;
+      }
+
+      &__lists {
+        padding: 0;
         display: flex;
-        flex-direction: column;
-        gap: 5px;
-
-        &-item {
-            padding: 15px 10px 100px;
-            background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
-            border-radius: 5px 5px 0 0;
-        }
-
-        &-title {
-            margin: 0 0 15px 0;
-            padding-bottom: 7px;
-            font-size: 21px;
-            line-height: 120%;
-            text-transform: uppercase;
-            border-bottom: thin solid $mainBorderColor;
-        }
-    }
-
-    &__race,
-    &__class {
-        display: flex;
+        justify-content: space-evenly;
         align-items: center;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 25px;
+      }
 
-        &-variable {
-            position: relative;
-            width: 64px;
-            height: 64px;
-            border: 2px solid $mainBorderColor;
-            cursor: pointer;
-
-            & img {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-            }
-
-            &._active {
-                border: 2px solid $activedBorderColor;
-            }
-        }
-    }
-
-    &__bigimg {
+      &__elem {
+        cursor: pointer;
+        list-style: none;
+        border: 2px solid $mainBorderColor;
+        display: flex;
         position: relative;
 
         & img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+          width: 64px;
+          height: 64px;
         }
+      }
     }
+  }
 
-    &__info {
-        padding: 15px 10px 0;
-        background: linear-gradient(rgba(3, 3, 3, 0.6), rgba(3, 3, 3, 0));
-        border-radius: 5px 5px 0 0;
+  &__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
 
-        &-title {
-            margin: 0 0 30px 0;
-            padding-bottom: 7px;
-            font-size: 21px;
-            line-height: 120%;
-            text-transform: uppercase;
-            border-bottom: thin solid $mainBorderColor;
-        }
+    & input {
+      width: 30%;
+      padding: 10px 0;
+      outline: none;
+      border-top: 1px solid $mainBorderColor;
+      border-bottom: 1px solid $mainBorderColor;
+      border-left: none;
+      border-right: none;
+      border-radius: 3px;
+      font-family: inherit;
+      font-size: 20px;
+      line-height: 120%;
+      text-align: center;
+      color: $mainTextColor;
+      background-color: rgba(0, 0, 0, 0.171);
+      transition: all 0.2s ease;
 
-        &-descr {
-            height: 135px;
+      &::placeholder {
+        color: $mainTextColor;
+      }
 
-            & p {
-                font-size: 16px;
-                line-height: 120%;
-                font-weight: 700;
-            }
-        }
-
-        .stats {
-            cursor: pointer;
-
-            &__title {
-                font-size: 16px;
-                line-height: 120%;
-                font-weight: 700;
-            }
-
-            &__lists {
-                padding: 0 0 0 35px;
-            }
-
-            &__elem {
-                position: relative;
-                text-align: left;
-
-                &:not(:last-child) {
-                    margin-bottom: 3px;
-                }
-            }
-        }
-
-        .skills {
-            &__title {
-                font-size: 16px;
-                line-height: 120%;
-                font-weight: 700;
-            }
-
-            &__lists {
-                padding: 0;
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-            }
-
-            &__elem {
-                cursor: pointer;
-                list-style: none;
-                border: 2px solid $mainBorderColor;
-                display: flex;
-                position: relative;
-
-                & img {
-                    width: 64px;
-                    height: 64px;
-                }
-            }
-        }
+      &:focus {
+        border-color: $activedBorderColor;
+      }
     }
+  }
 
-    &__form {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 50px;
-        margin-top: 50px;
+  &__button {
+    position: relative;
 
-        & input {
-            width: 30%;
-            padding: 10px 0;
-            outline: none;
-            border-top: 1px solid $mainBorderColor;
-            border-bottom: 1px solid $mainBorderColor;
-            border-left: none;
-            border-right: none;
-            border-radius: 3px;
-            font-family: inherit;
-            font-size: 20px;
-            line-height: 120%;
-            text-align: center;
-            color: $mainTextColor;
-            background-color: rgba(0, 0, 0, 0.171);
-            transition: all 0.2s ease;
-
-            &::placeholder {
-                color: $mainTextColor;
-            }
-
-            &:focus {
-                border-color: $activedBorderColor;
-            }
-        }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: 50%;
+      left: 0;
+      background-color: $activedBorderColor;
+      z-index: -1;
     }
-
-    &__button {
-        position: relative;
-
-        &::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: 50%;
-            left: 0;
-            background-color: $activedBorderColor;
-            z-index: -1;
-        }
-    }
+  }
 }

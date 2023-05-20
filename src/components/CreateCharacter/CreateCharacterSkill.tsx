@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
-import { useAppDispatch, useAppSelector } from '../../store/store';
+import { useAppDispatch } from '../../store/store';
 import ToolTip from './ToolTip';
 
 interface ICharacterRaceProps {

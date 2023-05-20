@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { locations } from '../../mechanics/Locations';
 import { locationMusic, mainMusic, playBossMusic, playDeathSound } from '../../mechanics/sounds/sound';
 import { sceneSlice } from '../../store/reducers/SceneReducer';
